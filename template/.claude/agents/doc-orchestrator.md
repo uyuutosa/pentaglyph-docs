@@ -39,7 +39,9 @@ every dispatch you re-run the auditor and decide the next move.
    | Phase 2 gap (strategy / building-blocks / C4 / ADRs missing) | Dispatch `architect-agent`. Architect will surface decisions; for each, dispatch `adr-writer` |
    | Phase 3 gap (no module spec yet, no runtime scenario) | Dispatch `spec-writer` for the highest-priority building block |
    | Phase 4 gap (deployment / SLOs / risks / glossary missing) | Either dispatch `architect-agent` for deployment + crosscutting, or prompt the user directly for short-form items (risks, glossary terms) |
-   | 100 % | Exit: summarise what was built, suggest review cadence, suggest publishing the docs alongside code |
+   | Architecture 100 %, Phase 5 applicable + gap | Dispatch `spec-writer` (api-contract sub-mode) for each public-API container missing a schema. Optional: dispatch for `design-guide/<topic>.md` files if the team has unique conventions. |
+   | Architecture 100 %, Phase 6 applicable + gap | Dispatch `spec-writer` (user-manual sub-mode) once per Diátaxis quadrant. Phase 6 typically waits until a UI exists. |
+   | All applicable phases at 100 % | Exit: summarise what was built per track (Architecture / Impl-companion / End-user), suggest review cadence, suggest publishing the docs alongside code |
 
 3. **Brief the specialist precisely.** When you dispatch via `Task`, your
    prompt to the specialist must contain:

@@ -161,6 +161,26 @@ When in doubt, **Layer A is the default for anything that describes "how the sys
 
 ---
 
+## 5.1 Three-track completion model (the auditor reports each independently)
+
+The four-phase rubric in [§4 Lifecycle](#4-lifecycle) covers the **architecture
+completion track** only. Two additional tracks are reported separately by the
+auditor and may legitimately be `N/A` for a given project state:
+
+| Track | Phases | Applicability |
+|-------|--------|---------------|
+| **Architecture** (mandatory) | Phase 1 Discovery → Phase 2 Architecture → Phase 3 Detail → Phase 4 Operations | Always applicable. 100% target before any 1.0 release. |
+| **Implementation companion** (conditional) | Phase 5 — `api-contract/` schemas + optional `design-guide/` conventions | Applicable when any PRD describes an HTTP/RPC interface, OR `api-contract/` / `design-guide/` has any content. Otherwise `N/A`. |
+| **End-user docs / Diátaxis** (conditional) | Phase 6 — ≥ 1 file per Diátaxis quadrant under `user-manual/` | Applicable once UI ships (auditor heuristic: at least one non-README file under `user-manual/`). Before that: `N/A — UI not yet shipped`. |
+
+Hitting **100% on Architecture alone is publish-ready as an architecture
+package**. It is *not* the same as 100% project documentation. A typical
+v1.0 deliverable is **Architecture 100% + Implementation 100% + End-user
+≥ partial**. Track each separately so you know whether you are missing
+"the architecture is unclear" vs "we never wrote the user manual".
+
+---
+
 ## 6. Hard rules (never violate)
 
 1. **One canonical location per topic.** If a concept appears in two files, one must be a link to the other.

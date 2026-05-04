@@ -1,6 +1,6 @@
 {
   "name": "@uyuutosa/tetragram",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "CLI scaffolder for tetragram-docs — arc42 + C4 + MADR + Diátaxis with one workflow",
   "license": "MIT",
   "author": "Yu Sato",

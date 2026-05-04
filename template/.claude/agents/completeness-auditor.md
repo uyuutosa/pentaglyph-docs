@@ -83,9 +83,54 @@ Phase 2 contributes 35% if all four pass + cross-consistency holds.
 | Artefact | Existence | Substance |
 |----------|----------|-----------|
 | `docs/arc42/07-deployment/deployment.md` | exists | length > 500 |
-| `docs/arc42/10-quality/slos.md` | exists | ≥ 3 lines containing both "target" and a numeric value (regex `\d+(\.\d+)?\s*(%|ms|s|RPS|req/s)`) |
+| `docs/arc42/10-quality/slos.md` | exists | ≥ 3 lines containing both "target" and a numeric value (regex `\d+(\.\d+)?\s*(%|ms|s|RPS|req/s|min)`) |
 | `docs/arc42/11-risks/risk-register.md` | exists | ≥ 5 markdown table rows after the header |
 | `docs/arc42/12-glossary/glossary.md` | exists | ≥ 5 markdown table rows after the header |
+
+Phases 1–4 form the **architecture-completion track**. They are the rubric the
+orchestrator drives by default. Phases 5 and 6 below are **separate tracks**
+that the auditor reports independently — they may be empty (`N/A`) for many
+projects and that is not a defect.
+
+### Phase 5 — Implementation companion (separate track, conditional)
+
+This track covers documents that live alongside implementation work: API
+contracts and team conventions. It is **applicable** when the project
+declares public APIs or team conventions; otherwise it is `N/A`.
+
+**Applicability heuristic**: applicable if any PRD under
+`docs/arc42/03-context-and-scope/prds/` references an HTTP endpoint /
+RPC method / external interface, OR if `docs/api-contract/` contains
+content beyond `README.md`, OR if `docs/design-guide/` contains content
+beyond `README.md`.
+
+| Artefact | Existence | Substance |
+|----------|----------|-----------|
+| ≥ 1 schema in `docs/api-contract/{openapi,graphql,mcp,proto}/*.{yaml,json,md,proto}` per public-API container | glob match per container that exposes a public interface | yaml/json must parse; reference at least one FR-* ID in description fields |
+| (optional) `docs/design-guide/<topic>.md` files | each contains content beyond Template-0 boilerplate | length > 300 chars |
+
+Applicable target = 100% means **every public-API container has a contract
+file** (using `arc42/05-building-blocks/overview.md` as the source of
+truth for which containers are public-facing).
+
+### Phase 6 — End-user documentation (Diátaxis, separate track, conditional)
+
+This track covers `docs/user-manual/` (Diátaxis 4 quadrants). It is
+**applicable** only when the project has shipped at least one
+user-visible build or has explicitly opted in.
+
+**Applicability heuristic**: applicable if `docs/user-manual/{tutorials,how-to,reference,explanation}/`
+contains any content file beyond its `README.md`. If all four quadrants
+are empty (only README.md), report `N/A — UI not yet shipped`.
+
+| Artefact | Existence | Substance |
+|----------|----------|-----------|
+| ≥ 1 file in `docs/user-manual/tutorials/` | glob match | length > 500; numbered steps |
+| ≥ 1 file in `docs/user-manual/how-to/` | glob match | length > 300 |
+| ≥ 1 file in `docs/user-manual/reference/` | glob match | length > 300; structured (table or list) |
+| ≥ 1 file in `docs/user-manual/explanation/` | glob match | length > 500 |
+
+All four required to claim Phase 6 = 100%.
 
 ---
 
@@ -94,8 +139,11 @@ Phase 2 contributes 35% if all four pass + cross-consistency holds.
 Return **exactly** this format. The orchestrator parses it:
 
 ```text
-PHASE: <1|2|3|4|complete>
-COVERAGE: <NN>%
+ARCHITECTURE-PHASE: <1|2|3|4|complete>
+ARCHITECTURE-COVERAGE: <NN>%   (Phases 1-4, mandatory rubric)
+IMPL-COMPANION-COVERAGE: <NN>% | N/A   (Phase 5, applicable if any PRD has API behaviour or api-contract/design-guide has content)
+END-USER-COVERAGE: <NN>% | N/A   (Phase 6, applicable if user-manual/ has any non-README content)
+
 SUBSTANTIVE-FILES: <count>
 TOTAL-EXPECTED: <count>
 
@@ -108,6 +156,10 @@ ARTEFACTS:
     [✓|✗|⚠] <path>: <one-line status>
   PHASE-4:
     [✓|✗|⚠] <path>: <one-line status>
+  PHASE-5 (Implementation companion):
+    [✓|✗|⚠|N/A] <path>: <one-line status>
+  PHASE-6 (End-user docs / Diátaxis):
+    [✓|✗|⚠|N/A] <path>: <one-line status>
 
 INCONSISTENCIES:
   - <e.g. "container 'Auth' in overview.md not in workspace.dsl">
