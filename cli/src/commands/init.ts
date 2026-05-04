@@ -125,11 +125,31 @@ async function installAiHook(
     return;
   }
 
-  const map: Record<Exclude<AiTarget, "generic">, { src: string; dest: string }> = {
-    claude: {
-      src: join(templateRoot, ".claude/rules/documentation.md"),
-      dest: join(targetRoot, ".claude/rules/documentation.md"),
-    },
+  // Claude target: install full .claude/ tree (rules + agents + skills).
+  // The bundled doc-orchestrator + 5 specialist agents + 3 slash commands
+  // turn /doc-init into a guided conversational doc builder.
+  if (ai === "claude") {
+    const src = join(templateRoot, ".claude");
+    const dest = join(targetRoot, ".claude");
+    if (!existsSync(src)) {
+      log(`  warn   Claude template source missing: ${src}`);
+      return;
+    }
+    log(`  ai     claude → .claude/{rules,agents,skills}/ (orchestrator + 5 specialists + 3 commands)`);
+    await copyDir(src, dest, {
+      force: !!opts.force,
+      dryRun: !!opts.dryRun,
+      log,
+      transform: opts.name
+        ? (content) => content.replaceAll("<placeholder>", opts.name!)
+        : undefined,
+    });
+    return;
+  }
+
+  // Cursor / Copilot targets: re-use the documentation rule as a project
+  // instruction file at the editor's expected path.
+  const map: Record<Exclude<AiTarget, "generic" | "claude">, { src: string; dest: string }> = {
     cursor: {
       src: join(templateRoot, ".claude/rules/documentation.md"),
       dest: join(targetRoot, ".cursor/rules/docs.md"),
