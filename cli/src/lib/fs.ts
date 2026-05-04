@@ -1,6 +1,23 @@
 import { mkdir, readdir, copyFile, stat, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { dirname, join, relative } from "node:path";
+import { dirname, join, relative, isAbsolute } from "node:path";
+
+/**
+ * Format a path for log output.
+ *
+ * @remarks
+ * Prefers a relative path **only when** the target is under the current
+ * working directory. Otherwise falls back to the absolute path to avoid
+ * unreadable `../../../../` chains when the target lives elsewhere
+ * (e.g. `/tmp/...`).
+ */
+function fmt(path: string): string {
+  const rel = relative(process.cwd(), path);
+  if (rel === "" || rel.startsWith("..") || isAbsolute(rel)) {
+    return path;
+  }
+  return rel;
+}
 
 export interface CopyOptions {
   force: boolean;
@@ -43,13 +60,13 @@ export async function copyDir(
     }
 
     if (existsSync(destPath) && !opts.force) {
-      opts.log?.(`  skip   ${relative(process.cwd(), destPath)} (exists)`);
+      opts.log?.(`  skip   ${fmt(destPath)} (exists)`);
       skipped++;
       continue;
     }
 
     if (opts.dryRun) {
-      opts.log?.(`  would  ${relative(process.cwd(), destPath)}`);
+      opts.log?.(`  would  ${fmt(destPath)}`);
       copied++;
       continue;
     }
@@ -64,7 +81,7 @@ export async function copyDir(
       await copyFile(srcPath, destPath);
     }
 
-    opts.log?.(`  write  ${relative(process.cwd(), destPath)}`);
+    opts.log?.(`  write  ${fmt(destPath)}`);
     copied++;
   }
 
