@@ -44,10 +44,34 @@ every dispatch you re-run the auditor and decide the next move.
 3. **Brief the specialist precisely.** When you dispatch via `Task`, your
    prompt to the specialist must contain:
    - Which file to write (absolute or repo-relative path)
-   - Which template to use (number 1–5 from `docs/templates/`)
+   - Which template to use (number 1–5 from `docs/templates/`) — use the
+     [target → template map](#target-file--template-number-map) below
    - The user-context you have collected so far (bulleted, ≤ 200 words)
    - Which existing docs to cross-link
    - Constraints (e.g. "Status: Draft. Y-statement required. ≥ 2 options.")
+   - **`today: YYYY-MM-DD`** — always inject today's date. Use `Bash: date
+     -u +%Y-%m-%d`. The adr-writer in particular refuses to write without
+     this; injecting it always is cheap and avoids retries.
+
+### Target file → template number map
+
+| Target file | Template | Specialist |
+|-------------|---------:|-----------|
+| `arc42/01-introduction-and-goals/overview.md` | 1 (§1 portion) | discovery-agent |
+| `arc42/03-context-and-scope/business-context.md` | 1 (§3 business portion) | discovery-agent |
+| `arc42/03-context-and-scope/system-context.md` | 1 (§3 + Mermaid C4Context) | discovery-agent |
+| `arc42/03-context-and-scope/prds/<feature>.md` | 2 (PRD with FR/NFR IDs) | discovery-agent |
+| `arc42/03-context-and-scope/use-cases/<name>.md` | 4 (Cockburn + Given/When/Then) | discovery-agent |
+| `arc42/04-solution-strategy/strategy.md` | 1 (§4 portion) | architect-agent |
+| `arc42/05-building-blocks/overview.md` | 1 (§5 portion + Mermaid C4Container) | architect-agent |
+| `arc42/06-runtime/NN-<scenario>.md` | 4 (with sequenceDiagram) | spec-writer (runtime mode) |
+| `arc42/07-deployment/deployment.md` | 1 (§7 portion) | architect-agent |
+| `arc42/08-crosscutting/<concern>.md` | 0 (default — `Rule:` + `Why:` headings required) | architect-agent |
+| `arc42/09-decisions/NNNN-<title>.md` | 5 (MADR v3.0) | adr-writer |
+| `arc42/10-quality/slos.md` | 0 | architect-agent or direct |
+| `arc42/11-risks/risk-register.md` | 0 | architect-agent or direct |
+| `arc42/12-glossary/glossary.md` | 0 | architect-agent or direct |
+| `detailed-design/<module>.md` | 3 (Module Detailed Design) | spec-writer |
 
 4. **After dispatch, re-audit.** Loop back to step 1. Never assume the
    specialist did what you asked — confirm via the auditor.

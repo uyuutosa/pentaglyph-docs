@@ -6,6 +6,28 @@ import type { AiTarget, Profile, Section } from "../lib/types.ts";
 import { PROFILE_SECTIONS, ROOT_FILES } from "../lib/profiles.ts";
 import { copyDir, resolveTemplateDir } from "../lib/fs.ts";
 
+/**
+ * Substitute `<placeholder>` with the project name **only inside the YAML
+ * front-matter block** at the top of the file.
+ *
+ * @remarks
+ * `<placeholder>` is overloaded in the templates: it stands for the project
+ * name in front-matter `owner:` lines (where it should be substituted) AND
+ * for "fill-this-in" markers in the body of authoring templates (where it
+ * must remain literal so the human author can spot it). Substituting only
+ * inside the leading `---...---` block satisfies both.
+ *
+ * Files without front-matter are returned unchanged.
+ */
+function substitutePlaceholder(content: string, projectName: string): string {
+  const fmMatch = content.match(/^---\n([\s\S]*?)\n---\n/);
+  if (!fmMatch) return content;
+  const fmEnd = fmMatch[0].length;
+  const head = content.slice(0, fmEnd).replaceAll("<placeholder>", projectName);
+  const body = content.slice(fmEnd);
+  return head + body;
+}
+
 export async function runInit(opts: ParsedArgs): Promise<void> {
   const target = opts._[0];
   if (!target) {
@@ -70,7 +92,7 @@ export async function runInit(opts: ParsedArgs): Promise<void> {
       force: !!opts.force,
       dryRun: !!opts.dryRun,
       log,
-      transform: (content) => content.replaceAll("<placeholder>", projectName),
+      transform: (content) => substitutePlaceholder(content, projectName),
     });
   }
 
@@ -108,7 +130,7 @@ async function installFile(
   }
   await mkdir(dirname(dest), { recursive: true });
   const content = await readFile(src, "utf-8");
-  const replaced = content.replaceAll("<placeholder>", opts.projectName);
+  const replaced = substitutePlaceholder(content, opts.projectName);
   await writeFile(dest, replaced, "utf-8");
   opts.log(`  write  ${dest}`);
 }
@@ -141,7 +163,7 @@ async function installAiHook(
       dryRun: !!opts.dryRun,
       log,
       transform: opts.name
-        ? (content) => content.replaceAll("<placeholder>", opts.name!)
+        ? (content) => substitutePlaceholder(content, opts.name!)
         : undefined,
     });
     return;

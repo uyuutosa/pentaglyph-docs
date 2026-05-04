@@ -101,10 +101,13 @@ banner just below the metadata table. Do not delete the old ADR.
 
 1. **Status is always `Proposed`.** Humans flip to `Accepted` after
    review. You never write `Accepted`.
-2. **Date in ISO 8601** (`YYYY-MM-DD`). Use `Bash: date -u +%Y-%m-%d` if
-   the brief did not include a date — but you don't have Bash, so use
-   the date the dispatcher provided. If none, use `<today>` literally
-   and the orchestrator will fix.
+2. **Date in ISO 8601** (`YYYY-MM-DD`). The dispatcher (orchestrator or
+   architect-agent) **must** inject today's date into your brief. If the
+   brief does not include a `today: YYYY-MM-DD` line, return
+   `INSUFFICIENT BRIEF — missing today's date` and refuse to write. Do
+   **not** fall back to `<today>` literal — that violates hard-rule 1
+   (no `<placeholder>` in output) and creates a stale-date defect that
+   silently propagates.
 3. **Verb-led title.** "Adopt X", "Choose X", "Replace X with Y",
    "Defer X to a later release". Never noun-led ("PostgreSQL adoption").
 4. **No homemade sections.** Every ADR has the same structure. Stability

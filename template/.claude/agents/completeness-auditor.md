@@ -47,7 +47,7 @@ For each of the four required artefacts, check both **existence** and
 |----------|---------------|-------------------------------|
 | `docs/arc42/01-introduction-and-goals/overview.md` | file exists | length > 500; no `<placeholder>`; ≥ 5 lines starting with `G-` or `- G` (goals); ≥ 3 lines mentioning roles in a stakeholders table; ≥ 5 lines in a quality-goal table |
 | `docs/arc42/03-context-and-scope/system-context.md` | file exists | length > 500; no `<placeholder>`; contains `C4Context` or `Person(` (Mermaid C4 syntax) |
-| ≥ 1 PRD under `docs/arc42/03-context-and-scope/prds/*.md` | glob matches ≥ 1 | ≥ 1 file contains `FR-` and ≥ 1 file contains `NFR-` (regex `(FR\|NFR)-[A-Z]{3,6}-\d{3}`) |
+| ≥ 1 PRD under `docs/arc42/03-context-and-scope/prds/*.md` | glob matches ≥ 1 | ≥ 1 file contains a well-formed FR ID and ≥ 1 file contains a well-formed NFR ID. Well-formed = matches `^(?:\| \*\*)?(FR\|NFR)-[A-Z]{3,6}-\d{3}\*?\*?` at start of line or table cell — order is `FR-CAT-NNN`, **not** `CAT-FR-NNN`. Malformed IDs like `TRACK-FR-003` or `FR-003-AUTH` must be flagged in `INCONSISTENCIES` even if the file otherwise has a correct ID elsewhere. |
 | ≥ 1 use case under `docs/arc42/03-context-and-scope/use-cases/*.md` | glob matches ≥ 1 | ≥ 1 file contains "**Given**" + "**When**" + "**Then**" |
 
 Phase 1 contributes 25% if **all four** pass; partial credit:
@@ -61,7 +61,7 @@ another 2.25%. Maximum 25%.
 | `docs/arc42/04-solution-strategy/strategy.md` | exists | ≥ 5 markdown table rows that link to `09-decisions/` files |
 | `docs/arc42/05-building-blocks/overview.md` | exists | length > 500; ≥ 3 distinct container names mentioned |
 | `docs/diagrams/c4/workspace.dsl` | exists | contains ≥ 1 `container "..."` declaration that is *not* `"Web App"`, `"API"`, or `"Datastore"` (the placeholders) |
-| ≥ 3 ADRs in `docs/arc42/09-decisions/NNNN-*.md` | glob matches ≥ 3 (excluding README.md) | each contains literal text "Y-statement"; each has ≥ 2 lines starting with "**Option" or "Option " (considered options) |
+| ≥ 3 ADRs in `docs/arc42/09-decisions/NNNN-*.md` | glob matches ≥ 3 (excluding README.md) | each contains literal text "Y-statement"; each contains ≥ 2 headings matching `^### Option [A-Z]:` (the per-option Pros/Cons sections in MADR template 5_adr.md). Earlier auditor versions matched on `**Option` line-start which the MADR template does NOT produce — the correct anchor is the `### Option A: <name>` headings. |
 
 **Cross-consistency check** (extra rigour):
 container names in `05-building-blocks/overview.md` and `workspace.dsl`

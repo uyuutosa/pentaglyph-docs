@@ -118,12 +118,27 @@ Use Template 1 trimmed to §5. Required:
   `detailed-design/<module>.md` containing only front-matter + TODO if
   they don't exist yet — they will be filled by spec-writer in Phase 3)
 
-### 6. Update `diagrams/c4/workspace.dsl`
+### 6. Update `diagrams/c4/workspace.dsl` — L2 containers ONLY
 
-Replace the starter `<System name>`, `user`, `web`, `api`, `db`, etc.,
-with the real names from your overview.md. Keep the Structurizr DSL
-syntax exactly. The auditor grep-matches container names between
-overview.md and workspace.dsl — they must be identical strings.
+By the time you arrive in Phase 2, `discovery-agent` should have already
+populated L1 (the person + external `softwareSystem` declarations + L1
+relations) and left the inner `softwareSystem "..." { ... }` block
+empty (or containing only a placeholder comment).
+
+Your job:
+
+- **Inside** the `softwareSystem "..." { ... }` block, add one
+  `container "..." "..." "<tech>" "<tag>"` line per building block from
+  your `05-building-blocks/overview.md`.
+- Add the L2 relations between containers (e.g. `web -> api "API call"`)
+  and from each container to relevant external systems (using the L1
+  identifiers discovery-agent already declared).
+- **Do NOT touch L1 elements** outside the inner block — those are owned
+  by discovery-agent. If you find a typo in an L1 element, return
+  `RENAME-REQUIRED: <old> → <new>` and let the orchestrator coordinate.
+- **Container names in the DSL must match `05-building-blocks/overview.md`
+  exactly.** The auditor grep-compares these two files; mismatches are
+  a cross-consistency failure.
 
 ### 7. Write crosscutting files (Phase 3 / 4 trigger)
 
