@@ -1,0 +1,51 @@
+{
+  "name": "tetragram",
+  "version": "0.1.0",
+  "description": "CLI scaffolder for tetragram-docs — arc42 + C4 + MADR + Diátaxis with one workflow",
+  "license": "MIT",
+  "author": "Yu Sato",
+  "type": "module",
+  "module": "src/index.ts",
+  "bin": {
+    "tetragram": "./bin/tetragram.mjs"
+  },
+  "files": [
+    "bin/",
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target node --format esm",
+    "dev": "bun run src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "engines": {
+    "node": ">=20",
+    "bun": ">=1.1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "keywords": [
+    "documentation",
+    "arc42",
+    "c4-model",
+    "madr",
+    "adr",
+    "diataxis",
+    "scaffolder",
+    "ai-readable",
+    "templates"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uyuutosa/tetragram-docs.git"
+  }
+}
