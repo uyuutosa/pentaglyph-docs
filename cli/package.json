@@ -1,6 +1,6 @@
 {
-  "name": "tetragram",
-  "version": "0.1.0",
+  "name": "@uyuutosa/tetragram",
+  "version": "0.0.1",
   "description": "CLI scaffolder for tetragram-docs — arc42 + C4 + MADR + Diátaxis with one workflow",
   "license": "MIT",
   "author": "Yu Sato",
@@ -11,7 +11,9 @@
   },
   "files": [
     "bin/",
-    "dist/",
+    "src/",
+    "template/",
+    "tsconfig.json",
     "README.md",
     "LICENSE"
   ],
@@ -19,7 +21,10 @@
     "build": "bun build src/index.ts --outdir dist --target node --format esm",
     "dev": "bun run src/index.ts",
     "typecheck": "tsc --noEmit",
-    "test": "bun test"
+    "test": "bun test",
+    "sync-template": "bun run scripts/sync-template.mjs",
+    "prepack": "bun run scripts/sync-template.mjs",
+    "smoke": "rm -rf /tmp/tetragram-smoke && bun run src/index.ts init /tmp/tetragram-smoke --profile=full --ai=claude --name='Smoke Test' && find /tmp/tetragram-smoke -type f | wc -l"
   },
   "engines": {
     "node": ">=20",
@@ -32,6 +37,10 @@
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "keywords": [
     "documentation",
@@ -46,6 +55,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/uyuutosa/tetragram-docs.git"
+    "url": "https://github.com/uyuutosa/tetragram-docs.git",
+    "directory": "cli"
+  },
+  "homepage": "https://github.com/uyuutosa/tetragram-docs#readme",
+  "bugs": {
+    "url": "https://github.com/uyuutosa/tetragram-docs/issues"
   }
 }

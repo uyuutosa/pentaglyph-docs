@@ -94,15 +94,28 @@ function isLikelyText(path: string): boolean {
   return TEXT_EXTS.some((ext) => path.endsWith(ext));
 }
 
-/** Resolve the path of the bundled `template/` directory relative to this file. */
+/**
+ * Resolve the path of the bundled `template/` directory relative to this file.
+ *
+ * @remarks
+ * Search order (first hit wins):
+ * 1. `cli/template/` — bundled by `npm publish` via the `prepack` hook.
+ *    This is what end users get.
+ * 2. `<repo-root>/template/` — monorepo dev mode where `template/` lives
+ *    next to `cli/` and is the canonical source.
+ *
+ * If neither exists, the user is running an incomplete checkout — surface
+ * a helpful error.
+ */
 export async function resolveTemplateDir(): Promise<string> {
-  // When running from source: cli/src/lib/fs.ts → ../../../template/
-  // When running from compiled: cli/dist/index.js → ../template/
+  // cli/src/lib/fs.ts → cli/ is 2 levels up; cli/template lives under cli/
+  // cli/dist/index.js → cli/ is 1 level up
   const here = dirname(new URL(import.meta.url).pathname);
   const candidates = [
-    join(here, "..", "..", "..", "template"),
-    join(here, "..", "..", "template"),
-    join(here, "..", "template"),
+    join(here, "..", "..", "template"),         // cli/src/lib/fs.ts → cli/template (bundled)
+    join(here, "..", "template"),               // cli/dist/index.js → cli/template (bundled)
+    join(here, "..", "..", "..", "template"),   // cli/src/lib/fs.ts → repo-root/template (dev)
+    join(here, "..", "..", "template"),         // cli/dist/index.js → repo-root/template (dev)
   ];
   for (const c of candidates) {
     try {
