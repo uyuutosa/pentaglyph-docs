@@ -3,7 +3,8 @@
 > Audience: maintainers of [`@uyuutosa/tetragram`](https://www.npmjs.com/package/@uyuutosa/tetragram).
 > If you only want to *use* the CLI, see [`README.md`](./README.md).
 
-This document covers the **first publish** (0.0.1) and the **steady-state release flow**.
+This document covers the **OIDC trusted-publishing flow** (steady state) and the
+fallback **manual publish** (one-off / disaster recovery).
 
 ---
 
@@ -17,41 +18,103 @@ The package name change between 0.0.x and 0.1.0+ is deliberate — it signals st
 
 ---
 
-## First publish (0.0.1)
+## Steady-state release flow (OIDC trusted publishing — preferred)
 
-### Prerequisites
+> Why OIDC? Classic tokens were retired by npm in November 2025. Granular tokens have a known [bug](https://github.com/npm/cli/issues/8869) preventing 2FA bypass on personal accounts. OIDC trusted publishing is the only fully-tokenless path.
 
-1. **npm account** — create one at <https://www.npmjs.com/signup> if needed. Username should match (or be associated with) the GitHub identity `uyuutosa`.
-2. **Two-factor auth** — required by npm for publishing. Set it up at <https://www.npmjs.com/settings/<your-username>/profile>.
-3. **Bun installed locally** — see [`README.md`](./README.md). `prepack` runs `bun run scripts/sync-template.mjs`.
-4. **Clean working tree** — `git status` shows nothing modified.
-5. **CI green on `main`** — check <https://github.com/uyuutosa/tetragram-docs/actions>.
+### Prerequisites (one-time setup)
+
+1. **npm account `uyuutosa`** with 2FA enabled.
+2. **GitHub Actions trusted publisher** configured in npm:
+   - Open <https://www.npmjs.com/package/@uyuutosa/tetragram/access>
+   - Section **Trusted Publisher** → **Add Trusted Publisher**
+   - Provider: **GitHub Actions**
+   - Organization or user: `uyuutosa`
+   - Repository: `tetragram-docs`
+   - Workflow filename: `publish.yml`
+   - Environment name: leave blank (or set to `production` if you also configure a matching environment in `.github/workflows/publish.yml`)
+   - Save
+3. **Workflow `publish.yml`** is checked into [`.github/workflows/publish.yml`](../.github/workflows/publish.yml) — already done.
+
+### Per-release steps
+
+```bash
+cd cli/
+
+# 1. Bump version in cli/package.json (semver)
+#    e.g. 0.0.4 → 0.0.5
+$EDITOR package.json
+
+# 2. Commit + push the bump
+git add cli/package.json
+git commit -m "chore(tetragram/cli): release v0.0.5"
+git push
+
+# 3. Tag the release (the workflow triggers on this exact pattern)
+git tag tetragram-cli-v0.0.5
+git push origin tetragram-cli-v0.0.5
+
+# 4. Watch the workflow
+gh run watch --repo uyuutosa/tetragram-docs
+
+# 5. Verify
+npm view @uyuutosa/tetragram version
+```
+
+That's the full flow — **no NPM_TOKEN, no 2FA prompt, no WebAuthn**. The
+GitHub Actions workflow exchanges its OIDC ID token for a short-lived npm
+publish credential. Provenance attestation is generated automatically.
+
+### Manual dispatch (re-publish current version)
+
+If a publish fails partway through and you need to re-run with the same
+version (rare — usually you should bump):
+
+```bash
+gh workflow run publish.yml \
+  --repo uyuutosa/tetragram-docs \
+  -f confirm_version=0.0.5
+```
+
+The workflow's verify step ensures `confirm_version` matches `cli/package.json`.
+
+---
+
+## Fallback: manual publish (when OIDC is unavailable)
+
+Use this only if GitHub Actions is down, npm OIDC is having an outage, or the
+trusted publisher hasn't been configured yet (first-publish chicken-and-egg).
 
 ### Steps
 
 ```bash
 cd cli/
 
-# 1. Log in to npm (interactive — opens a browser for OAuth)
-npm login
+# 1. Log in to npm — interactive WebAuthn flow (opens browser, ~30s window)
+npm login --auth-type=web
 
-# 2. Verify you're logged in as the right user
+# 2. Verify
 npm whoami
-# → uyuutosa  (or whichever account owns @uyuutosa/*)
 
-# 3. Confirm the tarball contents one more time
+# 3. Sync template
 bun run sync-template
+
+# 4. Confirm tarball
 npm pack --dry-run | tail -10
 
-# 4. Publish (the "@uyuutosa/" scope means access:public is REQUIRED)
-npm publish --access=public --otp=<6-digit code from your authenticator>
+# 5. Publish (depending on your 2FA settings, may prompt for OTP / WebAuthn)
+npm publish --access=public
 
-# 5. Verify it landed
+# 6. Verify
 npm view @uyuutosa/tetragram version
-# → 0.0.1
 ```
 
-### Smoke test the published version
+If the WebAuthn flow keeps timing out (~60s URL TTL is short for some setups),
+you must use OIDC trusted publishing instead — see the previous section.
+
+---
+
+## Smoke test the published version
 
 In a clean shell:
 
@@ -60,26 +123,10 @@ cd /tmp && rm -rf publish-test
 bunx --bun @uyuutosa/tetragram init ./publish-test \
   --profile=standard --ai=claude --name="Publish Test"
 ls publish-test/docs
+test -f publish-test/.claude/agents/doc-orchestrator.md && echo "✓ agents shipped"
 ```
 
 If this scaffolds the kit identically to a local `bun run`, the publish is healthy.
-
----
-
-## Steady-state release flow
-
-For each new release:
-
-1. **Update version** in `cli/package.json` (`0.0.1` → `0.0.2` for patch, etc.).
-2. **Commit** — message format: `chore(cli): release v0.0.2`.
-3. **Tag** — `git tag tetragram-cli-v0.0.2` (the `tetragram-cli-` prefix disambiguates from any future tags on the doc kit itself).
-4. **Push** the tag — `git push origin tetragram-cli-v0.0.2`.
-5. **Publish** — `npm publish --access=public --otp=<code>` from `cli/`.
-6. **GitHub Release** — `gh release create tetragram-cli-v0.0.2 --notes-file CHANGELOG.md` (or write release notes inline).
-
-### Optional: automate via GitHub Actions
-
-When ready, add `.github/workflows/release.yml` triggered on tag push, with `NPM_TOKEN` secret. Manual publish is fine until release cadence picks up.
 
 ---
 
@@ -87,23 +134,26 @@ When ready, add `.github/workflows/release.yml` triggered on tag push, with `NPM
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| `403 You must be logged in to publish packages` | Not logged in or wrong account | `npm login` |
+| `403 You must be logged in to publish packages` | Not logged in or wrong account | `npm login --auth-type=web` |
 | `402 You must sign up for private packages` | Forgot `--access=public` on a scoped name | Re-run with `--access=public` |
 | `EBADENGINE` (during install on user's machine) | User's Node < 20 | Ask user to upgrade Node, or install Bun |
 | Published tarball missing `template/` | `prepack` didn't run | Verify `package.json` `scripts.prepack`; verify Bun on PATH |
 | `template/` contains stale content | `cli/template/` wasn't re-synced after editing `../template/` | Run `bun run sync-template` before `npm publish` |
-| `Package name too similar to existing package` | Scoped name conflict | Try a different scope (you own the scope, so this should not occur for `@uyuutosa/*`) |
+| OIDC workflow fails with `403` | Trusted publisher not configured on npm side | Re-check the npm Trusted Publisher settings; the workflow filename must match exactly |
+| OIDC workflow fails with `npm version too old` | Older npm bundled with Node | The workflow upgrades npm to latest; if you copy this to another repo, ensure `npm install -g npm@latest` runs before publish |
+| WebAuthn URL keeps timing out | URL TTL is ~60s; passkey browser flow exceeds that | Stop fighting it — switch to OIDC trusted publishing per above |
+| Granular token "Bypass 2FA" greyed out / requires Organization | npm bug ([#8869](https://github.com/npm/cli/issues/8869)); personal accounts hit this | Don't use granular tokens — use OIDC instead |
 
 ---
 
 ## Unpublish window
 
-npm allows `npm unpublish @uyuutosa/tetragram@0.0.1` **only within 72 hours** of publish, and only if no other package depends on it.
+npm allows `npm unpublish @uyuutosa/tetragram@0.0.5` **only within 72 hours** of publish, and only if no other package depends on it.
 
 After 72 hours:
 
-- You can `npm deprecate @uyuutosa/tetragram@0.0.1 "<reason>"` to discourage use.
-- The version number is **permanently retired** — you cannot re-publish `0.0.1`. Bump to `0.0.2` instead.
+- You can `npm deprecate @uyuutosa/tetragram@0.0.5 "<reason>"` to discourage use.
+- The version number is **permanently retired** — you cannot re-publish `0.0.5`. Bump to `0.0.6` instead.
 
 ---
 
@@ -117,13 +167,16 @@ When the API has been stable across 2–3 patch versions in real use:
    - `"version": "0.1.0"`
 3. Add `@uyuutosa/tetragram` as a deprecated alias:
    - Publish a final `@uyuutosa/tetragram@0.0.99` whose `package.json` has nothing but `"deprecated": "Use 'tetragram' instead"`.
-4. `npm publish --access=public` (no scope this time means default access is public).
+4. Configure trusted publisher for the new unscoped package too (one-time, same flow as above).
+5. Tag `tetragram-cli-v0.1.0` → push → workflow publishes both names.
 
 ---
 
 ## References
 
 - npm publishing — <https://docs.npmjs.com/cli/commands/npm-publish>
-- npm scoped packages — <https://docs.npmjs.com/cli/using-npm/scope>
+- npm trusted publishing (OIDC) — <https://docs.npmjs.com/trusted-publishers/>
+- npm trusted publishing GA changelog — <https://github.blog/changelog/2025-07-31-npm-trusted-publishing-with-oidc-is-generally-available/>
+- Classic token retirement — <https://github.com/orgs/community/discussions/179562>
 - semver — <https://semver.org/>
 - npm unpublish policy — <https://docs.npmjs.com/policies/unpublish>
