@@ -35,7 +35,7 @@ If the rule below contradicts those files, **the files in `docs/` win** — they
 
 - Editing anything under `docs/archive/` (read-only history).
 - Editing the body of an `Accepted` ADR (supersede with a new ADR instead).
-- Inventing a new template (the six in `docs/templates/` cover every case).
+- Inventing a new template (the nine in `docs/templates/` cover every case — six core + three UX research).
 - Duplicating workflow rules into other files (link to `docs/WORKFLOW.md`).
 - Writing in a non-English language in default-English directories.
 

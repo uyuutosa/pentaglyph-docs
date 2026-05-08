@@ -6,11 +6,11 @@ last-reviewed: 2026-05-04
 
 # Template Index
 
-Six templates cover the full authoring surface. Pick one before writing.
+Nine templates cover the full authoring surface (six core + three UX research). Pick one before writing.
 
 > For *when to write what and where to put it*, see [`../WORKFLOW.md`](../WORKFLOW.md). This README is a template index only.
 
-The template set is synthesised from industry references: [arc42](https://arc42.org/), [C4 Model](https://c4model.com/), [MADR v3.0](https://adr.github.io/madr/), [Google Design Doc](https://www.industrialempathy.com/posts/design-docs-at-google/), [Lenny PRD](https://www.lennysnewsletter.com/p/how-the-most-successful-pms-write), [Cockburn Use Cases](https://www.craiglarman.com/wiki/downloads/cockburn-use-case-fundamentals.pdf), and [Diátaxis](https://diataxis.fr/).
+The template set is synthesised from industry references: [arc42](https://arc42.org/), [C4 Model](https://c4model.com/), [MADR v3.0](https://adr.github.io/madr/), [Google Design Doc](https://www.industrialempathy.com/posts/design-docs-at-google/), [Lenny PRD](https://www.lennysnewsletter.com/p/how-the-most-successful-pms-write), [Cockburn Use Cases](https://www.craiglarman.com/wiki/downloads/cockburn-use-case-fundamentals.pdf), [Cooper Personas](https://www.cooper.com/journal/2008/05/the_origin_of_personas), [Kalbach Mapping Experiences](https://www.oreilly.com/library/view/mapping-experiences/9781491923528/), [Bitner Service Blueprints](https://digitalcommons.usu.edu/cgi/viewcontent.cgi?article=1041&context=marketing_facpub), and [Diátaxis](https://diataxis.fr/).
 
 ---
 
@@ -24,6 +24,9 @@ The template set is synthesised from industry references: [arc42](https://arc42.
 | 3   | [Module Detailed Design](3_module-detailed-design.md)          | Implementation spec             | §5 Building Block        | "How is it implemented / what does the API look like?" |
 | 4   | [Use Case](4_use-case.md)                                      | Scenario                        | §6 Runtime View          | "Which actor performs which operations?"           |
 | 5   | [ADR (MADR v3.0)](5_adr.md)                                    | Design decision                 | §9 Decisions             | "Why was this chosen / what was rejected?"         |
+| 6   | [Persona](6_persona.md)                                        | UX research — goal-directed persona | §3 Context (personas/) | "Who is this for, and what do they want?"          |
+| 7   | [Journey Map](7_journey-map.md)                                | UX research — experience over time  | §3 Context (journeys/) / §6 Runtime | "How does this persona experience the scenario, stage by stage?" |
+| 8   | [Service Blueprint](8_service-blueprint.md)                    | UX research — frontstage / backstage | §3 Context (blueprints/) / §6 Runtime | "What do we do behind the scenes to make the journey happen?"    |
 
 ## How to choose a template
 
