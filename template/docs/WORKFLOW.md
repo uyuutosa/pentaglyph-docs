@@ -63,6 +63,11 @@ START: I am about to write a doc.
 │   YES → user-manual/{tutorials|how-to|reference|explanation}/
 │         (Diátaxis quadrant — see §3 below)
 │
+├─ Is it UX research output (optional, for product / design teams)?
+│   ┌─ Persona definition?            → Template 6 → arc42/03-context-and-scope/personas/<id>.md
+│   ├─ Customer / user journey map?   → Template 7 → arc42/03-context-and-scope/journeys/<id>.md
+│   └─ Service blueprint (cross-functional service)? → Template 8 → arc42/03-context-and-scope/blueprints/<id>.md
+│
 └─ None of the above? → Template 0 (Default) in the closest matching directory
 ```
 
@@ -90,6 +95,9 @@ When you change code, the **same PR** must update the corresponding doc. Use thi
 | Bug / incident retrospective (Medium+) | `postmortems/YYYY-MM-DD_<title>.md` | Template 0 |
 | End-user manual chapter | `user-manual/{tutorials,how-to,reference,explanation}/` | (Diátaxis) |
 | Cost change | `cost-estimates/YYYY-MM_<title>.md` | Template 0 |
+| New persona (UX research) | `arc42/03-context-and-scope/personas/<id>.md` | Template 6 |
+| New customer journey map | `arc42/03-context-and-scope/journeys/<id>.md` | Template 7 |
+| New service blueprint | `arc42/03-context-and-scope/blueprints/<id>.md` | Template 8 |
 
 PRs that change code without the corresponding doc update **must be sent back at review**.
 

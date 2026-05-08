@@ -42,9 +42,12 @@ Entry point for all project documentation.
 
 See [`templates/README.md`](./templates/README.md) for the index and selection flow.
 
-- [`templates/0_default.md`](./templates/0_default.md) — fallback when none of 1–5 fit
+- [`templates/0_default.md`](./templates/0_default.md) — fallback when none of 1–8 fit
 - [`templates/1_architecture-overview.md`](./templates/1_architecture-overview.md) — arc42 §1+§3+§4+§5+§8 + C4 L1/L2 system overview
 - [`templates/2_prd.md`](./templates/2_prd.md) — PRD with `FR-<CAT>-NNN` / `NFR-<CAT>-NNN` IDs
 - [`templates/3_module-detailed-design.md`](./templates/3_module-detailed-design.md) — Google Design Doc + Pragmatic Engineer module spec
 - [`templates/4_use-case.md`](./templates/4_use-case.md) — Cockburn casual + user story + Given/When/Then
 - [`templates/5_adr.md`](./templates/5_adr.md) — MADR v3.0 ADR with Y-statement
+- [`templates/6_persona.md`](./templates/6_persona.md) — Cooper goal-directed persona (UX research, optional)
+- [`templates/7_journey-map.md`](./templates/7_journey-map.md) — Kalbach customer journey map (UX research, optional)
+- [`templates/8_service-blueprint.md`](./templates/8_service-blueprint.md) — Bitner service blueprint (UX research, optional, cross-functional services)
