@@ -260,12 +260,15 @@ See: docs/templates/5_adr.md -->
 
 ## 9. Testing Strategy
 
-| Test level   | Coverage  | Tool                |
-| ------------ | --------- | ------------------- |
-| Unit         | <%>       | pytest / vitest     |
-| Integration  | <%>       | pytest              |
-| E2E          | <%>       | Playwright          |
-| Performance  | <scenario>| locust / k6         |
+<!-- The crosscutting policy (mock boundary, contract-test mandate, live / sandbox layers, fixture refresh) lives at arc42/08-crosscutting/testing-strategy.md. This table records *this module's application* of that policy — concrete coverage, tools, and any module-specific deviations. -->
+
+| Test level   | Coverage   | Tool                  | Real or mocked dependencies                              |
+| ------------ | ---------- | --------------------- | -------------------------------------------------------- |
+| Unit         | <%>        | pytest / vitest       | mocks OK for in-process collaborators                    |
+| Integration  | <%>        | pytest                | real DB / queue via testcontainers, real cloud emulator  |
+| Contract     | <%>        | pytest / schemathesis | adapter-against-real-backend per §8 testing-strategy     |
+| E2E          | <%>        | Playwright            | real or sandbox external services                        |
+| Performance  | <scenario> | locust / k6           | real backend; production-shaped data                     |
 
 ---
 

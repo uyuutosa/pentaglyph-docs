@@ -14,12 +14,13 @@ This directory holds operational and convention guidelines: code style, naming, 
 
 ## Suggested files
 
-| File                          | Purpose                                                                 |
-| ----------------------------- | ----------------------------------------------------------------------- |
-| `coding-style.md`             | Language-specific style guides + exceptions to upstream defaults        |
-| `branch-and-commit.md`        | Branch strategy + commit message format                                 |
-| `review-checklist.md`         | What reviewers must verify before approving a PR                        |
-| `sprint-cadence.md`           | Sprint length, ceremonies, definition of done                           |
-| `release-process.md`          | Versioning scheme, release notes format, rollback procedure             |
+| File                          | Purpose                                                                                                                                                                                                                                |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `architecture-layers.md`      | Granularity ladder for code organization (BE: Hexagonal / DDD / GoF; FE: Container-Presentational + Atomic Design). **Shipped as a default** — customise the Bounded Context list and lock the decision in an ADR if your team agrees. |
+| `coding-style.md`             | Language-specific style guides + exceptions to upstream defaults                                                                                                                                                                       |
+| `branch-and-commit.md`        | Branch strategy + commit message format                                                                                                                                                                                                |
+| `review-checklist.md`         | What reviewers must verify before approving a PR                                                                                                                                                                                       |
+| `sprint-cadence.md`           | Sprint length, ceremonies, definition of done                                                                                                                                                                                          |
+| `release-process.md`          | Versioning scheme, release notes format, rollback procedure                                                                                                                                                                            |
 
 For lifecycle / when to update, see [`../WORKFLOW.md`](../WORKFLOW.md).
