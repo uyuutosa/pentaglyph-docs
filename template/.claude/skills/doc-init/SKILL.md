@@ -5,7 +5,7 @@ description: >
   doc-orchestrator agent which audits the current docs/ state, identifies the
   current phase + next gap, and begins / resumes the discovery interview. Idem-
   potent — safe to call repeatedly. Use when a project has just been scaffolded
-  with `tetragram init` or when picking up after a long pause.
+  with `pentaglyph init` or when picking up after a long pause.
 disable-model-invocation: false
 ---
 
@@ -30,7 +30,7 @@ The conversation continues until the auditor reports **100% coverage**.
 
 ## When to use
 
-- **Fresh project**: just ran `tetragram init`, the docs/ scaffold has only
+- **Fresh project**: just ran `pentaglyph init`, the docs/ scaffold has only
   README.md files. → `/doc-init` to start Phase 1 (Discovery)
 - **Resuming**: a prior conversation got partway through. → `/doc-init` again;
   the orchestrator picks up exactly where you left off (state is computed

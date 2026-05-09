@@ -11,7 +11,7 @@ last-reviewed: <YYYY-MM-DD>
 > References: [Alan Cooper goal-directed personas](https://www.cooper.com/journal/2008/05/the_origin_of_personas) + [Pruitt & Adlin "The Persona Lifecycle"](https://www.elsevier.com/books/the-persona-lifecycle/pruitt/978-0-12-566251-2) + [Indi Young "Mental Models"](https://rosenfeldmedia.com/books/mental-models/)
 > Length target: **1–3 pages per persona**
 >
-> **Not used**: marketing personas (demographics-first, no goals), ad-hoc "user types". Cooper-style **goal-directed personas** are the only kind tetragram opinionates on, because they survive contact with engineering decisions.
+> **Not used**: marketing personas (demographics-first, no goals), ad-hoc "user types". Cooper-style **goal-directed personas** are the only kind pentaglyph opinionates on, because they survive contact with engineering decisions.
 >
 > A persona is a *reusable* artefact — one persona is referenced from many use-cases, journey maps, and PRDs. Keep it standalone; do not inline scenarios here (those go in journey maps, Type 7).
 >

@@ -1,13 +1,13 @@
 {
-  "name": "@uyuutosa/tetragram",
-  "version": "0.0.4",
-  "description": "CLI scaffolder for tetragram-docs — arc42 + C4 + MADR + Diátaxis with one workflow",
+  "name": "@uyuutosa/pentaglyph",
+  "version": "0.1.0",
+  "description": "CLI scaffolder for pentaglyph-docs — arc42 + C4 + MADR + Diátaxis with one workflow",
   "license": "MIT",
   "author": "Yu Sato",
   "type": "module",
   "module": "src/index.ts",
   "bin": {
-    "tetragram": "./bin/tetragram.mjs"
+    "pentaglyph": "./bin/pentaglyph.mjs"
   },
   "files": [
     "bin/",
@@ -24,7 +24,7 @@
     "test": "bun test",
     "sync-template": "bun run scripts/sync-template.mjs",
     "prepack": "bun run scripts/sync-template.mjs",
-    "smoke": "rm -rf /tmp/tetragram-smoke && bun run src/index.ts init /tmp/tetragram-smoke --profile=full --ai=claude --name='Smoke Test' && find /tmp/tetragram-smoke -type f | wc -l"
+    "smoke": "rm -rf /tmp/pentaglyph-smoke && bun run src/index.ts init /tmp/pentaglyph-smoke --profile=full --ai=claude --name='Smoke Test' && find /tmp/pentaglyph-smoke -type f | wc -l"
   },
   "engines": {
     "node": ">=20",

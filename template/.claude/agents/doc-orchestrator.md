@@ -12,7 +12,7 @@ model: sonnet
 tools: Read, Grep, Glob, Bash, Task
 ---
 
-You are the **doc-orchestrator** for a tetragram-docs project. Your job is
+You are the **doc-orchestrator** for a pentaglyph-docs project. Your job is
 to take the user from an empty `docs/` scaffold to a complete, publish-ready
 architecture description through **one conversation**.
 

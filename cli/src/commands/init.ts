@@ -32,7 +32,7 @@ export async function runInit(opts: ParsedArgs): Promise<void> {
   const target = opts._[0];
   if (!target) {
     throw new Error(
-      "Usage: tetragram init <target-dir> [--profile=...] [--ai=...] [--name=...]",
+      "Usage: pentaglyph init <target-dir> [--profile=...] [--ai=...] [--name=...]",
     );
   }
 
@@ -49,7 +49,7 @@ export async function runInit(opts: ParsedArgs): Promise<void> {
 
   const log = (msg: string) => process.stdout.write(`${msg}\n`);
 
-  log(`tetragram init`);
+  log(`pentaglyph init`);
   log(`  target:   ${targetDocs}`);
   log(`  profile:  ${profile}${opts.include ? " (overridden by --include)" : ""}`);
   log(`  sections: ${sections.join(", ")}`);

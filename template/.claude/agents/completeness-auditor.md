@@ -33,7 +33,7 @@ If `docs/` is empty or `WORKFLOW.md` doesn't exist, return:
 ```text
 PHASE: 0
 COVERAGE: 0%
-ERROR: docs/ scaffold not found. Run `tetragram init` first.
+ERROR: docs/ scaffold not found. Run `pentaglyph init` first.
 ```
 
 Otherwise continue.

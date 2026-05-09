@@ -1,9 +1,9 @@
 #!/usr/bin/env bun
 /**
- * tetragram — CLI scaffolder for the tetragram-docs kit.
+ * pentaglyph — CLI scaffolder for the pentaglyph-docs kit.
  *
  * @remarks
- * Copies the `template/` directory of the tetragram-docs repository into a target
+ * Copies the `template/` directory of the pentaglyph-docs repository into a target
  * project, optionally trimming sections by `--include` and rewriting AI instructions
  * for the chosen `--ai` target.
  */
@@ -45,6 +45,6 @@ try {
   }
 } catch (err) {
   const message = err instanceof Error ? err.message : String(err);
-  console.error(`tetragram: ${message}`);
+  console.error(`pentaglyph: ${message}`);
   process.exit(1);
 }

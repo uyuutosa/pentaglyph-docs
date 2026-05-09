@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "tetragram",
+      "name": "pentaglyph",
       "devDependencies": {
         "@types/bun": "latest",
         "@types/node": "^22.0.0",

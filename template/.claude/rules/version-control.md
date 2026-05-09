@@ -15,7 +15,7 @@ deviation. Until then, the rules below are mandatory.
 Reference (canonical): Vincent Driessen, "A successful Git branching model"
 <https://nvie.com/posts/a-successful-git-branching-model/>. Re-paraphrasing
 the model here is forbidden — read the source. This rule only encodes the
-operational decisions tetragram makes on top of the model.
+operational decisions pentaglyph makes on top of the model.
 
 ## Long-lived branches
 

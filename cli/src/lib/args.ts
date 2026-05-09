@@ -1,5 +1,5 @@
 /**
- * Lightweight CLI argument parser for tetragram.
+ * Lightweight CLI argument parser for pentaglyph.
  *
  * Supports:
  *   --flag=value
