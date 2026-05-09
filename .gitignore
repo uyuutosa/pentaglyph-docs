@@ -12,6 +12,9 @@ bun.lockb
 # Rendered C4 diagram exports (workspace.dsl is the source of truth)
 template/docs/diagrams/c4/exports/
 
+# paperbanana run artefacts (assets/hero.png is the source of truth)
+assets/run_*/
+
 # Editor
 .vscode/
 .idea/

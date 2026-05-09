@@ -6,8 +6,6 @@
 
 > A documentation scaffold built on five industry standards — **arc42** (architecture), **C4** (diagrams), **MADR** (decisions), **Diátaxis** (user docs), and **TiSDD** (service design) — with a single explicit workflow and AI-readable instructions per directory.
 
-> **Hero image regen TODO**: `assets/hero.png` still shows the four-standard tetragram branding. Regenerate via paperbanana / Gemini 3-Pro to depict five standards before the next minor release.
-
 The name **pentaglyph** (Greek `penta` "five" + `glyph` "engraved sign") reflects the five standards bundled into one opinionated kit. Renamed from the original `tetragram` (four standards) when TiSDD was adopted as the fifth peer standard; see `cli/PUBLISH.md` for migration notes.
 
 | #  | Standard      | Authoritative source                                  | Local home                          |
