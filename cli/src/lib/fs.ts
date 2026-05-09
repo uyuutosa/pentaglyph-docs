@@ -127,6 +127,6 @@ export async function resolveTemplateDir(): Promise<string> {
   }
   throw new Error(
     "Could not locate the bundled template/ directory. " +
-      "Reinstall tetragram or pass --template <path>.",
+      "Reinstall pentaglyph or pass --template <path>.",
   );
 }

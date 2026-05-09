@@ -1,21 +1,21 @@
 name: Publish CLI to npm (OIDC trusted publishing)
 
-# Triggers on tag push of the form tetragram-cli-vX.Y.Z
+# Triggers on tag push of the form pentaglyph-cli-vX.Y.Z
 # Also supports manual dispatch for emergency re-publish (re-runs current cli/package.json version).
 #
 # Auth model: OpenID Connect trusted publishing — no NPM_TOKEN required.
 # The workflow exchanges its OIDC ID token for a short-lived npm publish credential.
-# Setup on the npm side is one-time: npmjs.com → @uyuutosa/tetragram → Settings → Trusted Publisher
+# Setup on the npm side is one-time: npmjs.com → @uyuutosa/pentaglyph → Settings → Trusted Publisher
 #   - Provider:           GitHub Actions
 #   - Organization/user:  uyuutosa
-#   - Repository:         tetragram-docs
+#   - Repository:         pentaglyph-docs
 #   - Workflow filename:  publish.yml
 #   - Environment name:   (leave blank, or set "production" if you also configure it here)
 
 on:
   push:
     tags:
-      - 'tetragram-cli-v*'
+      - 'pentaglyph-cli-v*'
   workflow_dispatch:
     inputs:
       confirm_version:
@@ -25,7 +25,7 @@ on:
 
 jobs:
   publish:
-    name: Publish @uyuutosa/tetragram via OIDC
+    name: Publish @uyuutosa/pentaglyph via OIDC
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -57,7 +57,7 @@ jobs:
         run: |
           PKG_VERSION=$(node -p "require('./package.json').version")
           if [[ "${{ github.event_name }}" == "push" ]]; then
-            TAG_VERSION="${GITHUB_REF_NAME#tetragram-cli-v}"
+            TAG_VERSION="${GITHUB_REF_NAME#pentaglyph-cli-v}"
             echo "Tag: $GITHUB_REF_NAME → version $TAG_VERSION"
           else
             TAG_VERSION="${{ github.event.inputs.confirm_version }}"
@@ -81,9 +81,9 @@ jobs:
         run: |
           PKG_VERSION=$(node -p "require('./package.json').version")
           sleep 5  # registry propagation
-          PUBLISHED=$(npm view @uyuutosa/tetragram@$PKG_VERSION version 2>/dev/null || echo "MISSING")
+          PUBLISHED=$(npm view @uyuutosa/pentaglyph@$PKG_VERSION version 2>/dev/null || echo "MISSING")
           if [[ "$PUBLISHED" != "$PKG_VERSION" ]]; then
-            echo "::error::Verify failed — registry returned '$PUBLISHED' for @uyuutosa/tetragram@$PKG_VERSION"
+            echo "::error::Verify failed — registry returned '$PUBLISHED' for @uyuutosa/pentaglyph@$PKG_VERSION"
             exit 1
           fi
-          echo "Published @uyuutosa/tetragram@$PKG_VERSION via OIDC ✓"
+          echo "Published @uyuutosa/pentaglyph@$PKG_VERSION via OIDC ✓"

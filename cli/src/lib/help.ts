@@ -2,12 +2,12 @@ import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
 export function printHelp(): void {
-  const help = `tetragram — scaffold a docs/ tree based on arc42 + C4 + MADR + Diátaxis
+  const help = `pentaglyph — scaffold a docs/ tree based on arc42 + C4 + MADR + Diátaxis
 
 USAGE
-  tetragram init <target-dir> [options]
-  tetragram add <section> [options]
-  tetragram --help | --version
+  pentaglyph init <target-dir> [options]
+  pentaglyph add <section> [options]
+  pentaglyph --help | --version
 
 COMMANDS
   init <dir>     Scaffold a new docs/ tree under <dir>/docs.
@@ -48,13 +48,13 @@ OPTIONS
 
 EXAMPLES
   # Scaffold a standard kit into ./my-app/docs with Claude Code support
-  tetragram init ./my-app --profile=standard --ai=claude --name="My App"
+  pentaglyph init ./my-app --profile=standard --ai=claude --name="My App"
 
   # Just templates + arc42 + ADRs
-  tetragram init ./my-lib --profile=minimal --ai=generic
+  pentaglyph init ./my-lib --profile=minimal --ai=generic
 
   # Add the user-manual section later
-  tetragram add user-manual --target=./my-app
+  pentaglyph add user-manual --target=./my-app
 
 DOCS
   https://github.com/uyuutosa/tetragram-docs
@@ -72,7 +72,7 @@ export async function printVersion(): Promise<void> {
     for (const c of candidates) {
       try {
         const pkg = JSON.parse(await readFile(c, "utf-8"));
-        process.stdout.write(`tetragram ${pkg.version}\n`);
+        process.stdout.write(`pentaglyph ${pkg.version}\n`);
         return;
       } catch {
         // try next
@@ -81,5 +81,5 @@ export async function printVersion(): Promise<void> {
   } catch {
     // fall through
   }
-  process.stdout.write("tetragram (version unknown)\n");
+  process.stdout.write("pentaglyph (version unknown)\n");
 }

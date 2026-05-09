@@ -25,7 +25,7 @@ Define the taxonomy and authoring rules for `docs/` so that:
 
 ## 2. Adopted standards
 
-This kit binds four external standards into one opinionated layout. Their **authoritative definitions live at the source URLs**; this kit only adds the file layout that hosts them.
+This kit binds five external standards into one opinionated layout. Their **authoritative definitions live at the source URLs**; this kit only adds the file layout that hosts them.
 
 | Standard | Authoritative source | Question it answers | Local home |
 |---|---|---|---|
@@ -33,8 +33,11 @@ This kit binds four external standards into one opinionated layout. Their **auth
 | **C4 model** | <https://c4model.com> | What does the architecture look like at each zoom level? | `diagrams/c4/` |
 | **MADR v3.0** | <https://adr.github.io/madr/> | Why did we choose this over alternatives? | `arc42/09-decisions/` |
 | **Diátaxis** | <https://diataxis.fr> | How do users learn this product? | `user-manual/` |
+| **TiSDD** | <https://www.thisisservicedesigndoing.com/methods> | How is the **service** experienced end-to-end? | `service-design/` |
 
 Do not re-author the philosophy of these standards inside this repo. Link out.
+
+The five-standard set forms the kit's namesake (`pentaglyph` — Greek `penta` "five" + `glyph` "engraved sign"). The fifth standard, **TiSDD** (*This Is Service Design Doing*, Stickdorn et al., 2018), is the canonical method bank for service design and the natural anchor for the Persona / Journey Map / Service Blueprint templates already in `templates/`. It plays the same role for service-experience design that Diátaxis plays for end-user docs: a single authoritative URL plus a published reference book.
 
 ---
 
@@ -144,7 +147,7 @@ See [`WORKFLOW.md` §4](./WORKFLOW.md#4-lifecycle) for the state machine. Summar
 
 ## 9. Where this kit ends and project-specific extension begins
 
-This kit ships the four-standard skeleton **plus** a default branch strategy. It deliberately does not prescribe:
+This kit ships the five-standard skeleton **plus** a default branch strategy. It deliberately does not prescribe:
 
 - Sprint cadence (1-week / 2-week / Kanban)
 - Ticket system (GitHub Issues / Jira / Azure DevOps Boards)

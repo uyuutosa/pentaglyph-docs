@@ -1,4 +1,4 @@
-# tetragram agents — conversational documentation builder
+# pentaglyph agents — conversational documentation builder
 
 > **Goal**: through one continuous conversation with the **`doc-orchestrator`**
 > agent, the user goes from an empty `docs/` scaffold to a complete, citable

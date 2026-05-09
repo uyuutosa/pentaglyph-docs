@@ -5,7 +5,7 @@ paths:
 
 # Documentation Rule (auto-loaded for `docs/**`)
 
-This project uses the **tetragram-docs** scaffold: arc42 + C4 + MADR + Diátaxis bound by one workflow.
+This project uses the **pentaglyph-docs** scaffold: arc42 + C4 + MADR + Diátaxis bound by one workflow.
 
 ## Two files you must read first
 

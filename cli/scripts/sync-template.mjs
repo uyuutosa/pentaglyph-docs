@@ -6,7 +6,7 @@
  * be subtree-pushed and consumed independently. But `npm publish` only ships
  * what is inside the package directory (`cli/`). This script copies the
  * template into the package right before packing so the published tarball
- * contains everything `tetragram init` needs at runtime.
+ * contains everything `pentaglyph init` needs at runtime.
  *
  * Run by `prepack` lifecycle hook (also runs implicitly on `npm publish`).
  */

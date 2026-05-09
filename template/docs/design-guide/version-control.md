@@ -13,7 +13,7 @@ gives the project a place to record deviations.
 
 ## Default model: Git Flow
 
-tetragram ships with **Git Flow** (Vincent Driessen, 2010) as the default
+pentaglyph ships with **Git Flow** (Vincent Driessen, 2010) as the default
 branching strategy. The full canonical model is at
 <https://nvie.com/posts/a-successful-git-branching-model/> — read it
 once before extending the rule.
@@ -85,7 +85,7 @@ model.
 
 ## Project extension points (per-project required)
 
-Tetragram only ships the model. Each project must add the platform-
+Pentaglyph only ships the model. Each project must add the platform-
 specific operational details to either this file or its sibling rule:
 
 | Item | Examples |
@@ -133,6 +133,6 @@ These hold across every branching model, not just Git Flow:
 - [`.claude/rules/version-control.md`](../../.claude/rules/version-control.md)
   — operational rule loaded automatically by AI agents.
 - [`docs/STRATEGY.md` §9](../STRATEGY.md) — where this file is referenced
-  from the four-standard kit overview.
+  from the five-standard kit overview.
 - [`docs/WORKFLOW.md`](../WORKFLOW.md) — documentation lifecycle (separate
   from code lifecycle).

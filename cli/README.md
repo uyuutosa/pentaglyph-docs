@@ -1,33 +1,33 @@
-# tetragram (CLI)
+# pentaglyph (CLI)
 
 Scaffold a documentation tree based on arc42 + C4 + MADR + Diátaxis with one workflow.
 
 ## Install
 
-> Currently published as the scoped name **`@uyuutosa/tetragram`** (0.0.x series).
-> The unscoped `tetragram` name is reserved for the 0.1.0 stable release. See [`PUBLISH.md`](./PUBLISH.md) for the versioning policy.
+> Currently published as the scoped name **`@uyuutosa/pentaglyph`** (0.0.x series).
+> The unscoped `pentaglyph` name is reserved for the 0.1.0 stable release. See [`PUBLISH.md`](./PUBLISH.md) for the versioning policy.
 
 ### Run without install (recommended)
 
 ```bash
-bunx --bun @uyuutosa/tetragram init ./my-project --profile=standard --ai=claude
+bunx --bun @uyuutosa/pentaglyph init ./my-project --profile=standard --ai=claude
 # or
-npx @uyuutosa/tetragram init ./my-project --profile=standard --ai=claude
+npx @uyuutosa/pentaglyph init ./my-project --profile=standard --ai=claude
 ```
 
 ### Install globally
 
 ```bash
-bun add -g @uyuutosa/tetragram
+bun add -g @uyuutosa/pentaglyph
 # or
-npm install -g @uyuutosa/tetragram
+npm install -g @uyuutosa/pentaglyph
 ```
 
 ### From source (before npm publish, or for development)
 
 ```bash
 git clone https://github.com/uyuutosa/tetragram-docs.git
-cd tetragram-docs/cli
+cd pentaglyph-docs/cli
 bun install
 bun run src/index.ts init ../sample --profile=standard --ai=claude
 ```
@@ -35,23 +35,23 @@ bun run src/index.ts init ../sample --profile=standard --ai=claude
 ## Usage
 
 ```text
-tetragram init <target-dir> [options]
-tetragram add <section> [target-dir] [options]
-tetragram --help | --version
+pentaglyph init <target-dir> [options]
+pentaglyph add <section> [target-dir] [options]
+pentaglyph --help | --version
 ```
 
 ### `init` — scaffold a new docs/ tree
 
 ```bash
-tetragram init ./my-app --profile=standard --ai=claude --name="My App"
+pentaglyph init ./my-app --profile=standard --ai=claude --name="My App"
 ```
 
-This creates `./my-app/docs/` populated with the tetragram kit and (if `--ai=claude`) an auto-load rule at `./my-app/.claude/rules/documentation.md`.
+This creates `./my-app/docs/` populated with the pentaglyph kit and (if `--ai=claude`) an auto-load rule at `./my-app/.claude/rules/documentation.md`.
 
 ### `add` — add a single section to an existing scaffold
 
 ```bash
-tetragram add user-manual ./my-app
+pentaglyph add user-manual ./my-app
 ```
 
 ## Options
@@ -112,7 +112,7 @@ bun run smoke              # one-shot end-to-end smoke test
 
 ## Publishing
 
-See [`PUBLISH.md`](./PUBLISH.md) for the publish flow, versioning policy, and the eventual move to the unscoped `tetragram` name.
+See [`PUBLISH.md`](./PUBLISH.md) for the publish flow, versioning policy, and the eventual move to the unscoped `pentaglyph` name.
 
 ## License
 

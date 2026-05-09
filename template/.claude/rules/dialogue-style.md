@@ -77,7 +77,7 @@ When narrative mode is active:
 - Code-style file references with markdown links: `[bf-02-commercial-screening.md](docs/arc42/03-context-and-scope/use-cases/bf-02-commercial-screening.md)`
 - End with the question, not with a summary
 
-## Relationship to other tetragram artefacts
+## Relationship to other pentaglyph artefacts
 
 - This rule is about **conversational behaviour**. Documentation lifecycle (Phase 1–6, what gets written when) lives in [`docs/WORKFLOW.md`](../../docs/WORKFLOW.md).
 - The `doc-orchestrator` agent already implements this pattern when building documentation. This rule generalises the pattern to **all** open-ended conversations, not just doc-building.

@@ -20,7 +20,7 @@ const KNOWN_SECTIONS: ReadonlySet<Section> = new Set([
 ] as const);
 
 /**
- * `tetragram add <section> [--target=<dir>]`
+ * `pentaglyph add <section> [--target=<dir>]`
  *
  * Add a single section to an existing scaffolded project.
  */
@@ -28,14 +28,14 @@ export async function runAdd(opts: ParsedArgs): Promise<void> {
   const section = opts._[0] as Section | undefined;
   if (!section || !KNOWN_SECTIONS.has(section)) {
     throw new Error(
-      `Usage: tetragram add <section>\n  Known sections: ${[...KNOWN_SECTIONS].join(", ")}`,
+      `Usage: pentaglyph add <section>\n  Known sections: ${[...KNOWN_SECTIONS].join(", ")}`,
     );
   }
 
   const target = opts._[1] ?? ".";
   const targetDocs = resolve(target, "docs");
   if (!existsSync(targetDocs)) {
-    throw new Error(`No docs/ directory at ${targetDocs}. Run 'tetragram init' first.`);
+    throw new Error(`No docs/ directory at ${targetDocs}. Run 'pentaglyph init' first.`);
   }
 
   const templateDocs = join(await resolveTemplateDir(), "docs");
@@ -47,7 +47,7 @@ export async function runAdd(opts: ParsedArgs): Promise<void> {
   }
 
   const log = (msg: string) => process.stdout.write(`${msg}\n`);
-  log(`tetragram add ${section}`);
+  log(`pentaglyph add ${section}`);
   log(`  source: ${src}`);
   log(`  dest:   ${dest}`);
   log("");

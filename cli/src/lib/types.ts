@@ -1,4 +1,4 @@
-/** Profile selects which sections of the tetragram kit to scaffold. */
+/** Profile selects which sections of the pentaglyph kit to scaffold. */
 export type Profile = "minimal" | "standard" | "full";
 
 /**

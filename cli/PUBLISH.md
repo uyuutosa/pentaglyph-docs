@@ -1,6 +1,6 @@
-# Publishing the tetragram CLI to npm
+# Publishing the pentaglyph CLI to npm
 
-> Audience: maintainers of [`@uyuutosa/tetragram`](https://www.npmjs.com/package/@uyuutosa/tetragram).
+> Audience: maintainers of [`@uyuutosa/pentaglyph`](https://www.npmjs.com/package/@uyuutosa/pentaglyph).
 > If you only want to *use* the CLI, see [`README.md`](./README.md).
 
 This document covers the **OIDC trusted-publishing flow** (steady state) and the
@@ -10,8 +10,8 @@ fallback **manual publish** (one-off / disaster recovery).
 
 ## Versioning policy
 
-- **0.0.x** — initial scoped releases. API may break between any two patch versions. The unscoped `tetragram` name is **not yet claimed**.
-- **0.1.0** — first release once the API has stabilised in real use. At this point we publish unscoped `tetragram` and keep `@uyuutosa/tetragram` as a forwarding alias.
+- **0.0.x** — initial scoped releases. API may break between any two patch versions. The unscoped `pentaglyph` name is **not yet claimed**.
+- **0.1.0** — first release once the API has stabilised in real use. At this point we publish unscoped `pentaglyph` and keep `@uyuutosa/pentaglyph` as a forwarding alias.
 - **1.0.0** — semver guarantees engage. No breaking changes without a major bump.
 
 The package name change between 0.0.x and 0.1.0+ is deliberate — it signals stability publicly and lets the unscoped name accumulate trust before being claimed.
@@ -26,11 +26,11 @@ The package name change between 0.0.x and 0.1.0+ is deliberate — it signals st
 
 1. **npm account `uyuutosa`** with 2FA enabled.
 2. **GitHub Actions trusted publisher** configured in npm:
-   - Open <https://www.npmjs.com/package/@uyuutosa/tetragram/access>
+   - Open <https://www.npmjs.com/package/@uyuutosa/pentaglyph/access>
    - Section **Trusted Publisher** → **Add Trusted Publisher**
    - Provider: **GitHub Actions**
    - Organization or user: `uyuutosa`
-   - Repository: `tetragram-docs`
+   - Repository: `pentaglyph-docs`
    - Workflow filename: `publish.yml`
    - Environment name: leave blank (or set to `production` if you also configure a matching environment in `.github/workflows/publish.yml`)
    - Save
@@ -47,18 +47,18 @@ $EDITOR package.json
 
 # 2. Commit + push the bump
 git add cli/package.json
-git commit -m "chore(tetragram/cli): release v0.0.5"
+git commit -m "chore(pentaglyph/cli): release v0.0.5"
 git push
 
 # 3. Tag the release (the workflow triggers on this exact pattern)
-git tag tetragram-cli-v0.0.5
-git push origin tetragram-cli-v0.0.5
+git tag pentaglyph-cli-v0.0.5
+git push origin pentaglyph-cli-v0.0.5
 
 # 4. Watch the workflow
-gh run watch --repo uyuutosa/tetragram-docs
+gh run watch --repo uyuutosa/pentaglyph-docs
 
 # 5. Verify
-npm view @uyuutosa/tetragram version
+npm view @uyuutosa/pentaglyph version
 ```
 
 That's the full flow — **no NPM_TOKEN, no 2FA prompt, no WebAuthn**. The
@@ -72,7 +72,7 @@ version (rare — usually you should bump):
 
 ```bash
 gh workflow run publish.yml \
-  --repo uyuutosa/tetragram-docs \
+  --repo uyuutosa/pentaglyph-docs \
   -f confirm_version=0.0.5
 ```
 
@@ -106,7 +106,7 @@ npm pack --dry-run | tail -10
 npm publish --access=public
 
 # 6. Verify
-npm view @uyuutosa/tetragram version
+npm view @uyuutosa/pentaglyph version
 ```
 
 If the WebAuthn flow keeps timing out (~60s URL TTL is short for some setups),
@@ -120,7 +120,7 @@ In a clean shell:
 
 ```bash
 cd /tmp && rm -rf publish-test
-bunx --bun @uyuutosa/tetragram init ./publish-test \
+bunx --bun @uyuutosa/pentaglyph init ./publish-test \
   --profile=standard --ai=claude --name="Publish Test"
 ls publish-test/docs
 test -f publish-test/.claude/agents/doc-orchestrator.md && echo "✓ agents shipped"
@@ -148,27 +148,27 @@ If this scaffolds the kit identically to a local `bun run`, the publish is healt
 
 ## Unpublish window
 
-npm allows `npm unpublish @uyuutosa/tetragram@0.0.5` **only within 72 hours** of publish, and only if no other package depends on it.
+npm allows `npm unpublish @uyuutosa/pentaglyph@0.0.5` **only within 72 hours** of publish, and only if no other package depends on it.
 
 After 72 hours:
 
-- You can `npm deprecate @uyuutosa/tetragram@0.0.5 "<reason>"` to discourage use.
+- You can `npm deprecate @uyuutosa/pentaglyph@0.0.5 "<reason>"` to discourage use.
 - The version number is **permanently retired** — you cannot re-publish `0.0.5`. Bump to `0.0.6` instead.
 
 ---
 
-## Future: claiming the unscoped `tetragram` name
+## Future: claiming the unscoped `pentaglyph` name
 
 When the API has been stable across 2–3 patch versions in real use:
 
-1. Verify availability: `curl -s -o /dev/null -w '%{http_code}\n' https://registry.npmjs.org/tetragram` (404 means available).
+1. Verify availability: `curl -s -o /dev/null -w '%{http_code}\n' https://registry.npmjs.org/pentaglyph` (404 means available).
 2. Bump `cli/package.json`:
-   - `"name": "tetragram"` (unscoped)
+   - `"name": "pentaglyph"` (unscoped)
    - `"version": "0.1.0"`
-3. Add `@uyuutosa/tetragram` as a deprecated alias:
-   - Publish a final `@uyuutosa/tetragram@0.0.99` whose `package.json` has nothing but `"deprecated": "Use 'tetragram' instead"`.
+3. Add `@uyuutosa/pentaglyph` as a deprecated alias:
+   - Publish a final `@uyuutosa/pentaglyph@0.0.99` whose `package.json` has nothing but `"deprecated": "Use 'pentaglyph' instead"`.
 4. Configure trusted publisher for the new unscoped package too (one-time, same flow as above).
-5. Tag `tetragram-cli-v0.1.0` → push → workflow publishes both names.
+5. Tag `pentaglyph-cli-v0.1.0` → push → workflow publishes both names.
 
 ---
 
