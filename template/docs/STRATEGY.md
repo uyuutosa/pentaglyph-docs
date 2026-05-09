@@ -144,12 +144,17 @@ See [`WORKFLOW.md` §4](./WORKFLOW.md#4-lifecycle) for the state machine. Summar
 
 ## 9. Where this kit ends and project-specific extension begins
 
-This kit ships **only** the four-standard skeleton. It deliberately does not prescribe:
+This kit ships the four-standard skeleton **plus** a default branch strategy. It deliberately does not prescribe:
 
 - Sprint cadence (1-week / 2-week / Kanban)
 - Ticket system (GitHub Issues / Jira / Azure DevOps Boards)
-- Branch strategy (Git Flow / GitHub Flow / trunk-based)
-- Code review workflow
+- Code review workflow (specific reviewer rules, required CI checks)
 - CI / CD pipelines
 
 Add those as Layer A `design-guide/` documents in your downstream project.
+
+### Branch strategy — Git Flow by default
+
+Branching is the one operational concern this kit *does* prescribe a default for, because every project needs it on day one and the cost of changing it later is high.
+
+The default is **Git Flow** (Vincent Driessen, 2010). Rationale, model, and override path are documented in [`design-guide/version-control.md`](./design-guide/version-control.md). The auto-loaded rule file [`.claude/rules/version-control.md`](../.claude/rules/version-control.md) carries the operational checklist that AI agents follow. Override the default by replacing both files with your project-specific model.
