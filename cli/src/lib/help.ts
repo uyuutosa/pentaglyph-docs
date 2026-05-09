@@ -57,7 +57,7 @@ EXAMPLES
   pentaglyph add user-manual --target=./my-app
 
 DOCS
-  https://github.com/uyuutosa/tetragram-docs
+  https://github.com/uyuutosa/pentaglyph-docs
 `;
   process.stdout.write(help);
 }

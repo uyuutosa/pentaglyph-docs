@@ -55,11 +55,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/uyuutosa/tetragram-docs.git",
+    "url": "https://github.com/uyuutosa/pentaglyph-docs.git",
     "directory": "cli"
   },
-  "homepage": "https://github.com/uyuutosa/tetragram-docs#readme",
+  "homepage": "https://github.com/uyuutosa/pentaglyph-docs#readme",
   "bugs": {
-    "url": "https://github.com/uyuutosa/tetragram-docs/issues"
+    "url": "https://github.com/uyuutosa/pentaglyph-docs/issues"
   }
 }
