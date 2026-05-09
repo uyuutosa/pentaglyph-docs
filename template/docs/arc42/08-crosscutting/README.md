@@ -23,6 +23,7 @@ One file per concern. Common concerns:
 | `state-management.md`       | Where state lives (client / server / both), idempotency rules              |
 | `internationalisation.md`   | i18n / l10n conventions                                                    |
 | `accessibility.md`          | A11y baseline (WCAG level, screen-reader contract)                         |
+| `frontend-architecture.md`  | Frontend (React/Next.js): Server vs Client State, FSD layout, light DDD    |
 
 Add files only for concerns that **actually span ≥ 2 building blocks**. A concern relevant to a single building block belongs in that building block's detailed-design file.
 
