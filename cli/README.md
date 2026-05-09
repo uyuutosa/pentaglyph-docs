@@ -26,7 +26,7 @@ npm install -g @uyuutosa/pentaglyph
 ### From source (before npm publish, or for development)
 
 ```bash
-git clone https://github.com/uyuutosa/tetragram-docs.git
+git clone https://github.com/uyuutosa/pentaglyph-docs.git
 cd pentaglyph-docs/cli
 bun install
 bun run src/index.ts init ../sample --profile=standard --ai=claude
