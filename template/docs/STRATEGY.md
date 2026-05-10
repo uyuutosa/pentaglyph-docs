@@ -147,7 +147,7 @@ See [`WORKFLOW.md` §4](./WORKFLOW.md#4-lifecycle) for the state machine. Summar
 
 ## 9. Where this kit ends and project-specific extension begins
 
-This kit ships the five-standard skeleton **plus** a default branch strategy. It deliberately does not prescribe:
+This kit ships the five-standard skeleton **plus** three operational defaults (branching, AI-augmented PR authoring, code tours). It deliberately does not prescribe:
 
 - Sprint cadence (1-week / 2-week / Kanban)
 - Ticket system (GitHub Issues / Jira / Azure DevOps Boards)
@@ -156,8 +156,18 @@ This kit ships the five-standard skeleton **plus** a default branch strategy. It
 
 Add those as Layer A `design-guide/` documents in your downstream project.
 
-### Branch strategy — Git Flow by default
+### 9.1 Branch strategy — Git Flow by default
 
 Branching is the one operational concern this kit *does* prescribe a default for, because every project needs it on day one and the cost of changing it later is high.
 
 The default is **Git Flow** (Vincent Driessen, 2010). Rationale, model, and override path are documented in [`design-guide/version-control.md`](./design-guide/version-control.md). The auto-loaded rule file [`.claude/rules/version-control.md`](../.claude/rules/version-control.md) carries the operational checklist that AI agents follow. Override the default by replacing both files with your project-specific model.
+
+### 9.2 AI-augmented PR authoring — empirically grounded default
+
+Pull-request descriptions for AI-assisted changes follow [`design-guide/ai-augmented-pr.md`](./design-guide/ai-augmented-pr.md), and the companion template is `.github/PULL_REQUEST_TEMPLATE.md`. The convention selects a small set of fields (3-5 risk self-disclosures, span-level categorical confidence, one cognitive forcing question, a verification budget, an AI-involvement disclosure) on peer-reviewed evidence that these *specific* interventions reduce the appropriate-reliance gap, while longer free-form explanations and numeric confidence scores empirically do not. The design guide carries the citations.
+
+The kit prescribes this default because the industry's existing PR-template canon (Google eng-practices, Conventional Commits) does not yet cover AI-generated code, and ad-hoc per-team conventions tend to drift toward "more text" — which Tao Xiao et al. (FSE 2024) found correlates with longer merge latency without a defect-detection gain. Override by replacing the design-guide file and the template; do not selectively delete fields, since the set is balanced as a whole.
+
+### 9.3 Code tours — CodeTour-compatible reading paths
+
+Guided reading paths through the codebase use Microsoft's CodeTour `.tour` JSON schema, anchored under `.tours/`. Convention is documented in [`design-guide/code-tours.md`](./design-guide/code-tours.md). Tours sit *outside* Diátaxis (which is for end users), in line with Daniele Procida's explicit position that contributor-onboarding artefacts are not part of Diátaxis (<https://diataxis.fr/start-here/>). Override is rare; if your project uses a different walkthrough format, replace the design-guide file and migrate any existing tours.
