@@ -556,7 +556,219 @@ Order-related changes are local. The dependency graph (`widgets` depend on `feat
 
 ---
 
-## 9. Lightweight DDD on the frontend
+## 9. Coexistence with Atomic Design
+
+Feature-Sliced Design and Atomic Design are not in competition — they organise different axes. FSD organises **the application** by responsibility, dependency direction, and business meaning. Atomic Design organises **UI components** by visual granularity. They coexist cleanly when each is given the right scope.
+
+### 9.1 Different axes
+
+Atomic Design partitions UI by part-size:
+
+```text
+atoms       Button, Input, Label, Icon
+molecules   SearchBox, FormField, UserAvatarWithName
+organisms   Header, OrderCard, ReviewPanel
+templates   OrderDetailTemplate
+pages       OrderDetailPage
+```
+
+FSD partitions code by business meaning:
+
+```text
+shared, entities, features, widgets, pages, app
+```
+
+For an order app:
+
+```text
+entities/order
+features/pay-order
+features/add-order-item
+widgets/order-summary
+pages/order-detail
+```
+
+Atomic Design asks: *is this a Button, a FormField, or a Panel?* FSD asks: *is this an Order entity, a Pay use case, or an order-detail widget?* The same UI component can be classified differently along each axis, which is why neither subsumes the other.
+
+### 9.2 Recommended coexistence: Atomic Design inside `shared/ui` only
+
+The most workable arrangement places Atomic Design **inside `shared/ui` and nowhere else**:
+
+```text
+src/
+  shared/
+    ui/
+      atoms/
+        Button.tsx
+        Input.tsx
+        Icon.tsx
+      molecules/
+        FormField.tsx
+        SearchBox.tsx
+        ConfirmDialog.tsx
+      organisms/
+        AppHeader.tsx
+        SideNavigation.tsx
+```
+
+Generic, business-agnostic UI parts get the Atomic-Design granularity treatment. Business-specific UI lives in `entities`, `features`, and `widgets`:
+
+```text
+src/
+  entities/order/ui/
+    OrderStatusBadge.tsx
+    OrderAmount.tsx
+  features/pay-order/ui/
+    PayOrderButton.tsx
+  widgets/order-summary/ui/
+    OrderSummaryCard.tsx
+```
+
+The distinction matters. `Button` is genuinely an atom — a primitive, business-agnostic UI part. `PayOrderButton` *looks* like a button but *is* a payment use case in UI clothing. Filing it under `shared/ui/atoms/` would erase the business meaning and dilute the atom layer with hundreds of one-off feature buttons.
+
+### 9.3 Atomic Design alone hides business boundaries
+
+A pure Atomic-Design layout in a non-trivial app produces this:
+
+```text
+src/components/
+  atoms/Button.tsx
+  atoms/Input.tsx
+  molecules/SearchBox.tsx
+  molecules/OrderStatusBadge.tsx
+  molecules/UserInfoRow.tsx
+  organisms/OrderSummaryCard.tsx
+  organisms/ReviewDecisionPanel.tsx
+  organisms/AgentRunTimeline.tsx
+  pages/OrderDetailPage.tsx
+```
+
+Granularity is organised, but order-related code fans out across `components/organisms/`, `components/molecules/`, `hooks/`, `api/`, `types/`, `utils/`. There is no single place where "the order domain" lives. Atomic Design has no opinion on business boundaries — it is a granularity vocabulary, not an application architecture.
+
+### 9.4 FSD alone leaves `shared/ui` unstructured
+
+Conversely, with FSD only and no Atomic-Design discipline in `shared/ui`, the bag tends to flatten:
+
+```text
+shared/ui/
+  Button.tsx
+  Input.tsx
+  Modal.tsx
+  FormField.tsx
+  Header.tsx
+  Table.tsx
+  Badge.tsx
+  Card.tsx
+  Dropdown.tsx
+```
+
+Functional, but it stops scaling once the part count crosses ~20–30. Atomic Design's atoms / molecules / organisms layering reintroduces structure exactly where FSD has the least to say:
+
+```text
+shared/ui/
+  atoms/
+  molecules/
+  organisms/
+```
+
+### 9.5 Atomic Design's weakness: granularity questions that don't matter
+
+In a business app, debates like *"is `OrderStatusBadge` a molecule or an organism?"* and *"is `PayOrderButton` an atom or an organism?"* rarely have a productive answer. They are not the question to optimise for. The question that *does* matter is:
+
+```text
+Is this generic UI?
+Is this Order-domain UI?
+Is this Pay-Order feature UI?
+Is this OrderDetail widget UI?
+```
+
+That is an FSD question, and it is the one with consequences for change isolation, ownership, and dependency direction.
+
+### 9.6 Coexistence rule
+
+State the rule once and apply it without negotiation:
+
+```text
+shared/ui                       → Atomic Design (atoms / molecules / organisms)
+entities / features / widgets   → FSD only; do not force Atomic-Design classification
+```
+
+A combined directory layout:
+
+```text
+src/
+  app/
+    layout.tsx
+    providers.tsx
+
+  shared/
+    ui/
+      atoms/Button.tsx
+      atoms/Input.tsx
+      atoms/Spinner.tsx
+      molecules/FormField.tsx
+      molecules/ConfirmDialog.tsx
+      molecules/EmptyState.tsx
+      organisms/AppHeader.tsx
+      organisms/SideNavigation.tsx
+    api/httpClient.ts
+    lib/date.ts
+    lib/money.ts
+
+  entities/
+    order/
+      model/order.ts
+      model/orderPolicy.ts
+      api/orderApi.ts
+      ui/OrderStatusBadge.tsx
+      ui/OrderAmount.tsx
+
+  features/
+    pay-order/
+      model/usePayOrder.ts
+      ui/PayOrderButton.tsx
+    cancel-order/
+      model/useCancelOrder.ts
+      ui/CancelOrderButton.tsx
+
+  widgets/
+    order-summary/ui/OrderSummaryCard.tsx
+    order-action-panel/ui/OrderActionPanel.tsx
+
+  pages/
+    order-detail/ui/OrderDetailPage.tsx
+```
+
+Atomic Design lives inside `shared/ui`; FSD owns everything outside it.
+
+### 9.7 Summary
+
+Both vocabularies pull their weight when they stay in their lane:
+
+```text
+Feature-Sliced Design   organises responsibility, dependency, business boundaries
+Atomic Design           organises generic UI granularity
+```
+
+Concretely:
+
+```text
+Button is an atom.
+FormField is a molecule.
+AppHeader is an organism.
+
+PayOrderButton is a feature.
+OrderStatusBadge is entity UI.
+OrderSummaryCard is a widget.
+ReviewDecisionPanel is a widget.
+AgentRunTimeline is a widget.
+```
+
+**Generic parts → Atomic Design. Business parts → Feature-Sliced Design.** That is the configuration that survives growth.
+
+---
+
+## 10. Lightweight DDD on the frontend
 
 DDD is usually discussed in the backend context, where Aggregates, Repositories, and Application Services govern persistence boundaries. Importing that vocabulary verbatim into a frontend produces ceremony without payoff: frontends rarely own transactions or persistence boundaries. The useful sub-set is smaller and concrete.
 
@@ -644,7 +856,7 @@ The whole point of frontend lightweight DDD is to **evict business judgement fro
 
 ---
 
-## 10. Why frontends prefer `type + pure function` over classes
+## 11. Why frontends prefer `type + pure function` over classes
 
 Backend DDD models domain entities as classes that hold state and behaviour together:
 
@@ -726,7 +938,7 @@ But where the use case meets React, prefer hooks: the integration with TanStack 
 
 ---
 
-## 11. Frontend hexagonal architecture
+## 12. Frontend hexagonal architecture
 
 The hexagonal pattern's job is to keep the application core independent of external technologies. On a frontend, the external technologies include:
 
@@ -823,7 +1035,7 @@ API contract changes ripple through the `api` and `model` layers; the UI does no
 
 ---
 
-## 12. Practical directory layout
+## 13. Practical directory layout
 
 A pragmatic feature-based layout for React / Next.js:
 
@@ -916,7 +1128,7 @@ export default async function Page({
 
 ---
 
-## 13. Application to AI Agent UI
+## 14. Application to AI Agent UI
 
 Agent UIs raise the bar. They juggle async execution, streaming, intermediate logs, tool results, user approvals, cancel / resume / retry, multi-agent state, run history, review cards, human-intervention points, SSE / WebSocket transport, and optimistic UI updates. Stuffing those into a single component fails faster than CRUD does.
 
@@ -1041,7 +1253,7 @@ The Effect is justified, scoped, and named.
 
 ---
 
-## 14. When this architecture is worth applying
+## 15. When this architecture is worth applying
 
 Not every screen needs the full structure. A read-only list with no interaction is fine with a Server Component or a single TanStack Query hook plus minimal component split:
 
@@ -1079,11 +1291,11 @@ A "yes" on any of those is the cue to introduce feature-based layout, TanStack Q
 
 ---
 
-## 15. Practical rules
+## 16. Practical rules
 
 Compressed checklist for day-to-day work.
 
-### 15.1 Components are allowed to contain
+### 16.1 Components are allowed to contain
 
 ```text
 - JSX
@@ -1093,7 +1305,7 @@ Compressed checklist for day-to-day work.
 - Prop wiring
 ```
 
-### 15.2 Components should not contain
+### 16.2 Components should not contain
 
 ```text
 - Direct, complex API I/O
@@ -1105,7 +1317,7 @@ Compressed checklist for day-to-day work.
 - Domain calculations
 ```
 
-### 15.3 `useEffect` — when to use, when not to
+### 16.3 `useEffect` — when to use, when not to
 
 OK:
 
@@ -1129,7 +1341,7 @@ Not OK:
 
 (React's docs define both halves of this list. ([React][1]))
 
-### 15.4 Server State
+### 16.4 Server State
 
 ```text
 - Server data lives in TanStack Query or a Server Component result
@@ -1138,7 +1350,7 @@ Not OK:
 - Loading / error states come from the query
 ```
 
-### 15.5 Client State
+### 16.5 Client State
 
 ```text
 - Component-local: useState
@@ -1147,7 +1359,7 @@ Not OK:
 - Large, governed, auditable: Redux Toolkit
 ```
 
-### 15.6 Domain logic
+### 16.6 Domain logic
 
 Name the rules. Examples of names you should be writing:
 
@@ -1162,7 +1374,7 @@ These live in `model` / `domain` / `policy` files, not in components.
 
 ---
 
-## 16. Conclusion
+## 17. Conclusion
 
 The substance of modern frontend architecture is not the choice of React, Next.js, TanStack Query, Zustand, or Redux Toolkit. It is **separation of state and responsibility**:
 
