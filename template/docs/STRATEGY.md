@@ -190,16 +190,30 @@ See [`WORKFLOW.md` §4](./WORKFLOW.md#4-lifecycle) for the state machine. Summar
 
 ---
 
-## 9. Where this kit ends and project-specific extension begins
+## 9. Operational defaults — what this kit prescribes and what it leaves to downstream
 
-This kit ships the five-standard skeleton **plus** three operational defaults (branching, AI-augmented PR authoring, code tours). It deliberately does not prescribe:
+This kit ships the five-standard skeleton plus a **bound set of Layer ② Process operational defaults**. Each default is justified against the four-axis criterion stated in [ADR-0003](./arc42/09-decisions/0003-apply-day1-switching-cost-canon-criterion.md): **day-1 necessity ∧ switching cost ∧ external canon ∧ domain neutrality**. Failing any axis means the concern is left to project-specific extension.
 
-- Sprint cadence (1-week / 2-week / Kanban)
-- Ticket system (GitHub Issues / Jira / Azure DevOps Boards)
-- Code review workflow (specific reviewer rules, required CI checks)
-- CI / CD pipelines
+> **Historical note (ADR-0005)**: prior versions of this section claimed the kit "deliberately does not prescribe" sprint cadence / code review / CI-CD. That framing was inaccurate: [`WORKFLOW.md`](./WORKFLOW.md) and the Layer B directories (`task-list/`, `postmortems/`, `impl-plans/`) have always *implicitly* prescribed a Scrum-flavoured process. This revision **surfaces what was already running** and binds it to external canons rather than inventing a pentaglyph-specific process standard. See [ADR-0005](./arc42/09-decisions/0005-surface-implicit-process-layer.md).
 
-Add those as Layer A `design-guide/` documents in your downstream project.
+| # | Concern | Canon bound | Design-guide file |
+| --- | --- | --- | --- |
+| 1 | Branching | Git Flow (Driessen, 2010) | [`design-guide/version-control.md`](./design-guide/version-control.md) |
+| 2 | AI-augmented PR | Xiao et al. (FSE 2024) + Anthropic conventions | [`design-guide/ai-augmented-pr.md`](./design-guide/ai-augmented-pr.md) |
+| 3 | Code tours | Microsoft CodeTour schema | [`design-guide/code-tours.md`](./design-guide/code-tours.md) |
+| 4 | Acceptance Criteria format | BDD (North, 2003) + SbE (Adzic, 2011) | [`design-guide/bdd-workflow.md`](./design-guide/bdd-workflow.md) |
+| 5 | Development cycle | Scrum Guide (Schwaber & Sutherland, 2020) | [`design-guide/dev-cycle.md`](./design-guide/dev-cycle.md) |
+| 6 | Definition of Done / Ready | Scrum Guide §DoD + Scrum.org DoR guidance | [`design-guide/dod-dor.md`](./design-guide/dod-dor.md) |
+| 7 | Test-driven micro-cycle | TDD (Beck, 2002) | [`design-guide/tdd-workflow.md`](./design-guide/tdd-workflow.md) |
+
+What is **not** prescribed (passes 0–2 axes, deferred to downstream):
+
+- **Sprint cadence value** (1-week / 2-week / monthly) — domain-specific.
+- **Ticket system** (GitHub Issues / Jira / Linear / Azure DevOps Boards) — vendor lock-in concern.
+- **CI / CD pipeline implementation** (GitHub Actions vs Azure Pipelines vs Jenkins) — fails domain-neutrality for self-hosted / regulated environments.
+- **Specific code-review rules** (required reviewer count, blocking checks) — team-size-dependent.
+
+Add those as Layer A `design-guide/` documents in your downstream project, citing this section.
 
 ### 9.1 Branch strategy — Git Flow by default
 
@@ -216,3 +230,23 @@ The kit prescribes this default because the industry's existing PR-template cano
 ### 9.3 Code tours — CodeTour-compatible reading paths
 
 Guided reading paths through the codebase use Microsoft's CodeTour `.tour` JSON schema, anchored under `.tours/`. Convention is documented in [`design-guide/code-tours.md`](./design-guide/code-tours.md). Tours sit *outside* Diátaxis (which is for end users), in line with Daniele Procida's explicit position that contributor-onboarding artefacts are not part of Diátaxis (<https://diataxis.fr/start-here/>). Override is rare; if your project uses a different walkthrough format, replace the design-guide file and migrate any existing tours.
+
+### 9.4 BDD Acceptance Criteria — Given/When/Then by default
+
+Functional Requirements and Use Cases use the **Given/When/Then grammar** (Dan North 2003 / Adzic 2011) for Acceptance Criteria. The format is already required by [`templates/2_prd.md`](./templates/2_prd.md) and [`templates/4_use-case.md`](./templates/4_use-case.md); this binding ([`design-guide/bdd-workflow.md`](./design-guide/bdd-workflow.md)) names the canon. Tool selection (Cucumber / pytest-bdd / plain prose) is downstream's call. Override by adopting an alternative AC grammar (AAA, scenario tables) and replacing both templates' AC sections.
+
+### 9.5 Development cycle — Scrum Guide 2020 by default
+
+The kit binds [Scrum Guide 2020](https://scrumguides.org/scrum-guide.html) as the default cadence. The binding ([`design-guide/dev-cycle.md`](./design-guide/dev-cycle.md)) does not prescribe a specific Sprint length, ticket system, or framework variant (SAFe / LeSS / Nexus). Common alternatives (Kanban, XP, Trunk-Based-cadence) have documented override paths. Layer B directories `task-list/`, `impl-plans/`, `postmortems/`, plus templates 9 (`sprint-retro`), 10 (`refinement-pbi`) are the artefact homes for Scrum events.
+
+### 9.6 Definition of Done / Ready — Scrum Guide + Scrum.org by default
+
+The kit binds Scrum Guide 2020's DoD and Scrum.org's DoR guidance ([`design-guide/dod-dor.md`](./design-guide/dod-dor.md)), and [`templates/11_dod-checklist.md`](./templates/11_dod-checklist.md) provides per-artefact-type checklists. DoR is embedded in template 10 (`refinement-pbi`). The DoD is a living document: tighten over time via retrospective output, log changes in §"Tightening log" of `dod-checklist.md`.
+
+### 9.7 Test-driven micro-cycle — TDD (Beck 2002) recommended
+
+Pentaglyph recommends (does not strictly mandate) the Red-Green-Refactor cycle ([`design-guide/tdd-workflow.md`](./design-guide/tdd-workflow.md), Beck 2002) as the per-commit micro-cadence. The binding composes with [`design-guide/bdd-workflow.md`](./design-guide/bdd-workflow.md): BDD owns the outer-loop AC grammar; TDD owns the inner-loop discipline. Adopters running test-after / spike-style prototyping document the exemption per the override path in the binding.
+
+### 9.8 Extending Layer ② — adding new process canons
+
+When pentaglyph (or a downstream project) needs to bind a new process canon — DORA, SRE, Lean Startup, OKR, Continuous Discovery, … — follow [`design-guide/_binding-a-new-process.md`](./design-guide/_binding-a-new-process.md). It defines the 6-section template every new binding must follow, enforces [ADR-0002](./arc42/09-decisions/0002-bind-canons-only-no-self-authored-standards.md) (no canon paraphrasing), and is the substrate for the forthcoming `bunx pentaglyph add-process` CLI sub-command. Candidates under evaluation are tracked in [`design-guide/_future-bindings.md`](./design-guide/_future-bindings.md).
