@@ -1,7 +1,7 @@
 ---
 status: Stable
 owner: <placeholder>
-last-reviewed: 2026-05-04
+last-reviewed: 2026-05-14
 ---
 
 # STRATEGY — Documentation taxonomy and rationale
@@ -41,15 +41,60 @@ The five-standard set forms the kit's namesake (`pentaglyph` — Greek `penta` "
 
 ---
 
-## 3. Three-layer taxonomy
+## 3. Two-axis taxonomy: change-rate × concern
+
+Pentaglyph organizes the repository along **two orthogonal axes**:
+
+1. **Change-rate axis** (Layers A / B / C) — how often the artefact changes.
+2. **Concern axis** (Layers ⓪ / ① / ② / ③ / ④, plus optional ⑤) — what concern the artefact addresses.
+
+Every file in `docs/` and the kit itself sits at one cell of this matrix. Change-rate is independent of concern: an ADR (concern ⓪/①) and a sprint retro template (concern ②) are both *durable* records, but they live in different concern columns. The doc-coverage CLI (concern ③) and the doc-rot metric (concern ⑤) are both automation under the change-rate axis but split across concerns.
+
+Making both axes explicit is what allows pentaglyph to host BDD, Scrum, TDD or any future process canon without inventing new vocabulary: those canons land in the **concern ② column**, with their lifecycle still governed by the **change-rate row**.
+
+### 3.1 Change-rate axis (A / B / C)
 
 | Layer | Purpose | Change rate | Examples |
 |---|---|---|---|
-| **A — Durable design** | Records "how the system is built". Code-coupled. Reviewed before merge. | Slow | `arc42/`, `diagrams/c4/`, `detailed-design/`, `api-contract/`, `design-guide/`, `user-manual/` |
+| **A — Durable design** | Records "how the system is built". Code-coupled. Reviewed before merge. | Slow | `arc42/`, `diagrams/c4/`, `detailed-design/`, `api-contract/`, `design-guide/`, `user-manual/`, `governance/` |
 | **B — Volatile working material** | Records "what we did, when". Append-only. Not reviewed (latest-wins). | Fast (dated) | `impl-plans/`, `task-list/`, `postmortems/`, `reports/`, `cost-estimates/` |
 | **C — Reference and archive** | Frozen prior content / RAW third-party material. Read-only. | None | `archive/_legacy/`, vendor-supplied RAW data |
 
-**Why three layers and not one?** Mixing fast and slow material in the same directories produces two failure modes: (a) durable docs rot because nobody knows whether to update them or write a new dated file, and (b) volatile docs accumulate without ever being summarised into durable ones. Splitting by change rate makes the cost / review weight visible.
+**Why three layers and not one?** Mixing fast and slow material in the same directories produces two failure modes: (a) durable docs rot because nobody knows whether to update them or write a new dated file, and (b) volatile docs accumulate without ever being summarised into durable ones. Splitting by change-rate makes the cost / review weight visible.
+
+### 3.2 Concern axis (⓪ / ① / ② / ③ / ④, plus optional ⑤)
+
+| Layer | Concern | Responsibility (DO) | Out of scope (DON'T) | Primary location |
+|---|---|---|---|---|
+| **⓪ Standards** | Bind external authoritative canons | List + link out (arc42, C4, MADR, Diátaxis, TiSDD, …) | Re-author the canons' philosophy | `STRATEGY.md §2` |
+| **① Artefacts** | Templates + placement taxonomy + lifecycle state machine | Provide concrete document shapes and where they go | Prescribe processes that produce them | `templates/`, `STRATEGY.md §4-§8`, `WORKFLOW.md` |
+| **② Process** | Bind external process canons (Scrum, BDD, TDD, Trunk-based, …) into thin operational defaults | One `design-guide/` per canon, 6-section template, link-out only; provide extensibility (a meta-doc for binding *new* canons) | Invent new process standards; prescribe specific tools (Jira / pytest-bdd / GitHub Actions); paraphrase canon definitions | `design-guide/` |
+| **③ Automation** | Reduce manual work via CLI + AI agents + scripts | Operate on artefacts from ①, execute processes from ② | Re-define artefacts or processes inside automation code | `cli/`, `.claude/`, `scripts/docs/` |
+| **④ Governance** | Define who decides / accepts / overrides | RACI, ADR Accept protocol, override justification, contribution guide | Take specific decisions (that is the role of individual ADRs) | `governance/`, `STRATEGY.md §10-§12` |
+| **⑤ Measurement** *(optional)* | Quantify the health of ⓪-④ | Doc coverage, ADR throughput, freshness, doc-rot detection | Prescribe how to improve the metrics (that is ② Process's role) | `metrics/`, `scripts/docs/metrics_*` |
+
+**Why a concern axis at all?** Without it, "process" and "governance" leak into the artefact taxonomy without an explicit home. Sprint retros, DoR / DoD checklists, RACI matrices, ADR Accept policies — these are real artefacts pentaglyph already touches (often implicitly through `WORKFLOW.md` and Layer B docs), but until the concern axis exists they have no canonical place. The concern axis surfaces what was previously implicit, and binds it to external canons rather than inventing in-house vocabulary.
+
+**Layer dependency direction**: each lower concern is a substrate for the upper. ⓪ Standards is what ① Artefacts shape-check against; ① Artefacts is what ② Process operates on; ② Process is what ③ Automation executes; ③ Automation is what ④ Governance audits; ④ Governance is what ⑤ Measurement reports against. Downstream projects override from the top down (e.g. replace ② Process while reusing ⓪ Standards and ① Artefacts unchanged).
+
+### 3.3 Combined matrix — where things actually live
+
+| Concern \ Change-rate | A — Durable | B — Volatile | C — Frozen |
+|---|---|---|---|
+| **⓪ Standards** | `STRATEGY.md §2` (the five-canon list) | — *(canons don't expire on a date)* | — |
+| **① Artefacts** | `templates/`, `STRATEGY.md`, `WORKFLOW.md`, `AI_INSTRUCTIONS.md`, every directory under `arc42/`, `detailed-design/`, `api-contract/`, `user-manual/`, `service-design/`, `diagrams/c4/` | — | `archive/_legacy/<frozen artefacts>` |
+| **② Process** | `design-guide/version-control.md`, `design-guide/ai-augmented-pr.md`, `design-guide/code-tours.md`, plus forthcoming `design-guide/bdd-workflow.md`, `dev-cycle.md`, `dod-dor.md`, `tdd-workflow.md`, `_binding-a-new-process.md` | `task-list/`, `postmortems/`, `impl-plans/`, `reports/` (process *outputs* over time) | — *(a frozen process is a deprecated process, which is just an ADR superseding the binding)* |
+| **③ Automation** | `cli/README.md`, `.claude/README.md`, `scripts/docs/README.md` and the scripts themselves | — | — |
+| **④ Governance** | `governance/raci.md`, `governance/adr-accept-protocol.md`, `governance/override-justification.md`, `governance/contributing.md` (forthcoming) | `cost-estimates/` (governance outputs over time) | — |
+| **⑤ Measurement** *(optional)* | `metrics/README.md`, `metrics/baseline.md` (forthcoming) | `metrics/snapshots/*.md` (dated) | — |
+
+> **Note**: cells referencing files marked *forthcoming* describe the **target structure**. The build-out plan lives in [`docs/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md`](impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md). Empty cells marked "—" are **intentionally empty by design** — placing content there indicates a concern misclassification.
+
+**How to use the matrix when placing a new file**:
+
+1. **Concern first**: pick ⓪-⑤. Heuristic: "which concern would *re-author* this content if it disappeared?"
+2. **Change-rate second**: pick A/B/C. Heuristic: "would I keep editing this file indefinitely, or write a new dated file next month?"
+3. Pick the directory from the matching cell. If the cell is intentionally empty, reconsider — you are probably in the wrong concern.
 
 ---
 
