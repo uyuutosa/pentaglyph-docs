@@ -10,6 +10,7 @@
 import { parseArgs } from "./lib/args.ts";
 import { runInit } from "./commands/init.ts";
 import { runAdd } from "./commands/add.ts";
+import { runMetrics } from "./commands/metrics.ts";
 import { printHelp, printVersion } from "./lib/help.ts";
 
 const argv = process.argv.slice(2);
@@ -36,6 +37,11 @@ try {
     case "add": {
       const opts = parseArgs(rest);
       await runAdd(opts);
+      break;
+    }
+    case "metrics": {
+      const opts = parseArgs(rest);
+      await runMetrics(opts);
       break;
     }
     default:

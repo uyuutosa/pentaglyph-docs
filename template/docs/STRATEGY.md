@@ -303,13 +303,28 @@ governance/<topic>-decision-YYYY-MM-DD.md   ← uses templates/12_governance-dec
 
 ## 12. Layer ⑤ Measurement (optional)
 
-_Forthcoming (Phase 5 of the [self-architecture roadmap](./impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md), **optional**)._ Layer ⑤ Measurement will live under `metrics/` and quantify the health of layers ⓪-④. Planned files:
+Layer ⑤ Measurement lives in [`metrics/`](./metrics/) and quantifies the health of layers ⓪-④. Layer ⑤ is **optional** per [ADR-0001](./arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) §"Decision Outcome"; the activation contract is [ADR-0009](./arc42/09-decisions/0009-measurement-layer-activation.md).
 
-- `metrics/README.md` — layer role + index of available metric categories
-- `metrics/baseline.md` — kit's own current values (dogfooding)
-- `metrics/snapshots/YYYY-MM-DD_*.md` — dated snapshots over time
-- `scripts/docs/metrics_coverage.py` — arc42 §1-§12 / detailed-design / use-cases coverage
-- `scripts/docs/metrics_freshness.py` — durable doc `last-reviewed` age distribution
-- `scripts/docs/metrics_adr.py` — ADR Status distribution and throughput
+The directory contains:
 
-Layer ⑤ is **optional** — small projects may skip it without losing core kit value. The Measurement Layer is activated by a future ADR-0009 (or later) when sufficient adopter demand exists. Until activation, periodic manual audits suffice.
+| File | Purpose |
+| --- | --- |
+| [`metrics/README.md`](./metrics/README.md) | Layer role + 5 metric categories + activation playbook |
+| [`metrics/baseline.md`](./metrics/baseline.md) | Snapshot of the kit's own (dogfooded) metric values |
+| `metrics/snapshots/YYYY-MM-DD_*.md` | Periodic dated snapshots (append-only) |
+
+The 5 metric categories (per [ADR-0009](./arc42/09-decisions/0009-measurement-layer-activation.md) §3.1):
+
+| # | Category | Status | Script |
+| --- | --- | --- | --- |
+| 1 | Coverage | ✅ implemented | [`scripts/docs/metrics_coverage.py`](../scripts/docs/metrics_coverage.py) |
+| 2 | Freshness | ✅ implemented | [`scripts/docs/metrics_freshness.py`](../scripts/docs/metrics_freshness.py) |
+| 3 | ADR throughput | ✅ implemented | [`scripts/docs/metrics_adr.py`](../scripts/docs/metrics_adr.py) |
+| 4 | Doc rot detection | 🔜 future | TBD |
+| 5 | Adoption (kit-level only) | 🔜 future | TBD |
+
+The scripts are Python 3.10+ stdlib-only and follow the [ADR-0007](./arc42/09-decisions/0007-automation-layer-contract.md) layer-writes contract (read layers ⓪-④, write only to stdout). The Bun CLI wraps them via `bunx pentaglyph metrics --target=docs --metric=all|coverage|freshness|adr --format=markdown|json`.
+
+**Activate Layer ⑤** when project has > 50 durable docs, ≥ 3 active engineers, regulatory audit requirement, or visible doc rot. **Skip** for solo / early-prototype / manual-audit-preferring teams. The decision is reversible at any time without disturbing layers ⓪-④.
+
+**Override path**: downstream projects may add categories 4 / 5 (or category 6+) by writing new `scripts/docs/metrics_*.py` and updating the [ADR-0009](./arc42/09-decisions/0009-measurement-layer-activation.md) §3.1 enumeration via a follow-up ADR. Alternatively, replace the scripts entirely with project-specific tooling per [ADR-0001](./arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) §5 "Override paths".
