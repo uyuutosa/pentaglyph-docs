@@ -27,6 +27,20 @@ export interface ParsedArgs {
   force?: boolean;
   /** Print actions without writing. */
   dryRun?: boolean;
+
+  // ── metrics command flags ──────────────────────────────────────
+  /** docs/ directory to measure. Defaults to `docs` relative to cwd. */
+  target?: string;
+  /** which metric to run: coverage / freshness / adr / all. */
+  metric?: string;
+  /** output format: markdown / json. */
+  format?: string;
+  /** freshness staleness threshold in days (string, parsed downstream). */
+  "stale-days"?: string;
+  /** ADR Proposed staleness threshold in days (string, parsed downstream). */
+  "proposed-stale-days"?: string;
+  /** coverage substantive-content threshold in characters (string, parsed downstream). */
+  threshold?: string;
 }
 
 const VALID_PROFILES: ReadonlySet<Profile> = new Set([
@@ -120,6 +134,24 @@ function assignFlag(out: ParsedArgs, key: string, value: string): void {
       return;
     case "name":
       out.name = value;
+      return;
+    case "target":
+      out.target = value;
+      return;
+    case "metric":
+      out.metric = value;
+      return;
+    case "format":
+      out.format = value;
+      return;
+    case "stale-days":
+      out["stale-days"] = value;
+      return;
+    case "proposed-stale-days":
+      out["proposed-stale-days"] = value;
+      return;
+    case "threshold":
+      out.threshold = value;
       return;
     default:
       throw new Error(`Unknown flag --${key}`);
