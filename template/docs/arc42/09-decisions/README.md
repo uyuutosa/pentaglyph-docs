@@ -44,7 +44,7 @@ Always start from [`../../templates/5_adr.md`](../../templates/5_adr.md). Do not
 
 ## Index
 
-### Self-ADRs (kit-meta, ADRs 0001-0006)
+### Self-ADRs (kit-meta, ADRs 0001-0007)
 
 These ADRs document **pentaglyph's own** architectural decisions. They are distinguished by the `— self-ADR for the kit` suffix in their `Type` field ([ADR-0006](0006-self-adr-strict-madr-discipline.md)). Downstream projects adopting pentaglyph **either keep or delete** these self-ADRs (`bunx pentaglyph init --keep-self-adrs={true,false}` once that flag ships); their own ADRs start at the next free number.
 
@@ -56,6 +56,7 @@ These ADRs document **pentaglyph's own** architectural decisions. They are disti
 | 0004 | [0004-layer-separation-contracts.md](./0004-layer-separation-contracts.md)                    | Strict layer separation contracts (DO/DON'T + one-way dependency direction)     | Proposed | 2026-05-14 |
 | 0005 | [0005-surface-implicit-process-layer.md](./0005-surface-implicit-process-layer.md)            | Surface the implicit Process layer (Layer ② = surface, not invent)              | Proposed | 2026-05-14 |
 | 0006 | [0006-self-adr-strict-madr-discipline.md](./0006-self-adr-strict-madr-discipline.md)          | Apply strict MADR v3.0 discipline to the kit's own decisions                    | Proposed | 2026-05-14 |
+| 0007 | [0007-automation-layer-contract.md](./0007-automation-layer-contract.md)                      | Automation Layer ③ contract — named-exception allow-list for Layer ② writes     | Proposed | 2026-05-14 |
 
 ### Downstream-project ADRs
 

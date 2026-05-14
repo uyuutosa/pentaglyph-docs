@@ -250,3 +250,37 @@ Pentaglyph recommends (does not strictly mandate) the Red-Green-Refactor cycle (
 ### 9.8 Extending Layer ② — adding new process canons
 
 When pentaglyph (or a downstream project) needs to bind a new process canon — DORA, SRE, Lean Startup, OKR, Continuous Discovery, … — follow [`design-guide/_binding-a-new-process.md`](./design-guide/_binding-a-new-process.md). It defines the 6-section template every new binding must follow, enforces [ADR-0002](./arc42/09-decisions/0002-bind-canons-only-no-self-authored-standards.md) (no canon paraphrasing), and is the substrate for the forthcoming `bunx pentaglyph add-process` CLI sub-command. Candidates under evaluation are tracked in [`design-guide/_future-bindings.md`](./design-guide/_future-bindings.md).
+
+---
+
+## 10. Layer ④ Governance
+
+_Forthcoming (Phase 4 of the [self-architecture roadmap](./impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md))._ Layer ④ Governance will live under `governance/` and define **who** decides, accepts, and overrides — not **what** is decided (decisions are individual ADRs). Planned files: `governance/raci.md`, `governance/adr-accept-protocol.md`, `governance/override-justification.md`, `governance/contributing.md`. Tracked by ADR-0008 (forthcoming).
+
+Until Layer ④ ships, governance is implicit:
+
+- ADR acceptance follows the [`arc42/09-decisions/README.md`](./arc42/09-decisions/README.md) authoring rules.
+- Override justification is informal (one paragraph in the override file).
+- RACI is single-maintainer by default.
+
+---
+
+## 11. Layer ③ Automation
+
+Layer ③ Automation comprises the kit's executable components: the **Bun CLI** ([`cli/`](./cli/)), the **Claude Code rules / agents / skills** ([`.claude/`](.claude/)), and the **`scripts/docs/`** Python tooling (forthcoming, Phase 3.3 of the roadmap). Together they reduce the manual cost of operating Layer ① Artefacts and executing Layer ② Process bindings.
+
+The authoritative contract for this layer is [ADR-0007](./arc42/09-decisions/0007-automation-layer-contract.md). Summary:
+
+| Sub-component | Primary role | What it reads | What it writes |
+| --- | --- | --- | --- |
+| `cli/` (Bun CLI: `pentaglyph init` / `add` / `add-process` / `metrics`) | Scaffold new `docs/` trees + extend existing ones + (forthcoming) measure | ⓪ canon list, ① templates, ② binding meta-doc | ① artefacts (always); ② only for `add-process` (explicit exception per ADR-0007 §3) |
+| `.claude/` (rules, agents, skills) | Embed kit rules into Claude Code; provide doc-authoring sub-agents (`adr-writer`, `doc-orchestrator`, etc.) | ① + ② | ① only — agents may **author new ADRs / specs / use cases** using existing templates but must not redefine the templates themselves |
+| `scripts/docs/` (forthcoming) | Lint, coverage, sync, layer-citation enforcement | All layers (read) | None to artefact layers — outputs go to `metrics/` (Layer ⑤) or CI logs |
+
+**DON'T (per [ADR-0004](./arc42/09-decisions/0004-layer-separation-contracts.md))**: Layer ③ components must not invent new bindings, new template formats, or new governance rules. Adding a new agent / skill / script that materially changes Layer ① / ② contracts requires a new ADR.
+
+**Override path**: downstream projects may disable / replace specific automations by:
+
+1. Editing `package.json` to exclude the CLI install for a project that uses Bazel / Make / shell scripts instead.
+2. Overriding `.claude/rules/<name>.md` by writing a same-named file in the downstream `.claude/rules/` (more specific path wins for Claude Code).
+3. Authoring `<downstream>/docs/design-guide/automation-override.md` with rationale per [ADR-0001](./arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) §5.
