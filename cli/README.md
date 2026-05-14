@@ -114,6 +114,12 @@ bun run smoke              # one-shot end-to-end smoke test
 
 See [`PUBLISH.md`](./PUBLISH.md) for the publish flow, versioning policy, and the eventual move to the unscoped `pentaglyph` name.
 
+## Role in pentaglyph's self-architecture
+
+This CLI is part of **Layer ③ Automation** in pentaglyph's [self-architecture](../template/docs/arc42/05-building-blocks/pentaglyph-self-architecture.md), alongside [`.claude/`](../template/.claude/) and `scripts/docs/` (forthcoming). It executes Layer ② Process bindings and operates on Layer ① Artefacts; it does **not** define what those bindings or templates contain. See [ADR-0001](../template/docs/arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) and [ADR-0004](../template/docs/arc42/09-decisions/0004-layer-separation-contracts.md) for layer contracts.
+
+Forthcoming CLI sub-commands (post-Phase 2 / Phase 3 of the [self-architecture roadmap](../template/docs/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md)) include `bunx pentaglyph add-process <name>` (scaffolds a new Layer ② binding from the 6-section template — see [ADR-0002](../template/docs/arc42/09-decisions/0002-bind-canons-only-no-self-authored-standards.md)).
+
 ## License
 
 MIT.
