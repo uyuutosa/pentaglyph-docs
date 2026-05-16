@@ -9,7 +9,7 @@ layer: 1
 
 > **Self-architecture role**: this directory is the primary home of **Layer ① Artefacts** in pentaglyph's [self-architecture](../arc42/05-building-blocks/pentaglyph-self-architecture.md). It provides concrete document shapes; it does **not** prescribe the processes that produce them (that is Layer ② Process / `design-guide/`). See [ADR-0001](../arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) and [ADR-0004](../arc42/09-decisions/0004-layer-separation-contracts.md).
 
-Nine templates cover the full authoring surface (six core + three UX research). Pick one before writing.
+Fourteen templates cover the full authoring surface: 1 fallback + 5 core architecture + 3 UX research + 4 process bindings + 1 onboarding guidebook. Pick one before writing.
 
 > For *when to write what and where to put it*, see [`../WORKFLOW.md`](../WORKFLOW.md). This README is a template index only.
 
@@ -30,6 +30,11 @@ The template set is synthesised from industry references: [arc42](https://arc42.
 | 6   | [Persona](6_persona.md)                                        | UX research — goal-directed persona | §3 Context (personas/) | "Who is this for, and what do they want?"          |
 | 7   | [Journey Map](7_journey-map.md)                                | UX research — experience over time  | §3 Context (journeys/) / §6 Runtime | "How does this persona experience the scenario, stage by stage?" |
 | 8   | [Service Blueprint](8_service-blueprint.md)                    | UX research — frontstage / backstage | §3 Context (blueprints/) / §6 Runtime | "What do we do behind the scenes to make the journey happen?"    |
+| 9   | [Sprint Retrospective](9_sprint-retro.md)                      | Process — sprint retrospective output | `task-list/` (Layer B) | "What went well, what did not, what will we change?" |
+| 10  | [PBI Refinement](10_refinement-pbi.md)                         | Process — product-backlog-item refinement | `task-list/` (Layer B) | "Is this backlog item ready for the next sprint?" |
+| 11  | [DoD Checklist](11_dod-checklist.md)                           | Process — Definition of Done | `design-guide/dod-checklist.md` | "What does this team mean by *done*?" |
+| 12  | [Governance Decision](12_governance-decision.md)               | Process — heavyweight governance-board decision | `governance/` | "Why did the governance board approve / reject this?" |
+| 13  | [Architecture Guidebook](13_architecture-guidebook.md)         | Developer onboarding read-through (long-form Diátaxis explanation) | §1 + §5 + §8 (narrative re-presentation) | "How does the whole codebase fit together, and where does each concept live in the code?" |
 
 ## How to choose a template
 
