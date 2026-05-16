@@ -98,6 +98,10 @@ When you change code, the **same PR** must update the corresponding doc. Use thi
 | New persona (UX research) | `arc42/03-context-and-scope/personas/<id>.md` | Template 6 |
 | New customer journey map | `arc42/03-context-and-scope/journeys/<id>.md` | Template 7 |
 | New service blueprint | `arc42/03-context-and-scope/blueprints/<id>.md` | Template 8 |
+| Sprint Retrospective output | `task-list/YYYY-MM-DD_sprint-NN-retro.md` | Template 9 |
+| Product Backlog Item refinement | `task-list/YYYY-MM-DD_refinement.md` | Template 10 |
+| Definition of Done tightening | `design-guide/dod-checklist.md` | Template 11 |
+| New process canon binding (BDD / Scrum / TDD / Trunk-Based / DORA / …) | `design-guide/<canon>-workflow.md` | Follow [`design-guide/_binding-a-new-process.md`](./design-guide/_binding-a-new-process.md) 6-section template |
 
 PRs that change code without the corresponding doc update **must be sent back at review**.
 

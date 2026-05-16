@@ -1,7 +1,7 @@
 ---
 status: Stable
 owner: <placeholder>
-last-reviewed: 2026-05-04
+last-reviewed: 2026-05-14
 audience: AI agents (Claude / Cursor / Copilot / generic LLMs)
 ---
 
@@ -60,6 +60,58 @@ STEP 6: Verify the PR contains both code AND doc changes
    If the PR changes code in src/ but does not change docs/, the PR is incomplete.
    Add the doc update before requesting review.
 ```
+
+---
+
+## 2.5 Layer-aware navigation (2-axis decision)
+
+When STEP 2 of the decision protocol is ambiguous, fall back to the **two-axis taxonomy** from [`STRATEGY.md §3`](./STRATEGY.md) and the kit's [self-architecture](./arc42/05-building-blocks/pentaglyph-self-architecture.md). Every doc has exactly one cell in this matrix.
+
+**Axis 1 — Concern** ("what does this artefact address?"):
+
+| Layer | Concern | Heuristic |
+|---|---|---|
+| ⓪ | **Standards** — external canon bindings | "Am I citing arc42 / C4 / MADR / Diátaxis / TiSDD?" |
+| ① | **Artefacts** — templates, taxonomy, lifecycle | "Am I producing or shaping a concrete document?" |
+| ② | **Process** — operational defaults bound to external canons | "Am I describing *how* the team works (Scrum / BDD / TDD / branching / review)?" |
+| ③ | **Automation** — CLI / agents / scripts | "Am I writing code or scripts that operate on ① + execute ②?" |
+| ④ | **Governance** — who decides / accepts / overrides | "Am I defining a role, RACI, or approval policy?" |
+| ⑤ | **Measurement** *(optional)* | "Am I measuring the health of ⓪-④?" |
+
+**Axis 2 — Change-rate** ("how often will this change?"):
+
+| Layer | Change rate | Heuristic |
+|---|---|---|
+| A | **Durable** | "Will I keep editing this file indefinitely?" |
+| B | **Volatile** | "Will I write a new dated file next month rather than edit this one?" |
+| C | **Frozen** | "Is this archived / read-only / vendor-supplied raw data?" |
+
+**Decision flow**:
+
+1. **Concern first**: pick ⓪-⑤. If your file would be re-authored by a different layer if it disappeared, you have the wrong concern.
+2. **Change-rate second**: pick A/B/C.
+3. **Pick the directory** from the matrix in [`STRATEGY.md §3.3`](./STRATEGY.md). If your target cell is marked "—" (intentionally empty), reconsider — the cell is empty because the combination is incoherent (e.g. ⓪ × B = "a canon that expires on a date" makes no sense).
+
+**Common cells (quick reference)**:
+
+| Doc type you are about to write | Concern | Change-rate | Goes to |
+|---|---|---|---|
+| ADR (any new architectural decision) | ① | A | `arc42/09-decisions/NNNN-*.md` |
+| Self-ADR (kit-meta decision) | ① | A | `arc42/09-decisions/NNNN-*.md` with `Type: ... — self-ADR for the kit` |
+| Per-module implementation spec | ① | A | `detailed-design/<module>.md` |
+| PRD | ① | A | `arc42/03-context-and-scope/prds/<feature>.md` |
+| Use case / scenario | ① | A | `arc42/03-context-and-scope/use-cases/<name>.md` |
+| New process binding (e.g. BDD / Scrum / TDD) | ② | A | `design-guide/<canon>-workflow.md` (6-section template; see [ADR-0002](./arc42/09-decisions/0002-bind-canons-only-no-self-authored-standards.md)) |
+| Sprint retro / planning / refinement output | ② | B | `task-list/YYYY-MM-DD_*.md` |
+| Implementation plan (dated) | ② | B | `impl-plans/YYYY-MM-DD_*.md` |
+| Postmortem (Medium+) | ② | B | `postmortems/YYYY-MM-DD_*.md` |
+| Research / evaluation report | ② | B | `reports/YYYY-MM-DD_*.md` |
+| Cost projection (latest-wins) | ④ | B | `cost-estimates/YYYY-MM_*.md` |
+| New AI rule / agent / skill | ③ | A | `.claude/{rules,agents,skills}/<name>.md` (operates on ①+② only; see [ADR-0004](./arc42/09-decisions/0004-layer-separation-contracts.md)) |
+| Governance change (RACI / Accept protocol / contribution guide) | ④ | A | `governance/<topic>.md` (forthcoming) |
+| End-user tutorial / how-to / reference / explanation | ① | A | `user-manual/<diataxis-quadrant>/*.md` |
+
+**Layer dependency direction** ([ADR-0004](./arc42/09-decisions/0004-layer-separation-contracts.md)): each layer may cite layers below it but never above. Concretely, a Layer ③ file may reference Layer ⓪/①/② but not Layer ④/⑤. A Layer ① template must not depend on a Layer ② process.
 
 ---
 
@@ -135,9 +187,16 @@ Before saying "doc update done", verify:
 
 ## 7. References
 
-This file deliberately does not re-explain why arc42 / C4 / MADR / Diátaxis exist. Read the originals once:
+This file deliberately does not re-explain why arc42 / C4 / MADR / Diátaxis / TiSDD exist. Read the originals once:
 
 - arc42 — <https://arc42.org/overview/>
 - C4 model — <https://c4model.com>
 - MADR v3.0 — <https://adr.github.io/madr/>
 - Diátaxis — <https://diataxis.fr>
+- TiSDD (This Is Service Design Doing) — <https://www.thisisservicedesigndoing.com/methods>
+
+For the kit's own self-architecture (the 2-axis taxonomy and layer contracts referenced in §2.5):
+
+- [`STRATEGY.md §3`](./STRATEGY.md) — two-axis taxonomy + per-layer contracts + combined matrix
+- [`arc42/05-building-blocks/pentaglyph-self-architecture.md`](./arc42/05-building-blocks/pentaglyph-self-architecture.md) — C4 L1/L2 view of the kit + override paths
+- [Self-ADRs 0001-0006](./arc42/09-decisions/) — the rationale for the 5-layer model and the bind-only / day-1-criterion / layer-separation / surface-implicit-process / strict-MADR decisions

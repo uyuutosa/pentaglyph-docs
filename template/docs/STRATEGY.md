@@ -1,7 +1,7 @@
 ---
 status: Stable
 owner: <placeholder>
-last-reviewed: 2026-05-04
+last-reviewed: 2026-05-14
 ---
 
 # STRATEGY — Documentation taxonomy and rationale
@@ -41,15 +41,60 @@ The five-standard set forms the kit's namesake (`pentaglyph` — Greek `penta` "
 
 ---
 
-## 3. Three-layer taxonomy
+## 3. Two-axis taxonomy: change-rate × concern
+
+Pentaglyph organizes the repository along **two orthogonal axes**:
+
+1. **Change-rate axis** (Layers A / B / C) — how often the artefact changes.
+2. **Concern axis** (Layers ⓪ / ① / ② / ③ / ④, plus optional ⑤) — what concern the artefact addresses.
+
+Every file in `docs/` and the kit itself sits at one cell of this matrix. Change-rate is independent of concern: an ADR (concern ⓪/①) and a sprint retro template (concern ②) are both *durable* records, but they live in different concern columns. The doc-coverage CLI (concern ③) and the doc-rot metric (concern ⑤) are both automation under the change-rate axis but split across concerns.
+
+Making both axes explicit is what allows pentaglyph to host BDD, Scrum, TDD or any future process canon without inventing new vocabulary: those canons land in the **concern ② column**, with their lifecycle still governed by the **change-rate row**.
+
+### 3.1 Change-rate axis (A / B / C)
 
 | Layer | Purpose | Change rate | Examples |
 |---|---|---|---|
-| **A — Durable design** | Records "how the system is built". Code-coupled. Reviewed before merge. | Slow | `arc42/`, `diagrams/c4/`, `detailed-design/`, `api-contract/`, `design-guide/`, `user-manual/` |
+| **A — Durable design** | Records "how the system is built". Code-coupled. Reviewed before merge. | Slow | `arc42/`, `diagrams/c4/`, `detailed-design/`, `api-contract/`, `design-guide/`, `user-manual/`, `governance/` |
 | **B — Volatile working material** | Records "what we did, when". Append-only. Not reviewed (latest-wins). | Fast (dated) | `impl-plans/`, `task-list/`, `postmortems/`, `reports/`, `cost-estimates/` |
 | **C — Reference and archive** | Frozen prior content / RAW third-party material. Read-only. | None | `archive/_legacy/`, vendor-supplied RAW data |
 
-**Why three layers and not one?** Mixing fast and slow material in the same directories produces two failure modes: (a) durable docs rot because nobody knows whether to update them or write a new dated file, and (b) volatile docs accumulate without ever being summarised into durable ones. Splitting by change rate makes the cost / review weight visible.
+**Why three layers and not one?** Mixing fast and slow material in the same directories produces two failure modes: (a) durable docs rot because nobody knows whether to update them or write a new dated file, and (b) volatile docs accumulate without ever being summarised into durable ones. Splitting by change-rate makes the cost / review weight visible.
+
+### 3.2 Concern axis (⓪ / ① / ② / ③ / ④, plus optional ⑤)
+
+| Layer | Concern | Responsibility (DO) | Out of scope (DON'T) | Primary location |
+|---|---|---|---|---|
+| **⓪ Standards** | Bind external authoritative canons | List + link out (arc42, C4, MADR, Diátaxis, TiSDD, …) | Re-author the canons' philosophy | `STRATEGY.md §2` |
+| **① Artefacts** | Templates + placement taxonomy + lifecycle state machine | Provide concrete document shapes and where they go | Prescribe processes that produce them | `templates/`, `STRATEGY.md §4-§8`, `WORKFLOW.md` |
+| **② Process** | Bind external process canons (Scrum, BDD, TDD, Trunk-based, …) into thin operational defaults | One `design-guide/` per canon, 6-section template, link-out only; provide extensibility (a meta-doc for binding *new* canons) | Invent new process standards; prescribe specific tools (Jira / pytest-bdd / GitHub Actions); paraphrase canon definitions | `design-guide/` |
+| **③ Automation** | Reduce manual work via CLI + AI agents + scripts | Operate on artefacts from ①, execute processes from ② | Re-define artefacts or processes inside automation code | `cli/`, `.claude/`, `scripts/docs/` |
+| **④ Governance** | Define who decides / accepts / overrides | RACI, ADR Accept protocol, override justification, contribution guide | Take specific decisions (that is the role of individual ADRs) | `governance/`, `STRATEGY.md §10-§12` |
+| **⑤ Measurement** *(optional)* | Quantify the health of ⓪-④ | Doc coverage, ADR throughput, freshness, doc-rot detection | Prescribe how to improve the metrics (that is ② Process's role) | `metrics/`, `scripts/docs/metrics_*` |
+
+**Why a concern axis at all?** Without it, "process" and "governance" leak into the artefact taxonomy without an explicit home. Sprint retros, DoR / DoD checklists, RACI matrices, ADR Accept policies — these are real artefacts pentaglyph already touches (often implicitly through `WORKFLOW.md` and Layer B docs), but until the concern axis exists they have no canonical place. The concern axis surfaces what was previously implicit, and binds it to external canons rather than inventing in-house vocabulary.
+
+**Layer dependency direction**: each lower concern is a substrate for the upper. ⓪ Standards is what ① Artefacts shape-check against; ① Artefacts is what ② Process operates on; ② Process is what ③ Automation executes; ③ Automation is what ④ Governance audits; ④ Governance is what ⑤ Measurement reports against. Downstream projects override from the top down (e.g. replace ② Process while reusing ⓪ Standards and ① Artefacts unchanged).
+
+### 3.3 Combined matrix — where things actually live
+
+| Concern \ Change-rate | A — Durable | B — Volatile | C — Frozen |
+|---|---|---|---|
+| **⓪ Standards** | `STRATEGY.md §2` (the five-canon list) | — *(canons don't expire on a date)* | — |
+| **① Artefacts** | `templates/`, `STRATEGY.md`, `WORKFLOW.md`, `AI_INSTRUCTIONS.md`, every directory under `arc42/`, `detailed-design/`, `api-contract/`, `user-manual/`, `service-design/`, `diagrams/c4/` | — | `archive/_legacy/<frozen artefacts>` |
+| **② Process** | `design-guide/version-control.md`, `design-guide/ai-augmented-pr.md`, `design-guide/code-tours.md`, plus forthcoming `design-guide/bdd-workflow.md`, `dev-cycle.md`, `dod-dor.md`, `tdd-workflow.md`, `_binding-a-new-process.md` | `task-list/`, `postmortems/`, `impl-plans/`, `reports/` (process *outputs* over time) | — *(a frozen process is a deprecated process, which is just an ADR superseding the binding)* |
+| **③ Automation** | `cli/README.md`, `.claude/README.md`, `scripts/docs/README.md` and the scripts themselves | — | — |
+| **④ Governance** | `governance/raci.md`, `governance/adr-accept-protocol.md`, `governance/override-justification.md`, `governance/contributing.md` (forthcoming) | `cost-estimates/` (governance outputs over time) | — |
+| **⑤ Measurement** *(optional)* | `metrics/README.md`, `metrics/baseline.md` (forthcoming) | `metrics/snapshots/*.md` (dated) | — |
+
+> **Note**: cells referencing files marked *forthcoming* describe the **target structure**. The build-out plan lives in [`docs/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md`](impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md). Empty cells marked "—" are **intentionally empty by design** — placing content there indicates a concern misclassification.
+
+**How to use the matrix when placing a new file**:
+
+1. **Concern first**: pick ⓪-⑤. Heuristic: "which concern would *re-author* this content if it disappeared?"
+2. **Change-rate second**: pick A/B/C. Heuristic: "would I keep editing this file indefinitely, or write a new dated file next month?"
+3. Pick the directory from the matching cell. If the cell is intentionally empty, reconsider — you are probably in the wrong concern.
 
 ---
 
@@ -145,16 +190,30 @@ See [`WORKFLOW.md` §4](./WORKFLOW.md#4-lifecycle) for the state machine. Summar
 
 ---
 
-## 9. Where this kit ends and project-specific extension begins
+## 9. Operational defaults — what this kit prescribes and what it leaves to downstream
 
-This kit ships the five-standard skeleton **plus** three operational defaults (branching, AI-augmented PR authoring, code tours). It deliberately does not prescribe:
+This kit ships the five-standard skeleton plus a **bound set of Layer ② Process operational defaults**. Each default is justified against the four-axis criterion stated in [ADR-0003](./arc42/09-decisions/0003-apply-day1-switching-cost-canon-criterion.md): **day-1 necessity ∧ switching cost ∧ external canon ∧ domain neutrality**. Failing any axis means the concern is left to project-specific extension.
 
-- Sprint cadence (1-week / 2-week / Kanban)
-- Ticket system (GitHub Issues / Jira / Azure DevOps Boards)
-- Code review workflow (specific reviewer rules, required CI checks)
-- CI / CD pipelines
+> **Historical note (ADR-0005)**: prior versions of this section claimed the kit "deliberately does not prescribe" sprint cadence / code review / CI-CD. That framing was inaccurate: [`WORKFLOW.md`](./WORKFLOW.md) and the Layer B directories (`task-list/`, `postmortems/`, `impl-plans/`) have always *implicitly* prescribed a Scrum-flavoured process. This revision **surfaces what was already running** and binds it to external canons rather than inventing a pentaglyph-specific process standard. See [ADR-0005](./arc42/09-decisions/0005-surface-implicit-process-layer.md).
 
-Add those as Layer A `design-guide/` documents in your downstream project.
+| # | Concern | Canon bound | Design-guide file |
+| --- | --- | --- | --- |
+| 1 | Branching | Git Flow (Driessen, 2010) | [`design-guide/version-control.md`](./design-guide/version-control.md) |
+| 2 | AI-augmented PR | Xiao et al. (FSE 2024) + Anthropic conventions | [`design-guide/ai-augmented-pr.md`](./design-guide/ai-augmented-pr.md) |
+| 3 | Code tours | Microsoft CodeTour schema | [`design-guide/code-tours.md`](./design-guide/code-tours.md) |
+| 4 | Acceptance Criteria format | BDD (North, 2003) + SbE (Adzic, 2011) | [`design-guide/bdd-workflow.md`](./design-guide/bdd-workflow.md) |
+| 5 | Development cycle | Scrum Guide (Schwaber & Sutherland, 2020) | [`design-guide/dev-cycle.md`](./design-guide/dev-cycle.md) |
+| 6 | Definition of Done / Ready | Scrum Guide §DoD + Scrum.org DoR guidance | [`design-guide/dod-dor.md`](./design-guide/dod-dor.md) |
+| 7 | Test-driven micro-cycle | TDD (Beck, 2002) | [`design-guide/tdd-workflow.md`](./design-guide/tdd-workflow.md) |
+
+What is **not** prescribed (passes 0–2 axes, deferred to downstream):
+
+- **Sprint cadence value** (1-week / 2-week / monthly) — domain-specific.
+- **Ticket system** (GitHub Issues / Jira / Linear / Azure DevOps Boards) — vendor lock-in concern.
+- **CI / CD pipeline implementation** (GitHub Actions vs Azure Pipelines vs Jenkins) — fails domain-neutrality for self-hosted / regulated environments.
+- **Specific code-review rules** (required reviewer count, blocking checks) — team-size-dependent.
+
+Add those as Layer A `design-guide/` documents in your downstream project, citing this section.
 
 ### 9.1 Branch strategy — Git Flow by default
 
@@ -171,3 +230,101 @@ The kit prescribes this default because the industry's existing PR-template cano
 ### 9.3 Code tours — CodeTour-compatible reading paths
 
 Guided reading paths through the codebase use Microsoft's CodeTour `.tour` JSON schema, anchored under `.tours/`. Convention is documented in [`design-guide/code-tours.md`](./design-guide/code-tours.md). Tours sit *outside* Diátaxis (which is for end users), in line with Daniele Procida's explicit position that contributor-onboarding artefacts are not part of Diátaxis (<https://diataxis.fr/start-here/>). Override is rare; if your project uses a different walkthrough format, replace the design-guide file and migrate any existing tours.
+
+### 9.4 BDD Acceptance Criteria — Given/When/Then by default
+
+Functional Requirements and Use Cases use the **Given/When/Then grammar** (Dan North 2003 / Adzic 2011) for Acceptance Criteria. The format is already required by [`templates/2_prd.md`](./templates/2_prd.md) and [`templates/4_use-case.md`](./templates/4_use-case.md); this binding ([`design-guide/bdd-workflow.md`](./design-guide/bdd-workflow.md)) names the canon. Tool selection (Cucumber / pytest-bdd / plain prose) is downstream's call. Override by adopting an alternative AC grammar (AAA, scenario tables) and replacing both templates' AC sections.
+
+### 9.5 Development cycle — Scrum Guide 2020 by default
+
+The kit binds [Scrum Guide 2020](https://scrumguides.org/scrum-guide.html) as the default cadence. The binding ([`design-guide/dev-cycle.md`](./design-guide/dev-cycle.md)) does not prescribe a specific Sprint length, ticket system, or framework variant (SAFe / LeSS / Nexus). Common alternatives (Kanban, XP, Trunk-Based-cadence) have documented override paths. Layer B directories `task-list/`, `impl-plans/`, `postmortems/`, plus templates 9 (`sprint-retro`), 10 (`refinement-pbi`) are the artefact homes for Scrum events.
+
+### 9.6 Definition of Done / Ready — Scrum Guide + Scrum.org by default
+
+The kit binds Scrum Guide 2020's DoD and Scrum.org's DoR guidance ([`design-guide/dod-dor.md`](./design-guide/dod-dor.md)), and [`templates/11_dod-checklist.md`](./templates/11_dod-checklist.md) provides per-artefact-type checklists. DoR is embedded in template 10 (`refinement-pbi`). The DoD is a living document: tighten over time via retrospective output, log changes in §"Tightening log" of `dod-checklist.md`.
+
+### 9.7 Test-driven micro-cycle — TDD (Beck 2002) recommended
+
+Pentaglyph recommends (does not strictly mandate) the Red-Green-Refactor cycle ([`design-guide/tdd-workflow.md`](./design-guide/tdd-workflow.md), Beck 2002) as the per-commit micro-cadence. The binding composes with [`design-guide/bdd-workflow.md`](./design-guide/bdd-workflow.md): BDD owns the outer-loop AC grammar; TDD owns the inner-loop discipline. Adopters running test-after / spike-style prototyping document the exemption per the override path in the binding.
+
+### 9.8 Extending Layer ② — adding new process canons
+
+When pentaglyph (or a downstream project) needs to bind a new process canon — DORA, SRE, Lean Startup, OKR, Continuous Discovery, … — follow [`design-guide/_binding-a-new-process.md`](./design-guide/_binding-a-new-process.md). It defines the 6-section template every new binding must follow, enforces [ADR-0002](./arc42/09-decisions/0002-bind-canons-only-no-self-authored-standards.md) (no canon paraphrasing), and is the substrate for the forthcoming `bunx pentaglyph add-process` CLI sub-command. Candidates under evaluation are tracked in [`design-guide/_future-bindings.md`](./design-guide/_future-bindings.md).
+
+---
+
+## 10. Layer ③ Automation
+
+Layer ③ Automation comprises the kit's executable components: the **Bun CLI** ([`cli/`](./cli/)), the **Claude Code rules / agents / skills** ([`.claude/`](.claude/)), and the **`scripts/docs/`** Python tooling (forthcoming). Together they reduce the manual cost of operating Layer ① Artefacts and executing Layer ② Process bindings.
+
+The authoritative contract for this layer is [ADR-0007](./arc42/09-decisions/0007-automation-layer-contract.md). Summary:
+
+| Sub-component | Primary role | What it reads | What it writes |
+| --- | --- | --- | --- |
+| `cli/` (Bun CLI: `pentaglyph init` / `add` / `add-process` / `metrics`) | Scaffold new `docs/` trees + extend existing ones + (forthcoming) measure | ⓪ canon list, ① templates, ② binding meta-doc | ① artefacts (always); ② only for `add-process` (explicit exception per ADR-0007 §3) |
+| `.claude/` (rules, agents, skills) | Embed kit rules into Claude Code; provide doc-authoring sub-agents (`adr-writer`, `doc-orchestrator`, etc.) | ① + ② | ① only — agents may **author new ADRs / specs / use cases** using existing templates but must not redefine the templates themselves |
+| `scripts/docs/` (forthcoming) | Lint, coverage, sync, layer-citation enforcement | All layers (read) | None to artefact layers — outputs go to `metrics/` (Layer ⑤) or CI logs |
+
+**DON'T (per [ADR-0004](./arc42/09-decisions/0004-layer-separation-contracts.md))**: Layer ③ components must not invent new bindings, new template formats, or new governance rules. Adding a new agent / skill / script that materially changes Layer ① / ② contracts requires a new ADR.
+
+**Override path**: downstream projects may disable / replace specific automations by:
+
+1. Editing `package.json` to exclude the CLI install for a project that uses Bazel / Make / shell scripts instead.
+2. Overriding `.claude/rules/<name>.md` by writing a same-named file in the downstream `.claude/rules/` (more specific path wins for Claude Code).
+3. Authoring `<downstream>/docs/design-guide/automation-override.md` with rationale per [ADR-0001](./arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) §5.
+
+---
+
+## 11. Layer ④ Governance
+
+Layer ④ Governance lives in [`governance/`](./governance/) and defines **who decides, accepts, and overrides** — not **what** is decided (decisions are individual ADRs). The authoritative contract is [ADR-0008](./arc42/09-decisions/0008-governance-layer-contract.md).
+
+The directory contains exactly five files (each `layer: 4` in front-matter):
+
+| File | Purpose |
+| --- | --- |
+| [`governance/README.md`](./governance/README.md) | Layer role + navigation + DO/DON'T contract |
+| [`governance/raci.md`](./governance/raci.md) | Per-artefact-type Responsible / Accountable / Consulted / Informed matrix |
+| [`governance/adr-accept-protocol.md`](./governance/adr-accept-protocol.md) | MADR `Proposed → Accepted` transition conditions (structural + substantive checklists) |
+| [`governance/override-justification.md`](./governance/override-justification.md) | 8-section format and authorisation policy for downstream overrides of kit defaults |
+| [`governance/contributing.md`](./governance/contributing.md) | Upstream contribution flow (PR procedure, subtree push, regulatory carve-outs) |
+
+Plus append-only dated decision files for governance changes themselves:
+
+```
+governance/<topic>-decision-YYYY-MM-DD.md   ← uses templates/12_governance-decision.md
+```
+
+**DON'T (per [ADR-0004](./arc42/09-decisions/0004-layer-separation-contracts.md) + [ADR-0008](./arc42/09-decisions/0008-governance-layer-contract.md))**: Layer ④ must not take individual decisions (those are ADRs in `arc42/09-decisions/`), must not prescribe specific processes (those are Layer ② bindings in `design-guide/`), and must not mutate any Layer ⓪/①/②/③ artefact. Layer ④ audits but does not write into the other layers.
+
+**Override path**: downstream projects override Layer ④ files individually by writing same-named replacements in `<downstream>/docs/governance/`. Common overrides target `raci.md` (multi-team / consortium structures) and `adr-accept-protocol.md` (regulated industries with stricter reviewer requirements). Each override must include a rationale per [`governance/override-justification.md`](./governance/override-justification.md).
+
+---
+
+## 12. Layer ⑤ Measurement (optional)
+
+Layer ⑤ Measurement lives in [`metrics/`](./metrics/) and quantifies the health of layers ⓪-④. Layer ⑤ is **optional** per [ADR-0001](./arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) §"Decision Outcome"; the activation contract is [ADR-0009](./arc42/09-decisions/0009-measurement-layer-activation.md).
+
+The directory contains:
+
+| File | Purpose |
+| --- | --- |
+| [`metrics/README.md`](./metrics/README.md) | Layer role + 5 metric categories + activation playbook |
+| [`metrics/baseline.md`](./metrics/baseline.md) | Snapshot of the kit's own (dogfooded) metric values |
+| `metrics/snapshots/YYYY-MM-DD_*.md` | Periodic dated snapshots (append-only) |
+
+The 5 metric categories (per [ADR-0009](./arc42/09-decisions/0009-measurement-layer-activation.md) §3.1):
+
+| # | Category | Status | Script |
+| --- | --- | --- | --- |
+| 1 | Coverage | ✅ implemented | [`scripts/docs/metrics_coverage.py`](../scripts/docs/metrics_coverage.py) |
+| 2 | Freshness | ✅ implemented | [`scripts/docs/metrics_freshness.py`](../scripts/docs/metrics_freshness.py) |
+| 3 | ADR throughput | ✅ implemented | [`scripts/docs/metrics_adr.py`](../scripts/docs/metrics_adr.py) |
+| 4 | Doc rot detection | 🔜 future | TBD |
+| 5 | Adoption (kit-level only) | 🔜 future | TBD |
+
+The scripts are Python 3.10+ stdlib-only and follow the [ADR-0007](./arc42/09-decisions/0007-automation-layer-contract.md) layer-writes contract (read layers ⓪-④, write only to stdout). The Bun CLI wraps them via `bunx pentaglyph metrics --target=docs --metric=all|coverage|freshness|adr --format=markdown|json`.
+
+**Activate Layer ⑤** when project has > 50 durable docs, ≥ 3 active engineers, regulatory audit requirement, or visible doc rot. **Skip** for solo / early-prototype / manual-audit-preferring teams. The decision is reversible at any time without disturbing layers ⓪-④.
+
+**Override path**: downstream projects may add categories 4 / 5 (or category 6+) by writing new `scripts/docs/metrics_*.py` and updating the [ADR-0009](./arc42/09-decisions/0009-measurement-layer-activation.md) §3.1 enumeration via a follow-up ADR. Alternatively, replace the scripts entirely with project-specific tooling per [ADR-0001](./arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) §5 "Override paths".

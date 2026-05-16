@@ -1,7 +1,7 @@
 ---
 status: Stable
 owner: <placeholder>
-last-reviewed: 2026-05-04
+last-reviewed: 2026-05-14
 ---
 
 # arc42 §9 — Architecture Decision Records (ADRs)
@@ -42,16 +42,34 @@ Always start from [`../../templates/5_adr.md`](../../templates/5_adr.md). Do not
 6. **Y-statement** required in the Decision Outcome section (Olaf Zimmermann form).
 7. **Minimums**: 3 Decision Drivers, 2 Considered Options, Consequences in Positive / Negative / Neutral form, Compliance / Validation section.
 
-## Index (your project keeps an Index here)
+## Index
 
-Maintain a section like the example below. Group ADRs by theme.
+### Self-ADRs (kit-meta, ADRs 0001-0009)
+
+These ADRs document **pentaglyph's own** architectural decisions. They are distinguished by the `— self-ADR for the kit` suffix in their `Type` field ([ADR-0006](0006-self-adr-strict-madr-discipline.md)). Downstream projects adopting pentaglyph **either keep or delete** these self-ADRs (`bunx pentaglyph init --keep-self-adrs={true,false}` once that flag ships); their own ADRs start at the next free number.
+
+| #    | File                                                                                          | Title                                                                          | Status   | Date       |
+| ---- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | -------- | ---------- |
+| 0001 | [0001-adopt-five-layer-self-architecture.md](./0001-adopt-five-layer-self-architecture.md)    | Adopt a 5-layer self-architecture (+ optional Measurement)                     | Proposed | 2026-05-14 |
+| 0002 | [0002-bind-canons-only-no-self-authored-standards.md](./0002-bind-canons-only-no-self-authored-standards.md) | Bind external canons only (extended to Layer ② Process)                        | Proposed | 2026-05-14 |
+| 0003 | [0003-apply-day1-switching-cost-canon-criterion.md](./0003-apply-day1-switching-cost-canon-criterion.md)     | Apply the (day-1 × switching-cost × external-canon × domain-neutrality) criterion | Proposed | 2026-05-14 |
+| 0004 | [0004-layer-separation-contracts.md](./0004-layer-separation-contracts.md)                    | Strict layer separation contracts (DO/DON'T + one-way dependency direction)     | Proposed | 2026-05-14 |
+| 0005 | [0005-surface-implicit-process-layer.md](./0005-surface-implicit-process-layer.md)            | Surface the implicit Process layer (Layer ② = surface, not invent)              | Proposed | 2026-05-14 |
+| 0006 | [0006-self-adr-strict-madr-discipline.md](./0006-self-adr-strict-madr-discipline.md)          | Apply strict MADR v3.0 discipline to the kit's own decisions                    | Proposed | 2026-05-14 |
+| 0007 | [0007-automation-layer-contract.md](./0007-automation-layer-contract.md)                      | Automation Layer ③ contract — named-exception allow-list for Layer ② writes     | Proposed | 2026-05-14 |
+| 0008 | [0008-governance-layer-contract.md](./0008-governance-layer-contract.md)                      | Governance Layer ④ contract — directory with 5 fixed files + dated decisions    | Proposed | 2026-05-14 |
+| 0009 | [0009-measurement-layer-activation.md](./0009-measurement-layer-activation.md)                | Measurement Layer ⑤ activation (optional) — 5 categories + dogfooded baseline   | Proposed | 2026-05-14 |
+
+### Downstream-project ADRs
+
+Maintain a section like the example below in your downstream `arc42/09-decisions/README.md`. Group ADRs by theme. Start numbering at the next free number after the highest self-ADR.
 
 ```markdown
 ### Runtime / SDK Foundation
 
 | #     | File                                                | Title                                       | Status   | Date       |
 | ----- | --------------------------------------------------- | ------------------------------------------- | -------- | ---------- |
-| 0001  | [0001-...](./0001-...md)                            | <decision title>                            | Proposed | YYYY-MM-DD |
+| 0007  | [0007-...](./0007-...md)                            | <decision title>                            | Proposed | YYYY-MM-DD |
 ```
 
 ## References

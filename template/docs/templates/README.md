@@ -1,10 +1,13 @@
 ---
 status: Stable
 owner: <placeholder>
-last-reviewed: 2026-05-04
+last-reviewed: 2026-05-14
+layer: 1
 ---
 
 # Template Index
+
+> **Self-architecture role**: this directory is the primary home of **Layer ① Artefacts** in pentaglyph's [self-architecture](../arc42/05-building-blocks/pentaglyph-self-architecture.md). It provides concrete document shapes; it does **not** prescribe the processes that produce them (that is Layer ② Process / `design-guide/`). See [ADR-0001](../arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) and [ADR-0004](../arc42/09-decisions/0004-layer-separation-contracts.md).
 
 Nine templates cover the full authoring surface (six core + three UX research). Pick one before writing.
 
