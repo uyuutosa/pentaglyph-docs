@@ -17,7 +17,10 @@ export type Language = "en" | "ja" | "both";
 /**
  * Section identifier — corresponds to a top-level directory under `template/docs/`.
  *
- * Used by `--include` to selectively scaffold only the listed sections.
+ * Used by `--include` to selectively scaffold only the listed sections. Three
+ * sections (`service-design`, `governance`, `metrics`) exist in the template
+ * tree but are not part of any predefined `--profile`; they are opt-in via
+ * `--include` only.
  */
 export type Section =
   | "arc42"
@@ -31,4 +34,7 @@ export type Section =
   | "reports"
   | "cost-estimates"
   | "user-manual"
+  | "service-design"
+  | "governance"
+  | "metrics"
   | "templates";

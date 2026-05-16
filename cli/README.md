@@ -4,8 +4,8 @@ Scaffold a documentation tree based on arc42 + C4 + MADR + Diátaxis with one wo
 
 ## Install
 
-> Currently published as the scoped name **`@uyuutosa/pentaglyph`** (0.0.x series).
-> The unscoped `pentaglyph` name is reserved for the 0.1.0 stable release. See [`PUBLISH.md`](./PUBLISH.md) for the versioning policy.
+> **Currently published as `@uyuutosa/pentaglyph@0.1.0`.**
+> The unscoped `pentaglyph` name is reserved but not yet published; once the API stabilises in real use, the unscoped name will be released and the scoped name kept as a forwarding alias. See [`PUBLISH.md`](./PUBLISH.md) for the full versioning policy.
 
 ### Run without install (recommended)
 

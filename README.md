@@ -25,6 +25,33 @@ External standards are authoritative. This kit only adds:
 
 ---
 
+## Quick start
+
+```bash
+bunx --bun @uyuutosa/pentaglyph init ./my-project --profile=standard --ai=claude
+```
+
+That command creates `./my-project/docs/` populated with the kit and `./my-project/.claude/rules/documentation.md` for the auto-load rule. Then open `./my-project/docs/AI_INSTRUCTIONS.md` and `./my-project/docs/WORKFLOW.md` — those two files contain everything you need.
+
+For a 30-minute walk-through (PRD → ADR → Module DD → code-with-doc), see the [getting-started tutorial](./docs/tutorials/getting-started.md).
+
+For the full CLI reference, see [`cli/README.md`](./cli/README.md).
+
+---
+
+## Documentation
+
+**[`docs/`](./docs/) — the user manual for pentaglyph itself.** Diátaxis-organised:
+
+- **Tutorial** — [Getting started (30 min walk-through)](./docs/tutorials/getting-started.md)
+- **How-to** — [Use with Claude Code](./docs/how-to/use-with-claude-code.md) · [Adopt in an existing project](./docs/how-to/adopt-existing-project.md) · [Choose the right template](./docs/how-to/choose-the-right-template.md) · [Prompt cookbook](./docs/how-to/prompt-cookbook.md)
+- **Reference** — [Template inventory](./docs/reference/template-index.md)
+- **Explanation** — [Why pentaglyph exists](./docs/explanation/why-pentaglyph.md)
+
+> **Two different "docs" in this repo.** `./docs/` (above) is the manual for pentaglyph *users*. `./template/docs/` is the kit *itself* — what gets copied into your project by `pentaglyph init`. Do not confuse the two.
+
+---
+
 ## Repo layout
 
 ```text
@@ -48,7 +75,7 @@ pentaglyph-docs/
 │   │   ├── reports/              # one-shot research reports
 │   │   ├── cost-estimates/       # cost projections
 │   │   ├── user-manual/          # Diátaxis quadrants
-│   │   └── templates/            # 6 authoring templates
+│   │   └── templates/            # 14 authoring templates (core + UX + process + onboarding)
 │   └── .claude/rules/            # Claude Code auto-load rule
 └── cli/                          # Bun CLI scaffolder
     ├── package.json
@@ -58,26 +85,15 @@ pentaglyph-docs/
 
 ---
 
-## Quick start (CLI)
+## Alternative: manual copy
 
-```bash
-# scaffold a new project's docs/
-bunx pentaglyph init ./my-project --profile=standard --ai=claude --lang=en
-```
-
-See [`cli/README.md`](./cli/README.md) for full CLI usage.
-
----
-
-## Quick start (manual copy)
+If you do not want to use `bunx` / `npx`, you can copy the template directly:
 
 ```bash
 git clone https://github.com/uyuutosa/pentaglyph-docs.git
-cp -r pentaglyph-docs/template/docs ./my-project/docs
+cp -r pentaglyph-docs/template/docs   ./my-project/docs
 cp -r pentaglyph-docs/template/.claude ./my-project/.claude
 ```
-
-Then read [`docs/AI_INSTRUCTIONS.md`](./template/docs/AI_INSTRUCTIONS.md) and [`docs/WORKFLOW.md`](./template/docs/WORKFLOW.md) — those two files contain everything you need.
 
 ---
 

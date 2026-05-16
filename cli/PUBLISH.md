@@ -10,11 +10,14 @@ fallback **manual publish** (one-off / disaster recovery).
 
 ## Versioning policy
 
-- **0.0.x** — initial scoped releases. API may break between any two patch versions. The unscoped `pentaglyph` name is **not yet claimed**.
-- **0.1.0** — first release once the API has stabilised in real use. At this point we publish unscoped `pentaglyph` and keep `@uyuutosa/pentaglyph` as a forwarding alias.
+- **0.0.x** — early scoped releases under `@uyuutosa/pentaglyph`. API may break between any two patch versions. **(Past phase — superseded by 0.1.0.)**
+- **0.1.x** — current phase. `@uyuutosa/pentaglyph` is the canonical install path. The unscoped `pentaglyph` name remains reserved but is *not yet published* — it will be claimed when the kit reaches "stable enough for new adopters to rely on the API without reading the changelog every release". `0.1.x` may still break between minor versions, but the bar for that is higher than during 0.0.x.
+- **0.2.0+** — unscoped `pentaglyph` is published; `@uyuutosa/pentaglyph` becomes a forwarding alias. From this point, both install paths resolve to the same artefact.
 - **1.0.0** — semver guarantees engage. No breaking changes without a major bump.
 
-The package name change between 0.0.x and 0.1.0+ is deliberate — it signals stability publicly and lets the unscoped name accumulate trust before being claimed.
+The package-name change is deliberate — it signals stability publicly and lets the unscoped name accumulate trust before being claimed. Conflating the version bump (0.0.x → 0.1.0) with the namespace move (`@uyuutosa/pentaglyph` → `pentaglyph`) into a single step was the original plan; we have since separated them so that the unscoped publish is its own deliberate event rather than a side-effect of a routine bump.
+
+**Current published state** (2026-05-17): only `@uyuutosa/pentaglyph@0.1.0` is on npm. Unscoped `pentaglyph` is reserved-but-not-yet-published.
 
 ---
 
