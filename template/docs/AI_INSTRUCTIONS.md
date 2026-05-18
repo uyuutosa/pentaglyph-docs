@@ -1,7 +1,7 @@
 ---
 status: Stable
 owner: <placeholder>
-last-reviewed: 2026-05-04
+last-reviewed: 2026-05-19
 audience: AI agents (Claude / Cursor / Copilot / generic LLMs)
 ---
 
@@ -36,7 +36,20 @@ STEP 1: Classify the change
    ├─ Actor / scenario?                  → Use Case (Template 4)
    ├─ Big-picture / cross-cutting?       → Architecture Overview (Template 1)
    ├─ Volatile (dated)?                  → Layer B directories
-   └─ End-user docs?                     → user-manual/ (Diátaxis quadrant)
+   ├─ End-user docs?                     → user-manual/ (Diátaxis quadrant)
+   ├─ Service design (persona / journey / blueprint)? → service-design/ (Templates 6-8)
+   └─ Client engagement (PEL — 6th slot)? → client-engagement/ (Templates 9-13)
+        ┌─ Engagement charter?              → CHARTER.md (Template 9)
+        ├─ Operating rules?                 → OPERATING-AGREEMENT.md (inline, no template)
+        ├─ Forward roadmap?                 → NOW-NEXT-LATER.md (inline, no template)
+        ├─ Weekly status?                   → reports/<YYMMDD>/weekly.md (Template 10)
+        ├─ Cycle Heartbeat or strategic memo? → reports/<YYMMDD>/heartbeat.md or reports/narratives/ (Template 11)
+        ├─ Decision in flight?              → daci/YYYY-MM-DD-<slug>.md (Template 12) → archives to decisions/ as MADR
+        ├─ Client-visible decision recorded?→ decisions/YYYY-MM-DD-<slug>.md (Template 5)
+        ├─ Open item (risk/assumption/issue/decision)? → row in raid.md (Template 13)
+        ├─ Verbose open question?           → questions/Q-NNN-<slug>.md
+        ├─ New-initiative kickoff?          → prfaqs/YYYY-MM-DD_<launch>.md (Template 14 planned)
+        └─ Cycle kickoff narrative?         → kickoffs/YYYY-MM-DD_cycle-<n>.md (Template 16 planned)
 
 STEP 2: Find the destination directory
    Look up the destination in WORKFLOW.md §1 (decision tree) or §2 (mapping table).
@@ -94,18 +107,27 @@ The detailed instructions live in each directory's `README.md`. This is the inde
 | `user-manual/how-to/` | Problem-oriented (Diátaxis) | For competent users |
 | `user-manual/reference/` | Information-oriented (Diátaxis) | Dry, lookup-able |
 | `user-manual/explanation/` | Understanding-oriented (Diátaxis) | Background reading |
+| `service-design/` | Per-service designs (TiSDD: persona / journey / blueprint) | Templates 6-8; cross-link to arc42 §3 |
+| `client-engagement/` | Project Engagement Layer (PEL — 6th slot binder) | Templates 9-13; **internal / client-facing** distinction in `OPERATING-AGREEMENT.md` §5 |
+| `client-engagement/reports/` | PEL weekly + Heartbeat per cycle | Templates 10 (weekly) + 11 (heartbeat); dated `YYMMDD/` folders |
+| `client-engagement/daci/` | In-flight client-visible decisions (DACI workflow) | Template 12; archives to `decisions/` as MADR on approval |
+| `client-engagement/decisions/` | Client-visible decisions archive (curated MADR subset) | Template 5 (MADR); curated subset of `arc42/09-decisions/` |
+| `client-engagement/questions/` | Verbose open client questions (one file per Q-NNN) | Promote to `raid.md` row when triage-able |
+| `client-engagement/prfaqs/` | Amazon working-backwards memos for new initiatives | Template 14 (planned); for cycle-scale launches |
+| `client-engagement/kickoffs/` | Cycle kickoff narratives | Template 16 (planned); pair with Heartbeat at cycle end |
 
 ---
 
 ## 4. Things you must never do
 
-1. **Never invent a new template.** The 6 templates in `templates/` cover every case.
+1. **Never invent a new template.** The 13 templates in `templates/` cover every case (0–8 core + UX; 9–13 client engagement / PEL).
 2. **Never edit an Accepted ADR's body.** Supersede with a new ADR.
 3. **Never duplicate the workflow rules.** If you find yourself restating `WORKFLOW.md` content in another file, link to `WORKFLOW.md` instead.
-4. **Never re-explain arc42 / C4 / MADR / Diátaxis.** Link to the authoritative URLs.
+4. **Never re-explain arc42 / C4 / MADR / Diátaxis / TiSDD / PEL primitives.** Link to the authoritative URLs.
 5. **Never write doc-only PRs that change code-coupled docs.** Doc changes that describe non-existent code are bugs. If the code is being removed, supersede the doc in the same PR.
 6. **Never put files into Layer C (`archive/_legacy/`)** unless explicitly instructed. Layer C is read-only history.
-7. **Never write in a non-English language** in default-English directories. Per `STRATEGY.md`, only explicitly designated client-facing directories may be in another language.
+7. **Never write in a non-English language** in default-English directories. Per `STRATEGY.md`, only explicitly designated client-facing directories (including PEL files when the project's `OPERATING-AGREEMENT.md` declares a non-English client language) may be in another language.
+8. **Never treat `client-engagement/` (PEL) as public.** Per `STRATEGY.md` §2.6 confidentiality inversion, every PEL file is confidential unless the engagement's `OPERATING-AGREEMENT.md` §5 explicitly says otherwise.
 
 ---
 

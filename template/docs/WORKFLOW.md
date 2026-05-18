@@ -1,7 +1,7 @@
 ---
 status: Stable
 owner: <placeholder>
-last-reviewed: 2026-05-04
+last-reviewed: 2026-05-19
 ---
 
 # WORKFLOW — When to write what, where to put it, what state it goes through
@@ -68,6 +68,20 @@ START: I am about to write a doc.
 │   ├─ Customer / user journey map?   → Template 7 → arc42/03-context-and-scope/journeys/<id>.md
 │   └─ Service blueprint (cross-functional service)? → Template 8 → arc42/03-context-and-scope/blueprints/<id>.md
 │
+├─ Is it client-facing engagement material (PEL — 6th slot)?
+│   ┌─ Engagement charter / kickoff?       → Template 9  → client-engagement/CHARTER.md
+│   ├─ Operating agreement (working rules)?→ (no template — single living file) → client-engagement/OPERATING-AGREEMENT.md
+│   ├─ Forward roadmap?                    → (no template — single living file) → client-engagement/NOW-NEXT-LATER.md
+│   ├─ Weekly status update?               → Template 10 → client-engagement/reports/<YYMMDD>/weekly.md
+│   ├─ Cycle Heartbeat (narrative)?        → Template 11 → client-engagement/reports/<YYMMDD>/heartbeat.md
+│   ├─ Strategic ad-hoc memo (6-pager)?    → Template 11 → client-engagement/reports/narratives/YYYY-MM-DD_<topic>.md
+│   ├─ In-flight decision workflow (DACI)? → Template 12 → client-engagement/daci/YYYY-MM-DD-<slug>.md (archives to client-engagement/decisions/ as MADR on approval)
+│   ├─ Client-visible decision (recorded)? → Template 5  → client-engagement/decisions/YYYY-MM-DD-<slug>.md
+│   ├─ Risk / Assumption / Issue / Decision entry? → Template 13 (row format) → row in client-engagement/raid.md
+│   ├─ Verbose open question?              → (template in README) → client-engagement/questions/Q-NNN-<slug>.md
+│   ├─ New-initiative kickoff memo (PR/FAQ)? → (template 14 planned) → client-engagement/prfaqs/YYYY-MM-DD_<launch>.md
+│   └─ Cycle kickoff narrative?            → (template 16 planned) → client-engagement/kickoffs/YYYY-MM-DD_cycle-<n>.md
+│
 └─ None of the above? → Template 0 (Default) in the closest matching directory
 ```
 
@@ -98,6 +112,13 @@ When you change code, the **same PR** must update the corresponding doc. Use thi
 | New persona (UX research) | `arc42/03-context-and-scope/personas/<id>.md` | Template 6 |
 | New customer journey map | `arc42/03-context-and-scope/journeys/<id>.md` | Template 7 |
 | New service blueprint | `arc42/03-context-and-scope/blueprints/<id>.md` | Template 8 |
+| New engagement (PEL) | `client-engagement/CHARTER.md` + `client-engagement/OPERATING-AGREEMENT.md` | Template 9 + inline |
+| Weekly engagement update | `client-engagement/reports/<YYMMDD>/weekly.md` | Template 10 |
+| Cycle Heartbeat | `client-engagement/reports/<YYMMDD>/heartbeat.md` | Template 11 |
+| Decision in flight with the client | `client-engagement/daci/YYYY-MM-DD-<slug>.md` (archives to `client-engagement/decisions/` on approval) | Template 12 → 5 |
+| Open client question / risk / issue | row in `client-engagement/raid.md` (+ optional `client-engagement/questions/Q-NNN.md` if verbose) | Template 13 (row) |
+| Roadmap update | edit `client-engagement/NOW-NEXT-LATER.md` in place | (no template) |
+| New initiative kickoff (PR/FAQ) | `client-engagement/prfaqs/YYYY-MM-DD_<launch>.md` | Template 14 (planned) |
 
 PRs that change code without the corresponding doc update **must be sent back at review**.
 
@@ -161,8 +182,8 @@ Volatile docs **skip Review** — they are append-only by nature and superseded 
 
 | Layer | Directories | Change rate | Owner sensitivity |
 |---|---|---|---|
-| **A — Durable design** | `arc42/`, `diagrams/c4/`, `detailed-design/`, `design-guide/`, `api-contract/`, `user-manual/` | Slow | High (PR review required) |
-| **B — Volatile working material** | `impl-plans/`, `task-list/`, `postmortems/`, `reports/`, `cost-estimates/` | Fast (dated) | Low (append-only) |
+| **A — Durable design** | `arc42/`, `diagrams/c4/`, `detailed-design/`, `design-guide/`, `api-contract/`, `user-manual/`, `service-design/`, `client-engagement/{CHARTER,OPERATING-AGREEMENT,NOW-NEXT-LATER,raid,decisions}` | Slow | High (PR review required) |
+| **B — Volatile working material** | `impl-plans/`, `task-list/`, `postmortems/`, `reports/`, `cost-estimates/`, `client-engagement/{reports,daci,kickoffs,prfaqs,questions}` | Fast (dated) | Low (append-only) |
 | **C — Reference & archive** | `archive/_legacy/`, third-party RAW data | Frozen | Read-only |
 
 When in doubt, **Layer A is the default for anything that describes "how the system is built"**, Layer B for "what we did when".
@@ -215,6 +236,11 @@ v1.0 deliverable is **Architecture 100% + Implementation 100% + End-user
 | User-facing feature lands | Manual section is now stale | Update / add files under `user-manual/{quadrant}/` |
 | Sprint kicks off | Planning meeting | New `task-list/YYYY-MM-DD_sprint-N.md` (volatile) |
 | Quarterly cost review | Finance check-in | New `cost-estimates/YYYY-MM_<title>.md` (volatile) |
+| Engagement kicks off | New client / phase signed | `client-engagement/CHARTER.md` (Template 9) + `OPERATING-AGREEMENT.md` (PEL) |
+| Week ends (engagement active) | Weekly cadence | New `client-engagement/reports/YYMMDD/weekly.md` (Template 10) |
+| Cycle ends (engagement active) | Cycle cadence | New `client-engagement/reports/YYMMDD/heartbeat.md` (Template 11) + open `client-engagement/kickoffs/cycle-N+1.md` for next |
+| Open client question | Surfaces in weekly / Heartbeat | Row in `client-engagement/raid.md` (Template 13) + optional verbose `client-engagement/questions/Q-NNN.md` |
+| Cross-functional decision needed | Client + engineering both have input | New `client-engagement/daci/YYYY-MM-DD-<slug>.md` (Template 12) → archives to `client-engagement/decisions/` as MADR on approval |
 
 ---
 

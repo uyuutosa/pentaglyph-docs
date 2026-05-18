@@ -1,12 +1,12 @@
 ---
 status: Stable
 owner: <placeholder>
-last-reviewed: 2026-05-04
+last-reviewed: 2026-05-19
 ---
 
 # Template Index
 
-Nine templates cover the full authoring surface (six core + three UX research). Pick one before writing.
+Fourteen templates cover the full authoring surface (six core + three UX research + five client engagement / PEL). Pick one before writing.
 
 > For *when to write what and where to put it*, see [`../WORKFLOW.md`](../WORKFLOW.md). This README is a template index only.
 
@@ -27,6 +27,11 @@ The template set is synthesised from industry references: [arc42](https://arc42.
 | 6   | [Persona](6_persona.md)                                        | UX research — goal-directed persona | §3 Context (personas/) | "Who is this for, and what do they want?"          |
 | 7   | [Journey Map](7_journey-map.md)                                | UX research — experience over time  | §3 Context (journeys/) / §6 Runtime | "How does this persona experience the scenario, stage by stage?" |
 | 8   | [Service Blueprint](8_service-blueprint.md)                    | UX research — frontstage / backstage | §3 Context (blueprints/) / §6 Runtime | "What do we do behind the scenes to make the journey happen?"    |
+| 9   | [Inception Deck](9_inception-deck.md)                          | PEL engagement charter (10 questions)| `client-engagement/CHARTER.md` | "What is this engagement and what is out of scope?" |
+| 10  | [Weekly Update](10_weekly-update.md)                           | PEL short-form weekly (4-block)      | `client-engagement/reports/<YYMMDD>/weekly.md` | "What happened this week, what's next?" |
+| 11  | [Heartbeat](11_heartbeat.md)                                   | PEL long-form cyclical (narrative)   | `client-engagement/reports/<YYMMDD>/heartbeat.md` | "What did this cycle add up to, what did we learn?" |
+| 12  | [DACI Decision](12_daci-decision.md)                           | PEL in-flight decision workflow      | `client-engagement/daci/` → archives to `client-engagement/decisions/` as MADR | "Who decides, who contributes, what are we deciding?" |
+| 13  | [RAID Entry](13_raid-entry.md)                                 | PEL open-items log row format        | row in `client-engagement/raid.md` | "What risks / assumptions / issues / decisions are open right now?" |
 
 ## How to choose a template
 

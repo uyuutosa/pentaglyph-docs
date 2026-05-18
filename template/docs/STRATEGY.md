@@ -1,7 +1,7 @@
 ---
 status: Stable
 owner: <placeholder>
-last-reviewed: 2026-05-04
+last-reviewed: 2026-05-19
 ---
 
 # STRATEGY — Documentation taxonomy and rationale
@@ -19,7 +19,7 @@ Define the taxonomy and authoring rules for `docs/` so that:
 1. Every artifact has exactly one canonical location and one owner.
 2. Both humans and AI agents can locate the right document in ≤ 2 hops from the entry point.
 3. Volatile material (dated implementation plans, weekly reports) is separated from durable design records (architecture, ADRs).
-4. The boundary between the four adopted standards (arc42 / C4 / MADR / Diátaxis) is preserved — they each answer a different question.
+4. The boundary between the five adopted standards (arc42 / C4 / MADR / Diátaxis / TiSDD) is preserved — they each answer a different question — and the sixth slot ([Project Engagement Layer](#26-the-sixth-slot--project-engagement-layer-pel)) composes well-known primitives without competing with the five.
 
 ---
 
@@ -41,12 +41,41 @@ The five-standard set forms the kit's namesake (`pentaglyph` — Greek `penta` "
 
 ---
 
+## 2.6 The sixth slot — Project Engagement Layer (PEL)
+
+The five peer standards above each answer a *system-level* question (architecture, diagrams, decisions, user docs, service experience). The sixth slot — the **Project Engagement Layer**, local home [`client-engagement/`](./client-engagement/) — answers a different *kind* of question: **how does this team communicate with the paying client / external sponsor over the life of the engagement?**
+
+Unlike the five peer standards, PEL is **not a single canonical framework**. After surveying the consulting / advisory space, no single "client communication standard" emerged with the cohesion of arc42 or MADR. Every consulting firm has its own templates; no public standard has consolidated. PEL therefore exists as a **binder** that composes eight well-known, AI-friendly primitives — each owning one slice of the engagement lifecycle:
+
+| Slot | Bound primitive | Authoritative source |
+| --- | --- | --- |
+| Engagement charter (kickoff) | **Agile Inception Deck** (Rasmusson, 2010) | <https://agilewarrior.wordpress.com/2010/11/06/the-agile-inception-deck/> |
+| Operating agreement (working rules) | **GitLab Handbook** "handbook-first" pattern | <https://handbook.gitlab.com/> |
+| Short-form weekly | **Atlassian "Priorities → Progress → Problems → Next"** | <https://www.atlassian.com/team-playbook/plays/weekly-team-updates> |
+| Long-form cyclical | **Basecamp Heartbeat** + **Amazon 6-pager** prose discipline | <https://world.hey.com/jason/what-s-in-a-heartbeat-4fd72d0e> / <https://www.sixpagermemo.com/blog/amazon-six-pager-template> |
+| Forward roadmap | **Now / Next / Later** (Janna Bastow) | <https://productmanagementresources.com/now-next-later-roadmap/> |
+| In-flight decisions | **DACI** (Atlassian) → archives to MADR | <https://www.atlassian.com/team-playbook/plays/daci> |
+| Open-items ledger | **RAID log** (Risk / Assumption / Issue / Decision) | <https://asana.com/resources/raid-log> |
+| New-initiative kickoff | **Amazon PR/FAQ** (working backwards) | <https://workingbackwards.com/resources/working-backwards-pr-faq/> |
+
+**Why a binder, not a sixth peer standard**: the five peer standards each ship as a single authoritative URL plus (often) a reference book. PEL's eight primitives have no shared authoritative home — picking *one* as the "PEL standard" would be over-fitting; picking *several without a binder* would scatter client-engagement material across `reports/`, `arc42/09-decisions/`, `impl-plans/`, and ad-hoc directories. The binder model — one directory, one README, eight composed primitives — gives the AI agent a single placement target without forcing pentaglyph to invent its own framework. The kit's name remains `pentaglyph` (five peer standards); PEL is the sixth *slot*, not the sixth standard.
+
+**Why these eight primitives in particular**: every piece has very high LLM training-corpus footprint (millions of public examples on GitHub, Notion templates, Atlassian docs, blog posts, podcasts), zero proprietary licensing, naturally markdown-renderable. AI agents drafting in any of these formats produce high-quality output zero-shot.
+
+**Confidentiality posture inversion**: GitLab's handbook-first principle is *public-first*. Consulting engagements are *private-first*. PEL borrows the single-source-of-truth discipline from GitLab Handbook but inverts the public default — every file in `client-engagement/` is confidential unless the engagement agreement specifies otherwise. See [`client-engagement/OPERATING-AGREEMENT.md` §5](./client-engagement/OPERATING-AGREEMENT.md) for how a project records its specific confidentiality posture.
+
+**Templates that ship with PEL**: Types 9–13 cover the five highest-leverage primitives (Inception Deck, Weekly Update, Heartbeat, DACI, RAID). Types 14–16 (PR/FAQ, Now/Next/Later, Kickoff) are planned for a follow-up release; until then, follow the structure documented in the authoritative source URLs above and in each `client-engagement/<sub-dir>/README.md`.
+
+**When to enable PEL in a downstream project**: when the project has an external client / sponsor / paying customer / executive stakeholder who consumes written progress. Internal-only product development can keep `reports/` + `impl-plans/` and skip PEL.
+
+---
+
 ## 3. Three-layer taxonomy
 
 | Layer | Purpose | Change rate | Examples |
 |---|---|---|---|
-| **A — Durable design** | Records "how the system is built". Code-coupled. Reviewed before merge. | Slow | `arc42/`, `diagrams/c4/`, `detailed-design/`, `api-contract/`, `design-guide/`, `user-manual/` |
-| **B — Volatile working material** | Records "what we did, when". Append-only. Not reviewed (latest-wins). | Fast (dated) | `impl-plans/`, `task-list/`, `postmortems/`, `reports/`, `cost-estimates/` |
+| **A — Durable design** | Records "how the system is built". Code-coupled. Reviewed before merge. | Slow | `arc42/`, `diagrams/c4/`, `detailed-design/`, `api-contract/`, `design-guide/`, `user-manual/`, `service-design/`, `client-engagement/{CHARTER,OPERATING-AGREEMENT,NOW-NEXT-LATER,raid,decisions}` |
+| **B — Volatile working material** | Records "what we did, when". Append-only. Not reviewed (latest-wins). | Fast (dated) | `impl-plans/`, `task-list/`, `postmortems/`, `reports/`, `cost-estimates/`, `client-engagement/{reports,daci,kickoffs,prfaqs,questions}` |
 | **C — Reference and archive** | Frozen prior content / RAW third-party material. Read-only. | None | `archive/_legacy/`, vendor-supplied RAW data |
 
 **Why three layers and not one?** Mixing fast and slow material in the same directories produces two failure modes: (a) durable docs rot because nobody knows whether to update them or write a new dated file, and (b) volatile docs accumulate without ever being summarised into durable ones. Splitting by change rate makes the cost / review weight visible.
