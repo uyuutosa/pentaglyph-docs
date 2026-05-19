@@ -4,7 +4,7 @@ owner: <placeholder>
 last-reviewed: 2026-05-19
 ---
 
-# ADR-0010: Bind external problem-solving thinking frameworks under `design-guide/thinking-frameworks/`
+# ADR-0011: Bind external problem-solving thinking frameworks under `design-guide/thinking-frameworks/`
 
 | Metadata  | Value                                                          |
 | --------- | -------------------------------------------------------------- |

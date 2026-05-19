@@ -71,5 +71,5 @@ To add one: copy the structure of an existing file, place it under the right sta
 
 - [`../README.md`](../README.md) — design-guide directory overview
 - [`../../STRATEGY.md` §3.2 concern axis](../../STRATEGY.md) — these frameworks live in concern ② Process (or perhaps deserve their own concern ⑥ — see `_future-bindings.md`)
-- [`../../arc42/09-decisions/0010-adopt-thinking-frameworks-layer.md`](../../arc42/09-decisions/0010-adopt-thinking-frameworks-layer.md) — the adoption decision
+- [`../../arc42/09-decisions/0011-adopt-thinking-frameworks-layer.md`](../../arc42/09-decisions/0011-adopt-thinking-frameworks-layer.md) — the adoption decision
 - [`../_binding-a-new-process.md`](../_binding-a-new-process.md) — pentaglyph's process-canon-binding meta-doc (these thinking frameworks are bound the same way)

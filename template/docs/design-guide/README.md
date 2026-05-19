@@ -31,6 +31,6 @@ This directory holds operational and convention guidelines: code style, naming, 
 
 | Sub-directory                                              | Purpose                                                                                  |
 | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| [`thinking-frameworks/`](./thinking-frameworks/README.md)  | External problem-solving thinking frameworks (Minto Pyramid + SCQA / MECE / Issue Tree / Hypothesis-Driven / 5 Whys / First Principles / 80-20 / 2x2 / OODA) — bound per [ADR-0010](../arc42/09-decisions/0010-adopt-thinking-frameworks-layer.md) |
+| [`thinking-frameworks/`](./thinking-frameworks/README.md)  | External problem-solving thinking frameworks (Minto Pyramid + SCQA / MECE / Issue Tree / Hypothesis-Driven / 5 Whys / First Principles / 80-20 / 2x2 / OODA) — bound per [ADR-0011](../arc42/09-decisions/0011-adopt-thinking-frameworks-layer.md) |
 
 For lifecycle / when to update, see [`../WORKFLOW.md`](../WORKFLOW.md).
