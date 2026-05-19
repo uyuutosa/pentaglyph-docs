@@ -4,7 +4,7 @@ owner: <placeholder>
 last-reviewed: 2026-05-19
 ---
 
-# ADR-0010: Adopt explicit layer-prefixed directory names under `docs/` (`01-artefacts/`, `02-process/`, `04-04-governance/`, `05-measurement/`)
+# ADR-0010: Adopt explicit layer-prefixed directory names under `docs/` (`01-artefacts/`, `02-process/`, `04-governance/`, `05-measurement/`)
 
 | Metadata  | Value                                                          |
 | --------- | -------------------------------------------------------------- |
@@ -48,8 +48,8 @@ The kit already prescribes explicit numeric prefixes inside arc42 (`01-introduct
 
 1. **Status quo (flat directories, layer mapped via `§3.1` table only)**.
 2. **Front-matter `layer:` tag on every file, directories unchanged**. Each `.md` file gains `layer: 2` in front-matter; directories stay flat. Lint reads the tag.
-3. **Explicit layer-prefixed directories** (chosen) — `docs/01-artefacts/`, `docs/02-process/`, `docs/04-04-governance/`, `docs/05-measurement/`. Layer ⓪ has no directory (per ADR-0001, ⓪ is link-out only). Layer ③ Automation stays at repo root (`.claude/`, `cli/`, `scripts/docs/`) since it is intentionally outside `docs/`.
-4. **Hybrid: front-matter tag + selective directory rename** (rename only the small-population layers, `02-process/`, `04-04-governance/`, `05-measurement/`; keep Layer ① flat).
+3. **Explicit layer-prefixed directories** (chosen) — `docs/01-artefacts/`, `docs/02-process/`, `docs/04-governance/`, `docs/05-measurement/`. Layer ⓪ has no directory (per ADR-0001, ⓪ is link-out only). Layer ③ Automation stays at repo root (`.claude/`, `cli/`, `scripts/docs/`) since it is intentionally outside `docs/`.
+4. **Hybrid: front-matter tag + selective directory rename** (rename only the small-population layers, `02-process/`, `04-governance/`, `05-measurement/`; keep Layer ① flat).
 
 ---
 
@@ -105,7 +105,7 @@ docs/
 │   ├── tdd-workflow.md
 │   └── version-control.md
 │
-├── 04-04-governance/                   # Layer ④ Governance (formerly 04-governance/)
+├── 04-governance/                   # Layer ④ Governance (formerly 04-governance/)
 │   └── …
 │
 └── 05-measurement/                  # Layer ⑤ Measurement (formerly 05-measurement/, optional)
@@ -120,7 +120,7 @@ docs/
 
 ### Y-statement summary
 
-> In the context of **navigating pentaglyph's `docs/` tree as a contributor or AI agent**, facing **layer membership being inferable only from a remote table in `self-architecture.md §3.1`, which makes dependency-direction violations invisible in paths and forces a constant context-switch**, we decided for **explicit layer-prefixed directories (`01-artefacts/`, `02-process/`, `04-04-governance/`, `05-measurement/`) under `docs/`, leaving Layer ⓪ directory-less, Layer ③ at repo root, and cross-layer entry-points at `docs/` root** to achieve **layer-readability from the path alone, visually obvious dependency-direction violations in diffs, and a parsable layer signal for automation**, accepting **a one-shot migration cost of rewriting all cross-references across both pentaglyph upstream and downstream consumers, and a breaking-change major version bump of the published kit**.
+> In the context of **navigating pentaglyph's `docs/` tree as a contributor or AI agent**, facing **layer membership being inferable only from a remote table in `self-architecture.md §3.1`, which makes dependency-direction violations invisible in paths and forces a constant context-switch**, we decided for **explicit layer-prefixed directories (`01-artefacts/`, `02-process/`, `04-governance/`, `05-measurement/`) under `docs/`, leaving Layer ⓪ directory-less, Layer ③ at repo root, and cross-layer entry-points at `docs/` root** to achieve **layer-readability from the path alone, visually obvious dependency-direction violations in diffs, and a parsable layer signal for automation**, accepting **a one-shot migration cost of rewriting all cross-references across both pentaglyph upstream and downstream consumers, and a breaking-change major version bump of the published kit**.
 
 ---
 
