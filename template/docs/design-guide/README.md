@@ -1,7 +1,7 @@
 ---
 status: Stable
 owner: <placeholder>
-last-reviewed: 2026-05-14
+last-reviewed: 2026-05-19
 layer: 2
 ---
 
@@ -26,5 +26,11 @@ This directory holds operational and convention guidelines: code style, naming, 
 | `code-tours.md`               | CodeTour-compatible guided reading paths (kit-shipped default)          |
 | `sprint-cadence.md`           | Sprint length, ceremonies, definition of done                           |
 | `release-process.md`          | Versioning scheme, release notes format, rollback procedure             |
+
+## Sub-directories
+
+| Sub-directory                                              | Purpose                                                                                  |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| [`thinking-frameworks/`](./thinking-frameworks/README.md)  | External problem-solving thinking frameworks (Minto Pyramid + SCQA / MECE / Issue Tree / Hypothesis-Driven / 5 Whys / First Principles / 80-20 / 2x2 / OODA) — bound per [ADR-0010](../arc42/09-decisions/0010-adopt-thinking-frameworks-layer.md) |
 
 For lifecycle / when to update, see [`../WORKFLOW.md`](../WORKFLOW.md).

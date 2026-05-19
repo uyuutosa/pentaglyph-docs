@@ -1,7 +1,7 @@
 ---
 status: Stable
 owner: <placeholder>
-last-reviewed: 2026-05-14
+last-reviewed: 2026-05-19
 ---
 
 # STRATEGY — Documentation taxonomy and rationale
@@ -41,6 +41,37 @@ The five-standard set forms the kit's namesake (`pentaglyph` — Greek `penta` "
 
 ---
 
+## 2.6 The sixth slot — Project Engagement Layer (PEL)
+
+The five peer standards above each answer a *system-level* question (architecture, diagrams, decisions, user docs, service experience). The sixth slot — the **Project Engagement Layer**, local home [`client-engagement/`](./client-engagement/) — answers a different *kind* of question: **how does this team communicate with the paying client / external sponsor over the life of the engagement?**
+
+Unlike the five peer standards, PEL is **not a single canonical framework**. After surveying the consulting / advisory space, no single "client communication standard" emerged with the cohesion of arc42 or MADR. Every consulting firm has its own templates; no public standard has consolidated. PEL therefore exists as a **binder** that composes eight well-known, AI-friendly primitives — each owning one slice of the engagement lifecycle:
+
+| Slot | Bound primitive | Authoritative source |
+| --- | --- | --- |
+| Engagement charter (kickoff) | **Agile Inception Deck** (Rasmusson, 2010) | <https://agilewarrior.wordpress.com/2010/11/06/the-agile-inception-deck/> |
+| Operating agreement (working rules) | **GitLab Handbook** "handbook-first" pattern | <https://handbook.gitlab.com/> |
+| Short-form weekly | **Atlassian "Priorities → Progress → Problems → Next"** | <https://www.atlassian.com/team-playbook/plays/weekly-team-updates> |
+| Long-form cyclical | **Basecamp Heartbeat** + **Amazon 6-pager** prose discipline | <https://world.hey.com/jason/what-s-in-a-heartbeat-4fd72d0e> / <https://www.sixpagermemo.com/blog/amazon-six-pager-template> |
+| Forward roadmap | **Now / Next / Later** (Janna Bastow) | <https://productmanagementresources.com/now-next-later-roadmap/> |
+| In-flight decisions | **DACI** (Atlassian) → archives to MADR | <https://www.atlassian.com/team-playbook/plays/daci> |
+| Open-items ledger | **RAID log** (Risk / Assumption / Issue / Decision) | <https://asana.com/resources/raid-log> |
+| New-initiative kickoff | **Amazon PR/FAQ** (working backwards) | <https://workingbackwards.com/resources/working-backwards-pr-faq/> |
+
+**Why a binder, not a sixth peer standard**: the five peer standards each ship as a single authoritative URL plus (often) a reference book. PEL's eight primitives have no shared authoritative home — picking *one* as the "PEL standard" would be over-fitting; picking *several without a binder* would scatter client-engagement material across `reports/`, `arc42/09-decisions/`, `impl-plans/`, and ad-hoc directories. The binder model — one directory, one README, eight composed primitives — gives the AI agent a single placement target without forcing pentaglyph to invent its own framework. The kit's name remains `pentaglyph` (five peer standards); PEL is the sixth *slot*, not the sixth standard.
+
+**Where PEL sits in the two-axis taxonomy (§3)**: PEL spans the **concern ⓪ Standards axis** (the eight bound primitives are external authoritative canons that PEL only links out to) and the **concern ① Artefacts axis** (PEL ships templates 14–18 and the `client-engagement/` directory shape). The eight primitives behave as ⓪ Standards — pentaglyph does not paraphrase them. The templates behave as ① Artefacts — they are concrete document shapes with placement and lifecycle. On the change-rate axis, durable PEL files (`CHARTER.md` / `OPERATING-AGREEMENT.md` / `NOW-NEXT-LATER.md` / `raid.md` / `decisions/`) live in **Layer A**; volatile PEL files (`reports/<YYMMDD>/` / `daci/` / `kickoffs/` / `prfaqs/` / `questions/`) live in **Layer B**.
+
+**Why these eight primitives in particular**: every piece has very high LLM training-corpus footprint (millions of public examples on GitHub, Notion templates, Atlassian docs, blog posts, podcasts), zero proprietary licensing, naturally markdown-renderable. AI agents drafting in any of these formats produce high-quality output zero-shot.
+
+**Confidentiality posture inversion**: GitLab's handbook-first principle is *public-first*. Consulting engagements are *private-first*. PEL borrows the single-source-of-truth discipline from GitLab Handbook but inverts the public default — every file in `client-engagement/` is confidential unless the engagement agreement specifies otherwise. See [`client-engagement/OPERATING-AGREEMENT.md` §5](./client-engagement/OPERATING-AGREEMENT.md) for how a project records its specific confidentiality posture.
+
+**Templates that ship with PEL**: Types 14–18 cover the five highest-leverage primitives (Inception Deck, Weekly Update, Heartbeat, DACI, RAID). Types 19–21 (PR/FAQ, Now/Next/Later, Kickoff) are planned for a follow-up release; until then, follow the structure documented in the authoritative source URLs above and in each `client-engagement/<sub-dir>/README.md`.
+
+**When to enable PEL in a downstream project**: when the project has an external client / sponsor / paying customer / executive stakeholder who consumes written progress. Internal-only product development can keep `reports/` + `impl-plans/` and skip PEL.
+
+---
+
 ## 3. Two-axis taxonomy: change-rate × concern
 
 Pentaglyph organizes the repository along **two orthogonal axes**:
@@ -56,8 +87,8 @@ Making both axes explicit is what allows pentaglyph to host BDD, Scrum, TDD or a
 
 | Layer | Purpose | Change rate | Examples |
 |---|---|---|---|
-| **A — Durable design** | Records "how the system is built". Code-coupled. Reviewed before merge. | Slow | `arc42/`, `diagrams/c4/`, `detailed-design/`, `api-contract/`, `design-guide/`, `user-manual/`, `governance/` |
-| **B — Volatile working material** | Records "what we did, when". Append-only. Not reviewed (latest-wins). | Fast (dated) | `impl-plans/`, `task-list/`, `postmortems/`, `reports/`, `cost-estimates/` |
+| **A — Durable design** | Records "how the system is built". Code-coupled. Reviewed before merge. | Slow | `arc42/`, `diagrams/c4/`, `detailed-design/`, `api-contract/`, `design-guide/`, `user-manual/`, `service-design/`, `governance/`, durable PEL files: `client-engagement/{CHARTER,OPERATING-AGREEMENT,NOW-NEXT-LATER,raid,decisions}` |
+| **B — Volatile working material** | Records "what we did, when". Append-only. Not reviewed (latest-wins). | Fast (dated) | `impl-plans/`, `task-list/`, `postmortems/`, `reports/`, `cost-estimates/`, volatile PEL files: `client-engagement/{reports,daci,kickoffs,prfaqs,questions}` |
 | **C — Reference and archive** | Frozen prior content / RAW third-party material. Read-only. | None | `archive/_legacy/`, vendor-supplied RAW data |
 
 **Why three layers and not one?** Mixing fast and slow material in the same directories produces two failure modes: (a) durable docs rot because nobody knows whether to update them or write a new dated file, and (b) volatile docs accumulate without ever being summarised into durable ones. Splitting by change-rate makes the cost / review weight visible.
@@ -66,8 +97,8 @@ Making both axes explicit is what allows pentaglyph to host BDD, Scrum, TDD or a
 
 | Layer | Concern | Responsibility (DO) | Out of scope (DON'T) | Primary location |
 |---|---|---|---|---|
-| **⓪ Standards** | Bind external authoritative canons | List + link out (arc42, C4, MADR, Diátaxis, TiSDD, …) | Re-author the canons' philosophy | `STRATEGY.md §2` |
-| **① Artefacts** | Templates + placement taxonomy + lifecycle state machine | Provide concrete document shapes and where they go | Prescribe processes that produce them | `templates/`, `STRATEGY.md §4-§8`, `WORKFLOW.md` |
+| **⓪ Standards** | Bind external authoritative canons | List + link out (arc42, C4, MADR, Diátaxis, TiSDD, plus the 8 PEL primitives — Inception Deck / GitLab Handbook / Atlassian weekly / Basecamp Heartbeat / Amazon 6-pager / Now-Next-Later / DACI / RAID / PR-FAQ) | Re-author the canons' philosophy | `STRATEGY.md §2` + `§2.6` (PEL binder) |
+| **① Artefacts** | Templates + placement taxonomy + lifecycle state machine | Provide concrete document shapes and where they go | Prescribe processes that produce them | `templates/` (0-18), `STRATEGY.md §4-§8`, `WORKFLOW.md`, `client-engagement/` (PEL 6th slot) |
 | **② Process** | Bind external process canons (Scrum, BDD, TDD, Trunk-based, …) into thin operational defaults | One `design-guide/` per canon, 6-section template, link-out only; provide extensibility (a meta-doc for binding *new* canons) | Invent new process standards; prescribe specific tools (Jira / pytest-bdd / GitHub Actions); paraphrase canon definitions | `design-guide/` |
 | **③ Automation** | Reduce manual work via CLI + AI agents + scripts | Operate on artefacts from ①, execute processes from ② | Re-define artefacts or processes inside automation code | `cli/`, `.claude/`, `scripts/docs/` |
 | **④ Governance** | Define who decides / accepts / overrides | RACI, ADR Accept protocol, override justification, contribution guide | Take specific decisions (that is the role of individual ADRs) | `governance/`, `STRATEGY.md §10-§12` |
@@ -81,8 +112,8 @@ Making both axes explicit is what allows pentaglyph to host BDD, Scrum, TDD or a
 
 | Concern \ Change-rate | A — Durable | B — Volatile | C — Frozen |
 |---|---|---|---|
-| **⓪ Standards** | `STRATEGY.md §2` (the five-canon list) | — *(canons don't expire on a date)* | — |
-| **① Artefacts** | `templates/`, `STRATEGY.md`, `WORKFLOW.md`, `AI_INSTRUCTIONS.md`, every directory under `arc42/`, `detailed-design/`, `api-contract/`, `user-manual/`, `service-design/`, `diagrams/c4/` | — | `archive/_legacy/<frozen artefacts>` |
+| **⓪ Standards** | `STRATEGY.md §2` (the five-canon list) + `§2.6` (PEL binder over 8 client-comm primitives) | — *(canons don't expire on a date)* | — |
+| **① Artefacts** | `templates/` (0-18), `STRATEGY.md`, `WORKFLOW.md`, `AI_INSTRUCTIONS.md`, every directory under `arc42/`, `detailed-design/`, `api-contract/`, `user-manual/`, `service-design/`, `diagrams/c4/`, `client-engagement/{CHARTER,OPERATING-AGREEMENT,NOW-NEXT-LATER,raid,decisions}` (PEL durable) | `client-engagement/{reports,daci,kickoffs,prfaqs,questions}` (PEL volatile) | `archive/_legacy/<frozen artefacts>` |
 | **② Process** | `design-guide/version-control.md`, `design-guide/ai-augmented-pr.md`, `design-guide/code-tours.md`, plus forthcoming `design-guide/bdd-workflow.md`, `dev-cycle.md`, `dod-dor.md`, `tdd-workflow.md`, `_binding-a-new-process.md` | `task-list/`, `postmortems/`, `impl-plans/`, `reports/` (process *outputs* over time) | — *(a frozen process is a deprecated process, which is just an ADR superseding the binding)* |
 | **③ Automation** | `cli/README.md`, `.claude/README.md`, `scripts/docs/README.md` and the scripts themselves | — | — |
 | **④ Governance** | `governance/raci.md`, `governance/adr-accept-protocol.md`, `governance/override-justification.md`, `governance/contributing.md` (forthcoming) | `cost-estimates/` (governance outputs over time) | — |

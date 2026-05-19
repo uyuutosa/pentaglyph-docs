@@ -35,6 +35,11 @@ The template set is synthesised from industry references: [arc42](https://arc42.
 | 11  | [DoD Checklist](11_dod-checklist.md)                           | Process — Definition of Done | `design-guide/dod-checklist.md` | "What does this team mean by *done*?" |
 | 12  | [Governance Decision](12_governance-decision.md)               | Process — heavyweight governance-board decision | `governance/` | "Why did the governance board approve / reject this?" |
 | 13  | [Architecture Guidebook](13_architecture-guidebook.md)         | Developer onboarding read-through (long-form Diátaxis explanation) | §1 + §5 + §8 (narrative re-presentation) | "How does the whole codebase fit together, and where does each concept live in the code?" |
+| 14  | [Inception Deck](14_inception-deck.md)                         | PEL engagement charter (10 questions)| `client-engagement/CHARTER.md` | "What is this engagement and what is out of scope?" |
+| 15  | [Weekly Update](15_weekly-update.md)                           | PEL short-form weekly (4-block)      | `client-engagement/reports/<YYMMDD>/weekly.md` | "What happened this week, what's next?" |
+| 16  | [Heartbeat](16_heartbeat.md)                                   | PEL long-form cyclical (narrative)   | `client-engagement/reports/<YYMMDD>/heartbeat.md` | "What did this cycle add up to, what did we learn?" |
+| 17  | [DACI Decision](17_daci-decision.md)                           | PEL in-flight decision workflow      | `client-engagement/daci/` → archives to `client-engagement/decisions/` as MADR | "Who decides, who contributes, what are we deciding?" |
+| 18  | [RAID Entry](18_raid-entry.md)                                 | PEL open-items log row format        | row in `client-engagement/raid.md` | "What risks / assumptions / issues / decisions are open right now?" |
 
 ## How to choose a template
 

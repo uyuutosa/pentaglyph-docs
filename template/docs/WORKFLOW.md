@@ -68,6 +68,20 @@ START: I am about to write a doc.
 │   ├─ Customer / user journey map?   → Template 7 → arc42/03-context-and-scope/journeys/<id>.md
 │   └─ Service blueprint (cross-functional service)? → Template 8 → arc42/03-context-and-scope/blueprints/<id>.md
 │
+├─ Is it client-facing engagement material (PEL — 6th slot)?
+│   ┌─ Engagement charter / kickoff?       → Template 14 → client-engagement/CHARTER.md
+│   ├─ Operating agreement (working rules)?→ (no template — single living file) → client-engagement/OPERATING-AGREEMENT.md
+│   ├─ Forward roadmap?                    → (no template — single living file) → client-engagement/NOW-NEXT-LATER.md
+│   ├─ Weekly status update?               → Template 15 → client-engagement/reports/<YYMMDD>/weekly.md
+│   ├─ Cycle Heartbeat (narrative)?        → Template 16 → client-engagement/reports/<YYMMDD>/heartbeat.md
+│   ├─ Strategic ad-hoc memo (6-pager)?    → Template 16 → client-engagement/reports/narratives/YYYY-MM-DD_<topic>.md
+│   ├─ In-flight decision workflow (DACI)? → Template 17 → client-engagement/daci/YYYY-MM-DD-<slug>.md (archives to client-engagement/decisions/ as MADR on approval)
+│   ├─ Client-visible decision (recorded)? → Template 5  → client-engagement/decisions/YYYY-MM-DD-<slug>.md
+│   ├─ Risk / Assumption / Issue / Decision entry? → Template 18 (row format) → row in client-engagement/raid.md
+│   ├─ Verbose open question?              → (template in README) → client-engagement/questions/Q-NNN-<slug>.md
+│   ├─ New-initiative kickoff memo (PR/FAQ)? → (template 19 planned) → client-engagement/prfaqs/YYYY-MM-DD_<launch>.md
+│   └─ Cycle kickoff narrative?            → (template 21 planned) → client-engagement/kickoffs/YYYY-MM-DD_cycle-<n>.md
+│
 └─ None of the above? → Template 0 (Default) in the closest matching directory
 ```
 
@@ -102,6 +116,13 @@ When you change code, the **same PR** must update the corresponding doc. Use thi
 | Product Backlog Item refinement | `task-list/YYYY-MM-DD_refinement.md` | Template 10 |
 | Definition of Done tightening | `design-guide/dod-checklist.md` | Template 11 |
 | New process canon binding (BDD / Scrum / TDD / Trunk-Based / DORA / …) | `design-guide/<canon>-workflow.md` | Follow [`design-guide/_binding-a-new-process.md`](./design-guide/_binding-a-new-process.md) 6-section template |
+| New engagement (PEL) | `client-engagement/CHARTER.md` + `client-engagement/OPERATING-AGREEMENT.md` | Template 14 + inline |
+| Weekly engagement update | `client-engagement/reports/<YYMMDD>/weekly.md` | Template 15 |
+| Cycle Heartbeat | `client-engagement/reports/<YYMMDD>/heartbeat.md` | Template 16 |
+| Decision in flight with the client | `client-engagement/daci/YYYY-MM-DD-<slug>.md` (archives to `client-engagement/decisions/` on approval) | Template 17 → 5 |
+| Open client question / risk / issue | row in `client-engagement/raid.md` (+ optional `client-engagement/questions/Q-NNN.md` if verbose) | Template 18 (row) |
+| Roadmap update | edit `client-engagement/NOW-NEXT-LATER.md` in place | (no template) |
+| New initiative kickoff (PR/FAQ) | `client-engagement/prfaqs/YYYY-MM-DD_<launch>.md` | Template 19 (planned) |
 
 PRs that change code without the corresponding doc update **must be sent back at review**.
 
@@ -165,8 +186,8 @@ Volatile docs **skip Review** — they are append-only by nature and superseded 
 
 | Layer | Directories | Change rate | Owner sensitivity |
 |---|---|---|---|
-| **A — Durable design** | `arc42/`, `diagrams/c4/`, `detailed-design/`, `design-guide/`, `api-contract/`, `user-manual/` | Slow | High (PR review required) |
-| **B — Volatile working material** | `impl-plans/`, `task-list/`, `postmortems/`, `reports/`, `cost-estimates/` | Fast (dated) | Low (append-only) |
+| **A — Durable design** | `arc42/`, `diagrams/c4/`, `detailed-design/`, `design-guide/`, `api-contract/`, `user-manual/`, `service-design/`, `governance/`, `client-engagement/{CHARTER,OPERATING-AGREEMENT,NOW-NEXT-LATER,raid,decisions}` (PEL) | Slow | High (PR review required) |
+| **B — Volatile working material** | `impl-plans/`, `task-list/`, `postmortems/`, `reports/`, `cost-estimates/`, `client-engagement/{reports,daci,kickoffs,prfaqs,questions}` (PEL) | Fast (dated) | Low (append-only) |
 | **C — Reference & archive** | `archive/_legacy/`, third-party RAW data | Frozen | Read-only |
 
 When in doubt, **Layer A is the default for anything that describes "how the system is built"**, Layer B for "what we did when".
@@ -196,13 +217,14 @@ v1.0 deliverable is **Architecture 100% + Implementation 100% + End-user
 ## 6. Hard rules (never violate)
 
 1. **One canonical location per topic.** If a concept appears in two files, one must be a link to the other.
-2. **Front-matter on all durable docs** (`arc42/`, `detailed-design/`, `design-guide/`, `api-contract/`, `user-manual/`).
-3. **Date prefix on all volatile docs** (`YYYY-MM-DD_<kebab-title>.md`).
-4. **MADR for ADRs.** No homemade ADR formats.
+2. **Front-matter on all durable docs** (`arc42/`, `detailed-design/`, `design-guide/`, `api-contract/`, `user-manual/`, `service-design/`, `governance/`, durable PEL files `client-engagement/{CHARTER,OPERATING-AGREEMENT,NOW-NEXT-LATER,raid,decisions}`).
+3. **Date prefix on all volatile docs** (`YYYY-MM-DD_<kebab-title>.md`); for PEL weekly / heartbeat reports the dated form is `client-engagement/reports/<YYMMDD>/{weekly,heartbeat}.md`.
+4. **MADR for ADRs.** No homemade ADR formats. Client-visible decisions also use MADR, archived from `client-engagement/daci/` (DACI workflow, Template 17) into `client-engagement/decisions/`.
 5. **C4 single source of truth = `diagrams/c4/workspace.dsl`.** Image renders are gitignored.
-6. **English by default.** Other languages are reserved for explicitly client-facing locations declared in `STRATEGY.md`.
+6. **English by default.** Other languages are reserved for explicitly client-facing locations declared in `STRATEGY.md` — including PEL files when the project's `client-engagement/OPERATING-AGREEMENT.md` declares a non-English client language.
 7. **Repo-root-relative links.** Use `docs/<path>` form so links survive reorganization.
-8. **No re-explaining external standards.** Link to <https://arc42.org> / <https://c4model.com> / <https://adr.github.io/madr/> / <https://diataxis.fr> instead of paraphrasing them locally.
+8. **No re-explaining external standards.** Link to <https://arc42.org> / <https://c4model.com> / <https://adr.github.io/madr/> / <https://diataxis.fr> / <https://www.thisisservicedesigndoing.com/methods> / PEL primitive URLs (in `STRATEGY.md` §2.6) instead of paraphrasing them locally.
+9. **`client-engagement/` (PEL) is private-first.** Per `STRATEGY.md` §2.6 confidentiality inversion, every PEL file is confidential unless `client-engagement/OPERATING-AGREEMENT.md` §5 explicitly says otherwise.
 
 ---
 
@@ -219,6 +241,11 @@ v1.0 deliverable is **Architecture 100% + Implementation 100% + End-user
 | User-facing feature lands | Manual section is now stale | Update / add files under `user-manual/{quadrant}/` |
 | Sprint kicks off | Planning meeting | New `task-list/YYYY-MM-DD_sprint-N.md` (volatile) |
 | Quarterly cost review | Finance check-in | New `cost-estimates/YYYY-MM_<title>.md` (volatile) |
+| Engagement kicks off | New client / phase signed | `client-engagement/CHARTER.md` (Template 14) + `OPERATING-AGREEMENT.md` (PEL) |
+| Week ends (engagement active) | Weekly cadence | New `client-engagement/reports/YYMMDD/weekly.md` (Template 15) |
+| Cycle ends (engagement active) | Cycle cadence | New `client-engagement/reports/YYMMDD/heartbeat.md` (Template 16) + open `client-engagement/kickoffs/cycle-N+1.md` for next |
+| Open client question | Surfaces in weekly / Heartbeat | Row in `client-engagement/raid.md` (Template 18) + optional verbose `client-engagement/questions/Q-NNN.md` |
+| Cross-functional decision needed | Client + engineering both have input | New `client-engagement/daci/YYYY-MM-DD-<slug>.md` (Template 17) → archives to `client-engagement/decisions/` as MADR on approval |
 
 ---
 

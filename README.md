@@ -4,17 +4,18 @@
   <img src="./assets/hero.png" alt="pentaglyph-docs — five standards (arc42, C4, MADR, Diátaxis, TiSDD) bound by one AI-first workflow" width="100%" />
 </p>
 
-> A documentation scaffold built on five industry standards — **arc42** (architecture), **C4** (diagrams), **MADR** (decisions), **Diátaxis** (user docs), and **TiSDD** (service design) — with a single explicit workflow and AI-readable instructions per directory.
+> A documentation scaffold built on five industry standards — **arc42** (architecture), **C4** (diagrams), **MADR** (decisions), **Diátaxis** (user docs), and **TiSDD** (service design) — with a single explicit workflow and AI-readable instructions per directory. A sixth slot, the **Project Engagement Layer (PEL)**, composes eight well-known client-communication primitives for consulting / advisory work.
 
-The name **pentaglyph** (Greek `penta` "five" + `glyph` "engraved sign") reflects the five standards bundled into one opinionated kit. Renamed from the original `tetragram` (four standards) when TiSDD was adopted as the fifth peer standard; see `cli/PUBLISH.md` for migration notes.
+The name **pentaglyph** (Greek `penta` "five" + `glyph` "engraved sign") reflects the **five peer standards** bundled into one opinionated kit. The 6th slot is a *binder*, not a peer standard — the client-engagement space has no single canonical framework, so PEL composes eight well-known primitives (Inception Deck / GitLab Handbook / Atlassian weekly / Basecamp Heartbeat / Amazon 6-pager / Now-Next-Later / DACI / RAID / PR-FAQ) under one local home. Renamed from the original `tetragram` (four standards) when TiSDD was adopted as the fifth peer standard; see `cli/PUBLISH.md` for migration notes.
 
-| #  | Standard      | Authoritative source                                  | Local home                          |
-| -- | ------------- | ----------------------------------------------------- | ----------------------------------- |
-| 1  | **arc42**     | <https://arc42.org/overview/>                         | `template/docs/arc42/`              |
-| 2  | **C4 model**  | <https://c4model.com>                                 | `template/docs/diagrams/c4/`        |
-| 3  | **MADR v3.0** | <https://adr.github.io/madr/>                         | `template/docs/arc42/09-decisions/` |
-| 4  | **Diátaxis**  | <https://diataxis.fr>                                 | `template/docs/user-manual/`        |
-| 5  | **TiSDD**     | <https://www.thisisservicedesigndoing.com/methods>    | `template/docs/service-design/`     |
+| #  | Standard / slot                | Authoritative source                                                                | Local home                          |
+| -- | ------------------------------ | ----------------------------------------------------------------------------------- | ----------------------------------- |
+| 1  | **arc42**                      | <https://arc42.org/overview/>                                                       | `template/docs/arc42/`              |
+| 2  | **C4 model**                   | <https://c4model.com>                                                               | `template/docs/diagrams/c4/`        |
+| 3  | **MADR v3.0**                  | <https://adr.github.io/madr/>                                                       | `template/docs/arc42/09-decisions/` |
+| 4  | **Diátaxis**                   | <https://diataxis.fr>                                                               | `template/docs/user-manual/`        |
+| 5  | **TiSDD**                      | <https://www.thisisservicedesigndoing.com/methods>                                  | `template/docs/service-design/`     |
+| 6  | **PEL** (binder, 8 primitives) | per-primitive URLs in [`template/docs/STRATEGY.md`](./template/docs/STRATEGY.md) §2.6 | `template/docs/client-engagement/`  |
 
 External standards are authoritative. This kit only adds:
 
@@ -75,7 +76,9 @@ pentaglyph-docs/
 │   │   ├── reports/              # one-shot research reports
 │   │   ├── cost-estimates/       # cost projections
 │   │   ├── user-manual/          # Diátaxis quadrants
-│   │   └── templates/            # 14 authoring templates (core + UX + process + onboarding)
+│   │   ├── service-design/       # TiSDD per-service designs (persona / journey / blueprint)
+│   │   ├── client-engagement/    # PEL — Project Engagement Layer (6th slot)
+│   │   └── templates/            # 19 authoring templates (0-8 core+UX, 9-13 process/governance, 14-18 PEL)
 │   └── .claude/rules/            # Claude Code auto-load rule
 └── cli/                          # Bun CLI scaffolder
     ├── package.json
@@ -101,15 +104,16 @@ cp -r pentaglyph-docs/template/.claude ./my-project/.claude
 
 The five standards in this kit each answer a different question:
 
-| Standard | Question it answers                                       |
-| -------- | --------------------------------------------------------- |
-| arc42    | *How is the system organised?*                            |
-| C4       | *What does it look like at each zoom level?*              |
-| MADR     | *Why did we choose this over alternatives?*               |
-| Diátaxis | *How do users learn this product?*                        |
-| TiSDD    | *How is the **service** experienced end-to-end?*          |
+| Standard       | Question it answers                                              |
+| -------------- | ---------------------------------------------------------------- |
+| arc42          | *How is the system organised?*                                   |
+| C4             | *What does it look like at each zoom level?*                     |
+| MADR           | *Why did we choose this over alternatives?*                      |
+| Diátaxis       | *How do users learn this product?*                               |
+| TiSDD          | *How is the **service** experienced end-to-end?*                 |
+| PEL (6th slot) | *How does this team communicate with the client over the engagement?* |
 
-Picking just one is incomplete. Picking all five is opinionated but defensible — and that opinion is what this kit packages. The name `pentaglyph` (Greek `penta` "five" + `glyph` "engraved sign") replaces the earlier `tetragram` (four standards) as of v0.1.0, when TiSDD joined as the fifth peer standard.
+Picking just one is incomplete. Picking all five is opinionated but defensible — and that opinion is what this kit packages. The name `pentaglyph` (Greek `penta` "five" + `glyph` "engraved sign") replaces the earlier `tetragram` (four standards) as of v0.1.0, when TiSDD joined as the fifth peer standard. The 6th slot — **PEL (Project Engagement Layer)** — is a *binder* over eight well-known client-communication primitives, not a new peer standard; the kit's name remains `pentaglyph`.
 
 ---
 
