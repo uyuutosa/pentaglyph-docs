@@ -29,7 +29,7 @@ engagement: <client-name>
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | <R-001> | R | <YYYY-MM-DD> | <owner> | <one-line> | High / Med / Low | <next action> | [`daci/...`](./daci/) |
 | <A-001> | A | <YYYY-MM-DD> | <owner> | <one-line> | <sev> | <next action> | — |
-| <I-001> | I | <YYYY-MM-DD> | <owner> | <one-line> | <sev> | <next action> | [`reports/YYMMDD/...`](./reports/) |
+| <I-001> | I | <YYYY-MM-DD> | <owner> | <one-line> | <sev> | <next action> | [`01-artefacts/reports/YYMMDD/...`](./01-artefacts/reports/) |
 | <D-001> | D | <YYYY-MM-DD> | <owner> | <one-line> | — | Recorded | [`decisions/...`](./decisions/) |
 
 ## Closed

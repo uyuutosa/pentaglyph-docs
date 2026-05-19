@@ -21,7 +21,7 @@ For client-engagement work, the PR/FAQ format is the modern de-facto answer to "
 ## When NOT to write a PR/FAQ
 
 - The work is incremental (bug fixes, refactoring, optimisation). Use `weekly.md`.
-- The work is internal-only (no client-visible release). Use `arc42/` design docs.
+- The work is internal-only (no client-visible release). Use `01-artefacts/arc42/` design docs.
 - The work is a decision, not a delivery. Use `daci/` → `decisions/` (MADR).
 
 ## Structure
@@ -31,7 +31,7 @@ A PR/FAQ is two documents in one file:
 1. **PR (Press Release)** — 1 page, written as if the initiative has shipped. Headline, sub-headline, problem statement, solution, quote from leadership, quote from customer, availability, call to action.
 2. **FAQ (Customer + Internal)** — 5-10 pages, anticipating the questions a customer, sponsor, or skeptical reviewer would ask.
 
-Use the template (planned: [`../../templates/14_pr-faq.md`](../../templates/14_pr-faq.md), follow-up release) once available. Until then, follow the structure at <https://workingbackwards.com/resources/working-backwards-pr-faq/>.
+Use the template (planned: [`../../01-artefacts/templates/14_pr-faq.md`](../../01-artefacts/templates/14_pr-faq.md), follow-up release) once available. Until then, follow the structure at <https://workingbackwards.com/resources/working-backwards-pr-faq/>.
 
 ## File naming
 
@@ -47,7 +47,7 @@ After launch, a `Retrospected` PR/FAQ is annotated with what the launch actually
 
 - [`../NOW-NEXT-LATER.md`](../NOW-NEXT-LATER.md) *Later* items often link to draft PR/FAQs
 - [`../decisions/`](../decisions/) records the approval / rejection decision for a PR/FAQ
-- [`../reports/YYMMDD/heartbeat.md`](../reports/) narrates the launch when a PR/FAQ ships
+- [`../01-artefacts/reports/YYMMDD/heartbeat.md`](../01-artefacts/reports/) narrates the launch when a PR/FAQ ships
 
 ## Related
 

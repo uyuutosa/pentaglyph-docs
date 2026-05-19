@@ -74,7 +74,7 @@ When narrative mode is active:
 
 - Use prose, not headers, for short turns (< 200 words)
 - Use a small table only when comparing 3+ options on 2+ axes
-- Code-style file references with markdown links: `[bf-02-commercial-screening.md](docs/arc42/03-context-and-scope/use-cases/bf-02-commercial-screening.md)`
+- Code-style file references with markdown links: `[bf-02-commercial-screening.md](docs/01-artefacts/arc42/03-context-and-scope/use-cases/bf-02-commercial-screening.md)`
 - End with the question, not with a summary
 
 ## Relationship to other pentaglyph artefacts

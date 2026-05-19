@@ -36,15 +36,15 @@ STEP 1: Classify the change
    ├─ Actor / scenario?                  → Use Case (Template 4)
    ├─ Big-picture / cross-cutting?       → Architecture Overview (Template 1)
    ├─ Volatile (dated)?                  → Layer B directories
-   ├─ End-user docs?                     → user-manual/ (Diátaxis quadrant)
-   ├─ Service design (persona / journey / blueprint)? → service-design/ (Templates 6-8)
+   ├─ End-user docs?                     → 01-artefacts/user-manual/ (Diátaxis quadrant)
+   ├─ Service design (persona / journey / blueprint)? → 01-artefacts/service-design/ (Templates 6-8)
    ├─ Sprint / refinement / DoD / governance? → templates 9-13 (process / governance concern)
    └─ Client engagement (PEL — 6th slot)? → client-engagement/ (Templates 14-18)
         ┌─ Engagement charter?              → CHARTER.md (Template 14)
         ├─ Operating rules?                 → OPERATING-AGREEMENT.md (inline, no template)
         ├─ Forward roadmap?                 → NOW-NEXT-LATER.md (inline, no template)
-        ├─ Weekly status?                   → reports/<YYMMDD>/weekly.md (Template 15)
-        ├─ Cycle Heartbeat or strategic memo? → reports/<YYMMDD>/heartbeat.md or reports/narratives/ (Template 16)
+        ├─ Weekly status?                   → 01-artefacts/reports/<YYMMDD>/weekly.md (Template 15)
+        ├─ Cycle Heartbeat or strategic memo? → 01-artefacts/reports/<YYMMDD>/heartbeat.md or 01-artefacts/reports/narratives/ (Template 16)
         ├─ Decision in flight?              → daci/YYYY-MM-DD-<slug>.md (Template 17) → archives to decisions/ as MADR
         ├─ Client-visible decision recorded?→ decisions/YYYY-MM-DD-<slug>.md (Template 5)
         ├─ Open item (risk/assumption/issue/decision)? → row in raid.md (Template 18)
@@ -57,7 +57,7 @@ STEP 2: Find the destination directory
    Never guess. If the table does not name your case, ask the user.
 
 STEP 3: Pick the template
-   Copy the named template from templates/ as the starting point.
+   Copy the named template from 01-artefacts/templates/ as the starting point.
    Do not invent a new front-matter format.
 
 STEP 4: Set the lifecycle state
@@ -79,7 +79,7 @@ STEP 6: Verify the PR contains both code AND doc changes
 
 ## 2.5 Layer-aware navigation (2-axis decision)
 
-When STEP 2 of the decision protocol is ambiguous, fall back to the **two-axis taxonomy** from [`STRATEGY.md §3`](./STRATEGY.md) and the kit's [self-architecture](./arc42/05-building-blocks/pentaglyph-self-architecture.md). Every doc has exactly one cell in this matrix.
+When STEP 2 of the decision protocol is ambiguous, fall back to the **two-axis taxonomy** from [`STRATEGY.md §3`](./STRATEGY.md) and the kit's [self-architecture](./01-artefacts/arc42/05-building-blocks/pentaglyph-self-architecture.md). Every doc has exactly one cell in this matrix.
 
 **Axis 1 — Concern** ("what does this artefact address?"):
 
@@ -110,22 +110,22 @@ When STEP 2 of the decision protocol is ambiguous, fall back to the **two-axis t
 
 | Doc type you are about to write | Concern | Change-rate | Goes to |
 |---|---|---|---|
-| ADR (any new architectural decision) | ① | A | `arc42/09-decisions/NNNN-*.md` |
-| Self-ADR (kit-meta decision) | ① | A | `arc42/09-decisions/NNNN-*.md` with `Type: ... — self-ADR for the kit` |
-| Per-module implementation spec | ① | A | `detailed-design/<module>.md` |
-| PRD | ① | A | `arc42/03-context-and-scope/prds/<feature>.md` |
-| Use case / scenario | ① | A | `arc42/03-context-and-scope/use-cases/<name>.md` |
-| New process binding (e.g. BDD / Scrum / TDD) | ② | A | `design-guide/<canon>-workflow.md` (6-section template; see [ADR-0002](./arc42/09-decisions/0002-bind-canons-only-no-self-authored-standards.md)) |
-| Sprint retro / planning / refinement output | ② | B | `task-list/YYYY-MM-DD_*.md` |
-| Implementation plan (dated) | ② | B | `impl-plans/YYYY-MM-DD_*.md` |
-| Postmortem (Medium+) | ② | B | `postmortems/YYYY-MM-DD_*.md` |
-| Research / evaluation report | ② | B | `reports/YYYY-MM-DD_*.md` |
-| Cost projection (latest-wins) | ④ | B | `cost-estimates/YYYY-MM_*.md` |
-| New AI rule / agent / skill | ③ | A | `.claude/{rules,agents,skills}/<name>.md` (operates on ①+② only; see [ADR-0004](./arc42/09-decisions/0004-layer-separation-contracts.md)) |
-| Governance change (RACI / Accept protocol / contribution guide) | ④ | A | `governance/<topic>.md` (forthcoming) |
-| End-user tutorial / how-to / reference / explanation | ① | A | `user-manual/<diataxis-quadrant>/*.md` |
+| ADR (any new architectural decision) | ① | A | `01-artefacts/arc42/09-decisions/NNNN-*.md` |
+| Self-ADR (kit-meta decision) | ① | A | `01-artefacts/arc42/09-decisions/NNNN-*.md` with `Type: ... — self-ADR for the kit` |
+| Per-module implementation spec | ① | A | `01-artefacts/detailed-design/<module>.md` |
+| PRD | ① | A | `01-artefacts/arc42/03-context-and-scope/prds/<feature>.md` |
+| Use case / scenario | ① | A | `01-artefacts/arc42/03-context-and-scope/use-cases/<name>.md` |
+| New process binding (e.g. BDD / Scrum / TDD) | ② | A | `02-process/<canon>-workflow.md` (6-section template; see [ADR-0002](./01-artefacts/arc42/09-decisions/0002-bind-canons-only-no-self-authored-standards.md)) |
+| Sprint retro / planning / refinement output | ② | B | `01-artefacts/task-list/YYYY-MM-DD_*.md` |
+| Implementation plan (dated) | ② | B | `01-artefacts/impl-plans/YYYY-MM-DD_*.md` |
+| Postmortem (Medium+) | ② | B | `01-artefacts/postmortems/YYYY-MM-DD_*.md` |
+| Research / evaluation report | ② | B | `01-artefacts/reports/YYYY-MM-DD_*.md` |
+| Cost projection (latest-wins) | ④ | B | `01-artefacts/cost-estimates/YYYY-MM_*.md` |
+| New AI rule / agent / skill | ③ | A | `.claude/{rules,agents,skills}/<name>.md` (operates on ①+② only; see [ADR-0004](./01-artefacts/arc42/09-decisions/0004-layer-separation-contracts.md)) |
+| Governance change (RACI / Accept protocol / contribution guide) | ④ | A | `04-governance/<topic>.md` (forthcoming) |
+| End-user tutorial / how-to / reference / explanation | ① | A | `01-artefacts/user-manual/<diataxis-quadrant>/*.md` |
 
-**Layer dependency direction** ([ADR-0004](./arc42/09-decisions/0004-layer-separation-contracts.md)): each layer may cite layers below it but never above. Concretely, a Layer ③ file may reference Layer ⓪/①/② but not Layer ④/⑤. A Layer ① template must not depend on a Layer ② process.
+**Layer dependency direction** ([ADR-0004](./01-artefacts/arc42/09-decisions/0004-layer-separation-contracts.md)): each layer may cite layers below it but never above. Concretely, a Layer ③ file may reference Layer ⓪/①/② but not Layer ④/⑤. A Layer ① template must not depend on a Layer ② process.
 
 ---
 
@@ -135,36 +135,36 @@ The detailed instructions live in each directory's `README.md`. This is the inde
 
 | Directory | What lives here | README.md says |
 |---|---|---|
-| `arc42/01-introduction-and-goals/` | System identity, top-level goals, stakeholders | Use Template 1 |
-| `arc42/02-architecture-constraints/` | Fixed constraints (technical / organisational / regulatory) | One file per constraint family |
-| `arc42/03-context-and-scope/` | System-context diagrams, actor list, use-cases, PRDs | C4 Level 1 + Template 4 + Template 2 |
-| `arc42/04-solution-strategy/` | Top 5 design decisions in summary form | Each line links to its ADR |
-| `arc42/05-building-blocks/` | Static decomposition (containers + components) | Index of `detailed-design/` files |
-| `arc42/06-runtime/` | Sequence diagrams per business scenario | One file per scenario, Template 4 |
-| `arc42/07-deployment/` | Environments, infra topology | One file per environment |
-| `arc42/08-crosscutting/` | Security, observability, error handling, etc. | One file per concern |
-| `arc42/09-decisions/` | ADRs (MADR v3.0) | Template 5; immutable once Accepted |
-| `arc42/10-quality/` | SLOs, KPIs, quality scenarios | Measurable, testable |
-| `arc42/11-risks/` | Risk register, technical debt | Honest enumeration |
-| `arc42/12-glossary/` | Terms, abbreviations | Add on first use |
-| `diagrams/c4/` | `workspace.dsl` (Structurizr DSL) | Single source of truth |
-| `detailed-design/` | Per-module specs (HOW) | Template 3, linked from §5 |
-| `design-guide/` | Conventions (naming, style, team agreements) | Template 0 |
-| `api-contract/` | OpenAPI / MCP-tool schemas | One file per module group |
-| `impl-plans/` | Dated implementation plans | Volatile, append-only |
-| `task-list/` | Sprint task breakdowns | Volatile, append-only |
-| `postmortems/` | Incident retrospectives | Volatile, append-only, Medium+ severity |
-| `reports/` | Research / evaluation reports | Volatile, append-only |
-| `cost-estimates/` | Cost projections | Volatile, latest-wins |
-| `user-manual/tutorials/` | Learning-oriented (Diátaxis) | For newcomers |
-| `user-manual/how-to/` | Problem-oriented (Diátaxis) | For competent users |
-| `user-manual/reference/` | Information-oriented (Diátaxis) | Dry, lookup-able |
-| `user-manual/explanation/` | Understanding-oriented (Diátaxis) | Background reading |
-| `service-design/` | Per-service designs (TiSDD: persona / journey / blueprint) | Templates 6-8; cross-link to arc42 §3 |
+| `01-artefacts/arc42/01-introduction-and-goals/` | System identity, top-level goals, stakeholders | Use Template 1 |
+| `01-artefacts/arc42/02-architecture-constraints/` | Fixed constraints (technical / organisational / regulatory) | One file per constraint family |
+| `01-artefacts/arc42/03-context-and-scope/` | System-context diagrams, actor list, use-cases, PRDs | C4 Level 1 + Template 4 + Template 2 |
+| `01-artefacts/arc42/04-solution-strategy/` | Top 5 design decisions in summary form | Each line links to its ADR |
+| `01-artefacts/arc42/05-building-blocks/` | Static decomposition (containers + components) | Index of `01-artefacts/detailed-design/` files |
+| `01-artefacts/arc42/06-runtime/` | Sequence diagrams per business scenario | One file per scenario, Template 4 |
+| `01-artefacts/arc42/07-deployment/` | Environments, infra topology | One file per environment |
+| `01-artefacts/arc42/08-crosscutting/` | Security, observability, error handling, etc. | One file per concern |
+| `01-artefacts/arc42/09-decisions/` | ADRs (MADR v3.0) | Template 5; immutable once Accepted |
+| `01-artefacts/arc42/10-quality/` | SLOs, KPIs, quality scenarios | Measurable, testable |
+| `01-artefacts/arc42/11-risks/` | Risk register, technical debt | Honest enumeration |
+| `01-artefacts/arc42/12-glossary/` | Terms, abbreviations | Add on first use |
+| `01-artefacts/diagrams/c4/` | `workspace.dsl` (Structurizr DSL) | Single source of truth |
+| `01-artefacts/detailed-design/` | Per-module specs (HOW) | Template 3, linked from §5 |
+| `02-process/` | Conventions (naming, style, team agreements) | Template 0 |
+| `01-artefacts/api-contract/` | OpenAPI / MCP-tool schemas | One file per module group |
+| `01-artefacts/impl-plans/` | Dated implementation plans | Volatile, append-only |
+| `01-artefacts/task-list/` | Sprint task breakdowns | Volatile, append-only |
+| `01-artefacts/postmortems/` | Incident retrospectives | Volatile, append-only, Medium+ severity |
+| `01-artefacts/reports/` | Research / evaluation reports | Volatile, append-only |
+| `01-artefacts/cost-estimates/` | Cost projections | Volatile, latest-wins |
+| `01-artefacts/user-manual/tutorials/` | Learning-oriented (Diátaxis) | For newcomers |
+| `01-artefacts/user-manual/how-to/` | Problem-oriented (Diátaxis) | For competent users |
+| `01-artefacts/user-manual/reference/` | Information-oriented (Diátaxis) | Dry, lookup-able |
+| `01-artefacts/user-manual/explanation/` | Understanding-oriented (Diátaxis) | Background reading |
+| `01-artefacts/service-design/` | Per-service designs (TiSDD: persona / journey / blueprint) | Templates 6-8; cross-link to arc42 §3 |
 | `client-engagement/` | Project Engagement Layer (PEL — 6th slot binder) | Templates 14-18; **internal / client-facing** distinction in `OPERATING-AGREEMENT.md` §5 |
-| `client-engagement/reports/` | PEL weekly + Heartbeat per cycle | Templates 15 (weekly) + 16 (heartbeat); dated `YYMMDD/` folders |
+| `client-engagement/01-artefacts/reports/` | PEL weekly + Heartbeat per cycle | Templates 15 (weekly) + 16 (heartbeat); dated `YYMMDD/` folders |
 | `client-engagement/daci/` | In-flight client-visible decisions (DACI workflow) | Template 17; archives to `decisions/` as MADR on approval |
-| `client-engagement/decisions/` | Client-visible decisions archive (curated MADR subset) | Template 5 (MADR); curated subset of `arc42/09-decisions/` |
+| `client-engagement/decisions/` | Client-visible decisions archive (curated MADR subset) | Template 5 (MADR); curated subset of `01-artefacts/arc42/09-decisions/` |
 | `client-engagement/questions/` | Verbose open client questions (one file per Q-NNN) | Promote to `raid.md` row when triage-able |
 | `client-engagement/prfaqs/` | Amazon working-backwards memos for new initiatives | Template 19 (planned); for cycle-scale launches |
 | `client-engagement/kickoffs/` | Cycle kickoff narratives | Template 21 (planned); pair with Heartbeat at cycle end |
@@ -173,7 +173,7 @@ The detailed instructions live in each directory's `README.md`. This is the inde
 
 ## 4. Things you must never do
 
-1. **Never invent a new template.** The 19 templates in `templates/` cover every case (0–8 core + UX; 9–13 process + governance; 14–18 PEL).
+1. **Never invent a new template.** The 19 templates in `01-artefacts/templates/` cover every case (0–8 core + UX; 9–13 process + governance; 14–18 PEL).
 2. **Never edit an Accepted ADR's body.** Supersede with a new ADR.
 3. **Never duplicate the workflow rules.** If you find yourself restating `WORKFLOW.md` content in another file, link to `WORKFLOW.md` instead.
 4. **Never re-explain arc42 / C4 / MADR / Diátaxis / TiSDD / PEL primitives.** Link to the authoritative URLs.
@@ -221,5 +221,5 @@ This file deliberately does not re-explain why arc42 / C4 / MADR / Diátaxis / T
 For the kit's own self-architecture (the 2-axis taxonomy and layer contracts referenced in §2.5):
 
 - [`STRATEGY.md §3`](./STRATEGY.md) — two-axis taxonomy + per-layer contracts + combined matrix
-- [`arc42/05-building-blocks/pentaglyph-self-architecture.md`](./arc42/05-building-blocks/pentaglyph-self-architecture.md) — C4 L1/L2 view of the kit + override paths
-- [Self-ADRs 0001-0006](./arc42/09-decisions/) — the rationale for the 5-layer model and the bind-only / day-1-criterion / layer-separation / surface-implicit-process / strict-MADR decisions
+- [`01-artefacts/arc42/05-building-blocks/pentaglyph-self-architecture.md`](./01-artefacts/arc42/05-building-blocks/pentaglyph-self-architecture.md) — C4 L1/L2 view of the kit + override paths
+- [Self-ADRs 0001-0006](./01-artefacts/arc42/09-decisions/) — the rationale for the 5-layer model and the bind-only / day-1-criterion / layer-separation / surface-implicit-process / strict-MADR decisions

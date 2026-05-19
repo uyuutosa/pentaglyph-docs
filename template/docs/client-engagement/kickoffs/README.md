@@ -6,7 +6,7 @@ last-reviewed: 2026-05-19
 
 # `kickoffs/` — cycle kickoff narratives
 
-This directory holds **cycle kickoff messages** paired with the cycle Heartbeats in [`../reports/`](../reports/). Pattern adopted from **Basecamp's Kickoffs and Heartbeats** (<https://37signals.com/podcast/kickoffs-and-heartbeats/>): every cycle opens with a forward-looking Kickoff narrative ("what we're going to do in this cycle and why") and closes with a backward-looking Heartbeat narrative ("what we did this cycle, what we learned, what's next").
+This directory holds **cycle kickoff messages** paired with the cycle Heartbeats in [`../01-artefacts/reports/`](../01-artefacts/reports/). Pattern adopted from **Basecamp's Kickoffs and Heartbeats** (<https://37signals.com/podcast/kickoffs-and-heartbeats/>): every cycle opens with a forward-looking Kickoff narrative ("what we're going to do in this cycle and why") and closes with a backward-looking Heartbeat narrative ("what we did this cycle, what we learned, what's next").
 
 ## Why kickoffs exist as a separate slot
 
@@ -40,7 +40,7 @@ Kickoffs are **volatile**, like reports. Never edited after publication. The Hea
 
 ## Cross-references
 
-- [`../reports/YYMMDD/heartbeat.md`](../reports/) — closing narrative for the cycle this Kickoff opens
+- [`../01-artefacts/reports/YYMMDD/heartbeat.md`](../01-artefacts/reports/) — closing narrative for the cycle this Kickoff opens
 - [`../NOW-NEXT-LATER.md`](../NOW-NEXT-LATER.md) — *Now* bucket items become Kickoff commitments
 - [`../raid.md`](../raid.md) — risks flagged in Kickoff §4
 

@@ -49,30 +49,30 @@ SUBSTANTIVE-FILES: 16 / 22
 
 ARTEFACTS:
   PHASE-1:
-    ✓ docs/arc42/01-introduction-and-goals/overview.md: 7 goals, 4 stakeholders, 5 quality goals
-    ✓ docs/arc42/03-context-and-scope/system-context.md: 2 actors, 3 external systems
-    ✓ docs/arc42/03-context-and-scope/prds/auth-prd.md: 4 FRs, 3 NFRs
-    ✓ docs/arc42/03-context-and-scope/use-cases/login.md: 3 ACs
+    ✓ docs/01-artefacts/arc42/01-introduction-and-goals/overview.md: 7 goals, 4 stakeholders, 5 quality goals
+    ✓ docs/01-artefacts/arc42/03-context-and-scope/system-context.md: 2 actors, 3 external systems
+    ✓ docs/01-artefacts/arc42/03-context-and-scope/prds/auth-prd.md: 4 FRs, 3 NFRs
+    ✓ docs/01-artefacts/arc42/03-context-and-scope/use-cases/login.md: 3 ACs
   PHASE-2:
-    ✓ docs/arc42/04-solution-strategy/strategy.md: 6 decisions, all linked
-    ✓ docs/arc42/05-building-blocks/overview.md: 4 containers
-    ✓ docs/diagrams/c4/workspace.dsl: matches building-blocks
-    ✓ docs/arc42/09-decisions/: 5 ADRs (all with Y-statements)
+    ✓ docs/01-artefacts/arc42/04-solution-strategy/strategy.md: 6 decisions, all linked
+    ✓ docs/01-artefacts/arc42/05-building-blocks/overview.md: 4 containers
+    ✓ docs/01-artefacts/diagrams/c4/workspace.dsl: matches building-blocks
+    ✓ docs/01-artefacts/arc42/09-decisions/: 5 ADRs (all with Y-statements)
   PHASE-3:
-    ✓ docs/detailed-design/auth-service.md: 4200 chars, 4.2/4.3/5 filled
-    ✗ docs/arc42/06-runtime/: no scenarios yet
-    ⚠ docs/arc42/08-crosscutting/: 1 file, need ≥ 2
+    ✓ docs/01-artefacts/detailed-design/auth-service.md: 4200 chars, 4.2/4.3/5 filled
+    ✗ docs/01-artefacts/arc42/06-runtime/: no scenarios yet
+    ⚠ docs/01-artefacts/arc42/08-crosscutting/: 1 file, need ≥ 2
   PHASE-4:
-    ✗ docs/arc42/07-deployment/deployment.md: missing
-    ✗ docs/arc42/10-quality/slos.md: missing
-    ✗ docs/arc42/11-risks/risk-register.md: missing
-    ✗ docs/arc42/12-glossary/glossary.md: missing
+    ✗ docs/01-artefacts/arc42/07-deployment/deployment.md: missing
+    ✗ docs/01-artefacts/arc42/10-quality/slos.md: missing
+    ✗ docs/01-artefacts/arc42/11-risks/risk-register.md: missing
+    ✗ docs/01-artefacts/arc42/12-glossary/glossary.md: missing
 
 INCONSISTENCIES:
   (none)
 
 NEXT-GAP: write the primary runtime scenario (login flow)
-NEXT-GAP-PATH: docs/arc42/06-runtime/01-user-login.md
+NEXT-GAP-PATH: docs/01-artefacts/arc42/06-runtime/01-user-login.md
 NEXT-GAP-TEMPLATE: 4
 NEXT-GAP-AGENT: spec-writer (with runtime-only scope)
 NEXT-GAP-MISSING: scenario steps, sequence diagram, references to existing building blocks

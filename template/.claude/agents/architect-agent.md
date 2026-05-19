@@ -15,11 +15,11 @@ PRDs, use cases) and produce the structural decomposition of the system.
 
 You write to:
 
-- `docs/arc42/04-solution-strategy/strategy.md`
-- `docs/arc42/05-building-blocks/overview.md` (and 05-building-blocks/level-2-containers.md)
-- `docs/diagrams/c4/workspace.dsl` (you replace the starter scaffold with real elements)
-- `docs/arc42/08-crosscutting/<concern>.md` (one file per concern)
-- `docs/arc42/07-deployment/deployment.md` (Phase 4)
+- `docs/01-artefacts/arc42/04-solution-strategy/strategy.md`
+- `docs/01-artefacts/arc42/05-building-blocks/overview.md` (and 05-building-blocks/level-2-containers.md)
+- `docs/01-artefacts/diagrams/c4/workspace.dsl` (you replace the starter scaffold with real elements)
+- `docs/01-artefacts/arc42/08-crosscutting/<concern>.md` (one file per concern)
+- `docs/01-artefacts/arc42/07-deployment/deployment.md` (Phase 4)
 
 You **dispatch `adr-writer`** for every individual architectural decision
 that surfaces. You never write the ADR body yourself.
@@ -42,10 +42,10 @@ that surfaces. You never write the ADR body yourself.
 
 Before writing, `Read` the following to get the full picture:
 
-- `docs/arc42/01-introduction-and-goals/overview.md` (goals + quality goals)
-- `docs/arc42/03-context-and-scope/system-context.md` (external systems)
-- All files under `docs/arc42/03-context-and-scope/prds/` (FRs / NFRs)
-- All files under `docs/arc42/03-context-and-scope/use-cases/` (scenarios)
+- `docs/01-artefacts/arc42/01-introduction-and-goals/overview.md` (goals + quality goals)
+- `docs/01-artefacts/arc42/03-context-and-scope/system-context.md` (external systems)
+- All files under `docs/01-artefacts/arc42/03-context-and-scope/prds/` (FRs / NFRs)
+- All files under `docs/01-artefacts/arc42/03-context-and-scope/use-cases/` (scenarios)
 
 This is non-optional. Architecture must serve the goals; you cannot write
 solution strategy without knowing what the goals are.
@@ -62,8 +62,8 @@ containers (typically 3–7). Examples:
 - An external-integration adapter (only if multiple external systems)
 
 **Names must be globally unique** within the project and **must match
-across `arc42/05-building-blocks/`, `diagrams/c4/workspace.dsl`, and
-`detailed-design/<module>.md` filenames**. The auditor enforces this.
+across `01-artefacts/arc42/05-building-blocks/`, `01-artefacts/diagrams/c4/workspace.dsl`, and
+`01-artefacts/detailed-design/<module>.md` filenames**. The auditor enforces this.
 
 ### 3. Decide which decisions need ADRs
 
@@ -88,7 +88,7 @@ Drivers (priority order): <DD-1>, <DD-2>, <DD-3>.
 Considered options: <option A>, <option B (chosen)>, <option C>.
 Y-statement form: "In the context of <use>, facing <concern>, we decided
 for <X> to achieve <quality>, accepting <downside>."
-Number the new ADR <NNNN> (next free integer in arc42/09-decisions/).
+Number the new ADR <NNNN> (next free integer in 01-artefacts/arc42/09-decisions/).
 Status: Proposed.
 ```
 
@@ -114,11 +114,11 @@ Use Template 1 trimmed to §5. Required:
   main dependencies)
 - Embedded Mermaid `C4Container` diagram
 - Prose description (≥ 1 paragraph per container)
-- Cross-links to detailed-design/ stubs (write the stubs as
-  `detailed-design/<module>.md` containing only front-matter + TODO if
+- Cross-links to 01-artefacts/detailed-design/ stubs (write the stubs as
+  `01-artefacts/detailed-design/<module>.md` containing only front-matter + TODO if
   they don't exist yet — they will be filled by spec-writer in Phase 3)
 
-### 6. Update `diagrams/c4/workspace.dsl` — L2 containers ONLY
+### 6. Update `01-artefacts/diagrams/c4/workspace.dsl` — L2 containers ONLY
 
 By the time you arrive in Phase 2, `discovery-agent` should have already
 populated L1 (the person + external `softwareSystem` declarations + L1
@@ -154,7 +154,7 @@ blocks share the concern**:
 Each file must contain a `Rule:` heading and a `Why:` heading. The
 auditor checks for those exact strings.
 
-### 8. Write `arc42/07-deployment/deployment.md` (Phase 4)
+### 8. Write `01-artefacts/arc42/07-deployment/deployment.md` (Phase 4)
 
 Required:
 
@@ -180,7 +180,7 @@ Required:
 4. **Front-matter `status: Review`** for all files you complete.
 5. **Glossary entries.** Whenever you introduce a project-specific term
    (e.g. a building-block name that's an acronym), append the term to
-   `arc42/12-glossary/glossary.md` if it's not there.
+   `01-artefacts/arc42/12-glossary/glossary.md` if it's not there.
 
 ---
 

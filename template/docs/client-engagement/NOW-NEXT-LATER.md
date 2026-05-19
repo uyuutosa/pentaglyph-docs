@@ -11,15 +11,15 @@ engagement: <client-name>
 
 > **Review cadence**: monthly, owned by the engagement lead with client sponsor input. See [`OPERATING-AGREEMENT.md` §1](./OPERATING-AGREEMENT.md).
 
-> **Companion artefacts**: items in *Later* that need exploration become [`prfaqs/`](./prfaqs/) entries. Items in *Now* are tracked in [`reports/YYMMDD/`](./reports/) progress sections. Decisions about which bucket an item belongs in are captured in [`daci/`](./daci/) → [`decisions/`](./decisions/).
+> **Companion artefacts**: items in *Later* that need exploration become [`prfaqs/`](./prfaqs/) entries. Items in *Now* are tracked in [`01-artefacts/reports/YYMMDD/`](./01-artefacts/reports/) progress sections. Decisions about which bucket an item belongs in are captured in [`daci/`](./daci/) → [`decisions/`](./decisions/).
 
 ---
 
 ## Now (this cycle — actually working on it)
 
-> What the team is doing this week / this cycle. Status updates appear in `reports/YYMMDD/`. If something is on this list but not in last week's `weekly.md` progress section, one of the two files is wrong.
+> What the team is doing this week / this cycle. Status updates appear in `01-artefacts/reports/YYMMDD/`. If something is on this list but not in last week's `weekly.md` progress section, one of the two files is wrong.
 
-- **<item>** — <one-line description; link to relevant `daci/` or `reports/` if any>
+- **<item>** — <one-line description; link to relevant `daci/` or `01-artefacts/reports/` if any>
 - **<item>** — <description>
 
 ## Next (next 1-2 cycles — ready to pick up)
@@ -42,7 +42,7 @@ engagement: <client-name>
 
 | Item | Out of | Outcome | Link |
 | --- | --- | --- | --- |
-| <item> | Now | Delivered / Cancelled / Deferred | [`reports/YYMMDD/heartbeat.md`](./reports/) |
+| <item> | Now | Delivered / Cancelled / Deferred | [`01-artefacts/reports/YYMMDD/heartbeat.md`](./01-artefacts/reports/) |
 
 ## Revision history
 

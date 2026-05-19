@@ -18,8 +18,8 @@ confidentiality: private
 
 | Activity | Frequency | Format | Owner |
 | --- | --- | --- | --- |
-| Weekly short-form update | Weekly, `<weekday>` `<time-tz>` | [`reports/YYMMDD/weekly.md`](./reports/) | Engagement lead |
-| Cycle Heartbeat | Every `<N>` weeks | [`reports/YYMMDD/heartbeat.md`](./reports/) | Engagement lead |
+| Weekly short-form update | Weekly, `<weekday>` `<time-tz>` | [`01-artefacts/reports/YYMMDD/weekly.md`](./01-artefacts/reports/) | Engagement lead |
+| Cycle Heartbeat | Every `<N>` weeks | [`01-artefacts/reports/YYMMDD/heartbeat.md`](./01-artefacts/reports/) | Engagement lead |
 | Cycle Kickoff | Start of cycle | [`kickoffs/YYYY-MM-DD_cycle-<n>.md`](./kickoffs/) | Engagement lead |
 | Roadmap review | Monthly | [`NOW-NEXT-LATER.md`](./NOW-NEXT-LATER.md) | Engagement lead + client sponsor |
 | RAID triage | Weekly | [`raid.md`](./raid.md) | Engagement lead |
@@ -59,7 +59,7 @@ Time-box each step. Escalation is not failure; silent stuck-ness is.
 | Material | Confidentiality | Sharing default |
 | --- | --- | --- |
 | Everything in `client-engagement/` | **Confidential** | Repo access only |
-| `reports/YYMMDD/*.md` | Confidential | Shared with client sponsor + named recipients in CHARTER §10 |
+| `01-artefacts/reports/YYMMDD/*.md` | Confidential | Shared with client sponsor + named recipients in CHARTER §10 |
 | `decisions/*.md` | Confidential | Shared with client team |
 | RAW client data referenced in PEL | As per client policy | Never copied into PEL repo |
 | Anonymised case-study material | Subject to written sign-off | Out of scope unless explicitly permitted |

@@ -51,7 +51,7 @@ group: <category, e.g. UX / scope / infra / regulatory>
 
 **Expected decision**: <what we hope the answer looks like>
 
-**Latest mention**: [`../reports/YYMMDD/heartbeat.md`](../reports/)
+**Latest mention**: [`../01-artefacts/reports/YYMMDD/heartbeat.md`](../01-artefacts/reports/)
 
 **Linked**: `raid.md` `I-NNN`, `daci/YYYY-MM-DD-<slug>.md` if any
 ```

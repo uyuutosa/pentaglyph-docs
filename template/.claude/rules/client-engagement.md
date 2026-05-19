@@ -34,22 +34,22 @@ You are about to touch the **Project Engagement Layer (PEL)** — pentaglyph's 6
 ## Hard rules specific to PEL
 
 1. **Private-first.** Every file under `client-engagement/` is confidential unless `OPERATING-AGREEMENT.md` §5 explicitly says otherwise. This inverts GitLab Handbook's public-first default; PEL borrows the *single-source-of-truth* discipline but not the *public default*.
-2. **One canonical voice per artefact.** Weekly updates (`reports/<YYMMDD>/weekly.md`) are mechanical; Heartbeats (`reports/<YYMMDD>/heartbeat.md`) are narrative prose; RAID rows are one-line; PR/FAQs are launch-press-release prose. Do not blur the formats.
+2. **One canonical voice per artefact.** Weekly updates (`01-artefacts/reports/<YYMMDD>/weekly.md`) are mechanical; Heartbeats (`01-artefacts/reports/<YYMMDD>/heartbeat.md`) are narrative prose; RAID rows are one-line; PR/FAQs are launch-press-release prose. Do not blur the formats.
 3. **Promote within the cadence.** Anything decided in Slack / meeting / email that has decision implications must be promoted into PEL within the cadence stated in `OPERATING-AGREEMENT.md` §2. Untracked decisions = decisions that have not happened.
-4. **Decisions archive cleanly.** When a `daci/` entry is approved, archive it to `decisions/` as MADR ([template 5](../../docs/templates/5_adr.md)). Do not delete the DACI file — move it (so git history preserves the deliberation).
+4. **Decisions archive cleanly.** When a `daci/` entry is approved, archive it to `decisions/` as MADR ([template 5](../../docs/01-artefacts/templates/5_adr.md)). Do not delete the DACI file — move it (so git history preserves the deliberation).
 5. **Q → R triage promotion.** Items in `questions/Q-NNN.md` that become sharp enough for one-line triage get a `raid.md` row; the verbose file stays as the narrative home. Cross-link.
 6. **Volatile vs durable.**
    - **Durable** (no date prefix, edited in place, supersede over delete): `CHARTER.md`, `OPERATING-AGREEMENT.md`, `NOW-NEXT-LATER.md`, `raid.md`, `decisions/`
-   - **Volatile** (dated, append-only): `reports/<YYMMDD>/`, `daci/YYYY-MM-DD-<slug>.md` (until archived), `kickoffs/`, `prfaqs/`, `questions/`
+   - **Volatile** (dated, append-only): `01-artefacts/reports/<YYMMDD>/`, `daci/YYYY-MM-DD-<slug>.md` (until archived), `kickoffs/`, `prfaqs/`, `questions/`
 7. **Reports are never edited after publication.** Mistakes are corrected in the *next* report with a one-line "correction" note. The audit trail matters more than the polish.
 
 ## The 5 PEL templates that ship today (14–18)
 
-- [`14_inception-deck.md`](../../docs/templates/14_inception-deck.md) — for `CHARTER.md`
-- [`15_weekly-update.md`](../../docs/templates/15_weekly-update.md) — for `reports/<YYMMDD>/weekly.md`
-- [`16_heartbeat.md`](../../docs/templates/16_heartbeat.md) — for `reports/<YYMMDD>/heartbeat.md` and `reports/narratives/`
-- [`17_daci-decision.md`](../../docs/templates/17_daci-decision.md) — for `daci/`, archives to `decisions/` using `5_adr.md` (MADR)
-- [`18_raid-entry.md`](../../docs/templates/18_raid-entry.md) — row format for `raid.md`
+- [`14_inception-deck.md`](../../docs/01-artefacts/templates/14_inception-deck.md) — for `CHARTER.md`
+- [`15_weekly-update.md`](../../docs/01-artefacts/templates/15_weekly-update.md) — for `01-artefacts/reports/<YYMMDD>/weekly.md`
+- [`16_heartbeat.md`](../../docs/01-artefacts/templates/16_heartbeat.md) — for `01-artefacts/reports/<YYMMDD>/heartbeat.md` and `01-artefacts/reports/narratives/`
+- [`17_daci-decision.md`](../../docs/01-artefacts/templates/17_daci-decision.md) — for `daci/`, archives to `decisions/` using `5_adr.md` (MADR)
+- [`18_raid-entry.md`](../../docs/01-artefacts/templates/18_raid-entry.md) — row format for `raid.md`
 
 Templates 19 (PR/FAQ), 20 (Now/Next/Later), 21 (Kickoff) are planned for a follow-up release. Until shipped, follow the structure documented in the authoritative source URLs above and in each `client-engagement/<sub-dir>/README.md`.
 
@@ -67,6 +67,6 @@ Default sequence:
 
 - Paraphrasing any of the eight bound primitives instead of linking out.
 - Mixing narrative prose into a `weekly.md` (it's mechanical) or bullets-of-bullets into a `heartbeat.md` (it's prose).
-- Editing a published `reports/<YYMMDD>/*.md` after the fact — file a correction in the next report.
+- Editing a published `01-artefacts/reports/<YYMMDD>/*.md` after the fact — file a correction in the next report.
 - Treating any PEL file as shareable without first checking `OPERATING-AGREEMENT.md` §5.
 - Adding a new PEL sub-directory without first updating `client-engagement/README.md` and `STRATEGY.md` §2.6.

@@ -18,7 +18,7 @@ and updates a `views.md` viewer that embeds the SVGs.
 
 ## What it does
 
-1. **Discovery** — walks `docs/diagrams/` (and any other directory the project
+1. **Discovery** — walks `docs/01-artefacts/diagrams/` (and any other directory the project
    designates) and groups files by notation:
    - `*.dsl` → Structurizr DSL (each `views {}` view becomes one SVG)
    - `*.puml`, `*.plantuml` → PlantUML
@@ -59,7 +59,7 @@ and updates a `views.md` viewer that embeds the SVGs.
   CLI directly, run the skill once you settle on a shape
 - Inline Mermaid in narrative Markdown (rule of thumb: free-flowing
   explanation use inline blocks; canonical architecture diagrams use a
-  source file under `docs/diagrams/`)
+  source file under `docs/01-artefacts/diagrams/`)
 
 ## Tooling install (one-time per machine)
 
@@ -181,10 +181,10 @@ tooling) is large.
 A successful run prints one summary line per source plus a final table:
 
 ```
-[discover] docs/diagrams/c4/workspace.dsl  (Structurizr; 2 views)
-[render]   docs/diagrams/c4/exports/L1-SystemContext.svg  ← workspace.dsl
-[render]   docs/diagrams/c4/exports/L2-Container.svg       ← workspace.dsl
-[embed]    docs/diagrams/c4/views.md (refreshed)
+[discover] docs/01-artefacts/diagrams/c4/workspace.dsl  (Structurizr; 2 views)
+[render]   docs/01-artefacts/diagrams/c4/exports/L1-SystemContext.svg  ← workspace.dsl
+[render]   docs/01-artefacts/diagrams/c4/exports/L2-Container.svg       ← workspace.dsl
+[embed]    docs/01-artefacts/diagrams/c4/views.md (refreshed)
 
 | view              | source-hash | svg-hash    | status   |
 | ----------------- | ----------- | ----------- | -------- |

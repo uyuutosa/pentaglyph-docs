@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ADR Status distribution + monthly throughput.
 
-Walks `arc42/09-decisions/*.md` (excluding README.md), parses the Status from each
+Walks `01-artefacts/arc42/09-decisions/*.md` (excluding README.md), parses the Status from each
 ADR's metadata table or YAML front-matter, and reports:
 
 - Status distribution (Proposed / Accepted / Rejected / Superseded by NNNN / Deprecated).
@@ -167,7 +167,7 @@ def emit_markdown(
     if stale:
         lines.append(f"## Stale Proposed ADRs (in Proposed for ≥ {proposed_stale_days} days)")
         lines.append("")
-        lines.append("Per [`governance/adr-accept-protocol.md`](../governance/adr-accept-protocol.md): indefinite Proposed is forbidden. Acceptor should accept, reject, or deprecate within the threshold.")
+        lines.append("Per [`04-governance/adr-accept-protocol.md`](../04-governance/adr-accept-protocol.md): indefinite Proposed is forbidden. Acceptor should accept, reject, or deprecate within the threshold.")
         lines.append("")
         lines.append("| ADR | Title | Date | Path |")
         lines.append("| --- | --- | --- | --- |")

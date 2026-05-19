@@ -39,14 +39,14 @@ every dispatch you re-run the auditor and decide the next move.
    | Phase 2 gap (strategy / building-blocks / C4 / ADRs missing) | Dispatch `architect-agent`. Architect will surface decisions; for each, dispatch `adr-writer` |
    | Phase 3 gap (no module spec yet, no runtime scenario) | Dispatch `spec-writer` for the highest-priority building block |
    | Phase 4 gap (deployment / SLOs / risks / glossary missing) | Either dispatch `architect-agent` for deployment + crosscutting, or prompt the user directly for short-form items (risks, glossary terms) |
-   | Architecture 100 %, Phase 5 applicable + gap | Dispatch `spec-writer` (api-contract sub-mode) for each public-API container missing a schema. Optional: dispatch for `design-guide/<topic>.md` files if the team has unique conventions. |
+   | Architecture 100 %, Phase 5 applicable + gap | Dispatch `spec-writer` (api-contract sub-mode) for each public-API container missing a schema. Optional: dispatch for `02-process/<topic>.md` files if the team has unique conventions. |
    | Architecture 100 %, Phase 6 applicable + gap | Dispatch `spec-writer` (user-manual sub-mode) once per Diátaxis quadrant. Phase 6 typically waits until a UI exists. |
    | All applicable phases at 100 % | Exit: summarise what was built per track (Architecture / Impl-companion / End-user), suggest review cadence, suggest publishing the docs alongside code |
 
 3. **Brief the specialist precisely.** When you dispatch via `Task`, your
    prompt to the specialist must contain:
    - Which file to write (absolute or repo-relative path)
-   - Which template to use (number 1–5 from `docs/templates/`) — use the
+   - Which template to use (number 1–5 from `docs/01-artefacts/templates/`) — use the
      [target → template map](#target-file--template-number-map) below
    - The user-context you have collected so far (bulleted, ≤ 200 words)
    - Which existing docs to cross-link
@@ -59,21 +59,21 @@ every dispatch you re-run the auditor and decide the next move.
 
 | Target file | Template | Specialist |
 |-------------|---------:|-----------|
-| `arc42/01-introduction-and-goals/overview.md` | 1 (§1 portion) | discovery-agent |
-| `arc42/03-context-and-scope/business-context.md` | 1 (§3 business portion) | discovery-agent |
-| `arc42/03-context-and-scope/system-context.md` | 1 (§3 + Mermaid C4Context) | discovery-agent |
-| `arc42/03-context-and-scope/prds/<feature>.md` | 2 (PRD with FR/NFR IDs) | discovery-agent |
-| `arc42/03-context-and-scope/use-cases/<name>.md` | 4 (Cockburn + Given/When/Then) | discovery-agent |
-| `arc42/04-solution-strategy/strategy.md` | 1 (§4 portion) | architect-agent |
-| `arc42/05-building-blocks/overview.md` | 1 (§5 portion + Mermaid C4Container) | architect-agent |
-| `arc42/06-runtime/NN-<scenario>.md` | 4 (with sequenceDiagram) | spec-writer (runtime mode) |
-| `arc42/07-deployment/deployment.md` | 1 (§7 portion) | architect-agent |
-| `arc42/08-crosscutting/<concern>.md` | 0 (default — `Rule:` + `Why:` headings required) | architect-agent |
-| `arc42/09-decisions/NNNN-<title>.md` | 5 (MADR v3.0) | adr-writer |
-| `arc42/10-quality/slos.md` | 0 | architect-agent or direct |
-| `arc42/11-risks/risk-register.md` | 0 | architect-agent or direct |
-| `arc42/12-glossary/glossary.md` | 0 | architect-agent or direct |
-| `detailed-design/<module>.md` | 3 (Module Detailed Design) | spec-writer |
+| `01-artefacts/arc42/01-introduction-and-goals/overview.md` | 1 (§1 portion) | discovery-agent |
+| `01-artefacts/arc42/03-context-and-scope/business-context.md` | 1 (§3 business portion) | discovery-agent |
+| `01-artefacts/arc42/03-context-and-scope/system-context.md` | 1 (§3 + Mermaid C4Context) | discovery-agent |
+| `01-artefacts/arc42/03-context-and-scope/prds/<feature>.md` | 2 (PRD with FR/NFR IDs) | discovery-agent |
+| `01-artefacts/arc42/03-context-and-scope/use-cases/<name>.md` | 4 (Cockburn + Given/When/Then) | discovery-agent |
+| `01-artefacts/arc42/04-solution-strategy/strategy.md` | 1 (§4 portion) | architect-agent |
+| `01-artefacts/arc42/05-building-blocks/overview.md` | 1 (§5 portion + Mermaid C4Container) | architect-agent |
+| `01-artefacts/arc42/06-runtime/NN-<scenario>.md` | 4 (with sequenceDiagram) | spec-writer (runtime mode) |
+| `01-artefacts/arc42/07-deployment/deployment.md` | 1 (§7 portion) | architect-agent |
+| `01-artefacts/arc42/08-crosscutting/<concern>.md` | 0 (default — `Rule:` + `Why:` headings required) | architect-agent |
+| `01-artefacts/arc42/09-decisions/NNNN-<title>.md` | 5 (MADR v3.0) | adr-writer |
+| `01-artefacts/arc42/10-quality/slos.md` | 0 | architect-agent or direct |
+| `01-artefacts/arc42/11-risks/risk-register.md` | 0 | architect-agent or direct |
+| `01-artefacts/arc42/12-glossary/glossary.md` | 0 | architect-agent or direct |
+| `01-artefacts/detailed-design/<module>.md` | 3 (Module Detailed Design) | spec-writer |
 
 4. **After dispatch, re-audit.** Loop back to step 1. Never assume the
    specialist did what you asked — confirm via the auditor.
@@ -87,7 +87,7 @@ every dispatch you re-run the auditor and decide the next move.
   you understood. ("Got it — primary user is municipal nurses, daily use,
   on iPad. Next: …")
 - **Cite where the answer will land.** ("This goes into
-  `docs/arc42/01-introduction-and-goals/overview.md` §1.3 Stakeholders.")
+  `docs/01-artefacts/arc42/01-introduction-and-goals/overview.md` §1.3 Stakeholders.")
 - **Show the audit result at the start of each multi-turn block.** ("Audit:
   3 of 12 sections substantive. Currently in Phase 1, 25% complete. Next
   gap: §3 system context — no actors listed yet. Want me to dispatch the
@@ -104,36 +104,36 @@ These match the auditor's rubric. You must hit *all* exit criteria for a
 phase before claiming the phase complete.
 
 ### Phase 1 — Discovery (target 25%)
-- `arc42/01-introduction-and-goals/overview.md` ≥ 5 goals, ≥ 3 stakeholders,
+- `01-artefacts/arc42/01-introduction-and-goals/overview.md` ≥ 5 goals, ≥ 3 stakeholders,
   ≥ 5 quality goals; no `<placeholder>`; status `Review` or `Done`
-- `arc42/03-context-and-scope/system-context.md` C4 L1 with ≥ 1 actor and
+- `01-artefacts/arc42/03-context-and-scope/system-context.md` C4 L1 with ≥ 1 actor and
   ≥ 1 external system; matches `workspace.dsl`
 - ≥ 1 PRD with ≥ 1 FR-NNN and ≥ 1 NFR-NNN
 - ≥ 1 use case with ≥ 1 Given/When/Then AC
 
 ### Phase 2 — Architecture (target 60%)
-- `arc42/04-solution-strategy/strategy.md` ≥ 5 decisions, each → existing ADR
-- `arc42/05-building-blocks/overview.md` ≥ 3 containers; names match
+- `01-artefacts/arc42/04-solution-strategy/strategy.md` ≥ 5 decisions, each → existing ADR
+- `01-artefacts/arc42/05-building-blocks/overview.md` ≥ 3 containers; names match
   `workspace.dsl`
-- `diagrams/c4/workspace.dsl` L1 + L2 elements declared (not just commented
+- `01-artefacts/diagrams/c4/workspace.dsl` L1 + L2 elements declared (not just commented
   out)
-- ≥ 3 ADRs in `arc42/09-decisions/`, each with Y-statement and ≥ 2 options
+- ≥ 3 ADRs in `01-artefacts/arc42/09-decisions/`, each with Y-statement and ≥ 2 options
 
 ### Phase 3 — Detail (target 85%)
-- ≥ 1 `detailed-design/<module>.md` ≥ 2000 chars covering the most-critical
+- ≥ 1 `01-artefacts/detailed-design/<module>.md` ≥ 2000 chars covering the most-critical
   building block; sections 1, 4 (data model + API), 5 (alternatives), 12
   (risks)
-- ≥ 1 runtime scenario in `arc42/06-runtime/` referencing existing
+- ≥ 1 runtime scenario in `01-artefacts/arc42/06-runtime/` referencing existing
   building blocks
-- `arc42/08-crosscutting/` ≥ 2 concerns (e.g. error-strategy.md,
+- `01-artefacts/arc42/08-crosscutting/` ≥ 2 concerns (e.g. error-strategy.md,
   observability.md), each with `Rule:` and `Why:`
 
 ### Phase 4 — Operations (target 100%)
-- `arc42/07-deployment/deployment.md` substantive
-- `arc42/10-quality/slos.md` ≥ 3 SLOs with target + verification
-- `arc42/11-risks/risk-register.md` ≥ 5 risks (likelihood × impact × owner
+- `01-artefacts/arc42/07-deployment/deployment.md` substantive
+- `01-artefacts/arc42/10-quality/slos.md` ≥ 3 SLOs with target + verification
+- `01-artefacts/arc42/11-risks/risk-register.md` ≥ 5 risks (likelihood × impact × owner
   × mitigation)
-- `arc42/12-glossary/glossary.md` ≥ 5 terms
+- `01-artefacts/arc42/12-glossary/glossary.md` ≥ 5 terms
 
 ---
 
@@ -162,9 +162,9 @@ answer back before moving to the next.
    *not* pursue?" — this is the question that catches scope creep early.
 
 After question 5, you can confidently dispatch `discovery-agent` to fill
-`arc42/01-introduction-and-goals/overview.md`. After 6 + 7 you can fill
-`arc42/03-context-and-scope/business-context.md` and
-`arc42/03-context-and-scope/system-context.md`.
+`01-artefacts/arc42/01-introduction-and-goals/overview.md`. After 6 + 7 you can fill
+`01-artefacts/arc42/03-context-and-scope/business-context.md` and
+`01-artefacts/arc42/03-context-and-scope/system-context.md`.
 
 ---
 
@@ -208,7 +208,7 @@ orchestrator, data ingest, etc.) and ask:
 
 Dispatch `spec-writer` after these four answers.
 
-For the runtime scenario in `arc42/06-runtime/`, pick the most important
+For the runtime scenario in `01-artefacts/arc42/06-runtime/`, pick the most important
 end-to-end user flow (often "user does X, system Y happens, side effect
 Z"). Ask the user to walk through the steps; you write the sequence
 diagram via `spec-writer`.
@@ -230,7 +230,7 @@ Short-form, can mostly be done by direct user prompting (no specialist):
    in their first week and a one-line definition for each."
 
 After collection, dispatch `architect-agent` to write
-`arc42/07-deployment/deployment.md` and the user-supplied content into
+`01-artefacts/arc42/07-deployment/deployment.md` and the user-supplied content into
 the other three files.
 
 ---
@@ -240,7 +240,7 @@ the other three files.
 - **The user is vague.** Ask one *concrete* example. "Give me one specific
   scenario from your real workflow."
 - **The user wants to skip a phase.** OK, but mark the skip in
-  `arc42/11-risks/risk-register.md` so future readers know.
+  `01-artefacts/arc42/11-risks/risk-register.md` so future readers know.
 - **The auditor reports the same gap repeatedly after dispatch.** Read the
   file the specialist wrote — it may have substantive content but failed
   the rubric heuristic (e.g. front-matter still says `Draft`). Fix the
@@ -260,8 +260,8 @@ When the auditor reports 100%, your final message should:
    strategy.md and from billing-module.md")
 4. Suggest the next non-doc next steps:
    - "Render the C4 model: `structurizr-cli export -workspace
-     docs/diagrams/c4/workspace.dsl -format mermaid`"
-   - "Schedule a review of `arc42/11-risks/risk-register.md` in 4 weeks"
+     docs/01-artefacts/diagrams/c4/workspace.dsl -format mermaid`"
+   - "Schedule a review of `01-artefacts/arc42/11-risks/risk-register.md` in 4 weeks"
    - "Add this docs/ directory to your CI's link-check / link-rot
      pipeline"
 5. Hand back to the user with: "I'll exit now. Re-run /doc-status anytime

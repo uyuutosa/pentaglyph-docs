@@ -4,15 +4,15 @@ owner: <placeholder>
 last-reviewed: 2026-05-19
 ---
 
-# `reports/` — weekly + cyclical engagement reports
+# `01-artefacts/reports/` — weekly + cyclical engagement reports
 
 This directory holds the dated, append-only progress reports for the engagement. Two flavours coexist:
 
 | File | Format | Cadence | Template |
 | --- | --- | --- | --- |
-| `YYMMDD/weekly.md` | Atlassian "Priorities → Progress → Problems → Next" | Weekly | [`../../templates/15_weekly-update.md`](../../templates/15_weekly-update.md) |
-| `YYMMDD/heartbeat.md` | Basecamp Heartbeat + Amazon 6-pager prose discipline | Every cycle (typically 4-6 weeks) | [`../../templates/16_heartbeat.md`](../../templates/16_heartbeat.md) |
-| `narratives/YYYY-MM-DD_<topic>.md` | Amazon 6-pager (strategic memo) | Ad hoc | [`../../templates/16_heartbeat.md`](../../templates/16_heartbeat.md) (extended) |
+| `YYMMDD/weekly.md` | Atlassian "Priorities → Progress → Problems → Next" | Weekly | [`../../01-artefacts/templates/15_weekly-update.md`](../../01-artefacts/templates/15_weekly-update.md) |
+| `YYMMDD/heartbeat.md` | Basecamp Heartbeat + Amazon 6-pager prose discipline | Every cycle (typically 4-6 weeks) | [`../../01-artefacts/templates/16_heartbeat.md`](../../01-artefacts/templates/16_heartbeat.md) |
+| `narratives/YYYY-MM-DD_<topic>.md` | Amazon 6-pager (strategic memo) | Ad hoc | [`../../01-artefacts/templates/16_heartbeat.md`](../../01-artefacts/templates/16_heartbeat.md) (extended) |
 
 ## Why both weekly and Heartbeat
 
@@ -24,7 +24,7 @@ Each `YYMMDD/` folder typically contains a `weekly.md`. Add a `heartbeat.md` at 
 ## Directory layout
 
 ```
-reports/
+01-artefacts/reports/
 ├── README.md                          # this file
 ├── YYMMDD/                            # one folder per report date
 │   ├── weekly.md                      # Atlassian 4-block

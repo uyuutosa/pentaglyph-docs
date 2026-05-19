@@ -24,20 +24,20 @@ and don't need the orchestrator's full audit + interview loop.
 
 | `<area>` | Dispatches | Writes to |
 |----------|-----------|-----------|
-| `intro` | `discovery-agent` | `docs/arc42/01-introduction-and-goals/overview.md` |
-| `context` | `discovery-agent` | `docs/arc42/03-context-and-scope/{business,system}-context.md` |
-| `prd:<feature>` | `discovery-agent` | `docs/arc42/03-context-and-scope/prds/<feature>.md` |
-| `usecase:<name>` | `discovery-agent` | `docs/arc42/03-context-and-scope/use-cases/<name>.md` |
-| `strategy` | `architect-agent` | `docs/arc42/04-solution-strategy/strategy.md` |
-| `building-blocks` | `architect-agent` | `docs/arc42/05-building-blocks/overview.md` + `docs/diagrams/c4/workspace.dsl` |
-| `adr:<title-kebab>` | `adr-writer` | `docs/arc42/09-decisions/NNNN-<title>.md` |
-| `module:<name>` | `spec-writer` | `docs/detailed-design/<name>.md` |
-| `runtime:<scenario>` | `spec-writer` | `docs/arc42/06-runtime/NN-<scenario>.md` |
-| `crosscutting:<concern>` | `architect-agent` | `docs/arc42/08-crosscutting/<concern>.md` |
-| `deployment` | `architect-agent` | `docs/arc42/07-deployment/deployment.md` |
-| `slos` | `architect-agent` | `docs/arc42/10-quality/slos.md` |
-| `risks` | `architect-agent` | `docs/arc42/11-risks/risk-register.md` |
-| `glossary` | `architect-agent` | `docs/arc42/12-glossary/glossary.md` |
+| `intro` | `discovery-agent` | `docs/01-artefacts/arc42/01-introduction-and-goals/overview.md` |
+| `context` | `discovery-agent` | `docs/01-artefacts/arc42/03-context-and-scope/{business,system}-context.md` |
+| `prd:<feature>` | `discovery-agent` | `docs/01-artefacts/arc42/03-context-and-scope/prds/<feature>.md` |
+| `usecase:<name>` | `discovery-agent` | `docs/01-artefacts/arc42/03-context-and-scope/use-cases/<name>.md` |
+| `strategy` | `architect-agent` | `docs/01-artefacts/arc42/04-solution-strategy/strategy.md` |
+| `building-blocks` | `architect-agent` | `docs/01-artefacts/arc42/05-building-blocks/overview.md` + `docs/01-artefacts/diagrams/c4/workspace.dsl` |
+| `adr:<title-kebab>` | `adr-writer` | `docs/01-artefacts/arc42/09-decisions/NNNN-<title>.md` |
+| `module:<name>` | `spec-writer` | `docs/01-artefacts/detailed-design/<name>.md` |
+| `runtime:<scenario>` | `spec-writer` | `docs/01-artefacts/arc42/06-runtime/NN-<scenario>.md` |
+| `crosscutting:<concern>` | `architect-agent` | `docs/01-artefacts/arc42/08-crosscutting/<concern>.md` |
+| `deployment` | `architect-agent` | `docs/01-artefacts/arc42/07-deployment/deployment.md` |
+| `slos` | `architect-agent` | `docs/01-artefacts/arc42/10-quality/slos.md` |
+| `risks` | `architect-agent` | `docs/01-artefacts/arc42/11-risks/risk-register.md` |
+| `glossary` | `architect-agent` | `docs/01-artefacts/arc42/12-glossary/glossary.md` |
 
 ## When to use
 
@@ -73,20 +73,20 @@ and don't need the orchestrator's full audit + interview loop.
 /doc-fill prd:authentication
   → discovery-agent asks: "What is the user story for auth, in one sentence?
     What 3 functional requirements are MVP? What is the availability NFR?"
-  → writes docs/arc42/03-context-and-scope/prds/authentication.md
+  → writes docs/01-artefacts/arc42/03-context-and-scope/prds/authentication.md
   → suggests: "/doc-status to verify; or /doc-fill usecase:login next"
 
 /doc-fill adr:choose-event-broker
   → adr-writer asks: "What are the 3–5 drivers? What 2–3 options were
     considered? Which won and why? Y-statement?"
-  → writes docs/arc42/09-decisions/0007-choose-event-broker.md
+  → writes docs/01-artefacts/arc42/09-decisions/0007-choose-event-broker.md
   → suggests: "/doc-status to verify; remember to update strategy.md"
 
 /doc-fill module:notification-service
   → spec-writer asks: "What does this module expose (API methods)?
     What data does it own? What are its 2 worst failure modes? What's
     one rejected alternative design?"
-  → writes docs/detailed-design/notification-service.md
+  → writes docs/01-artefacts/detailed-design/notification-service.md
   → suggests: "/doc-fill runtime:notification-delivery if you want a
     sequence diagram for the main flow"
 ```

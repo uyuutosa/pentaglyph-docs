@@ -11,7 +11,7 @@ charter-period: <YYYY-MM-DD>–<YYYY-MM-DD>
 
 > Authored using the **Agile Inception Deck** (Jonathan Rasmusson, *The Agile Samurai*, Pragmatic Bookshelf 2010 — <https://agilewarrior.wordpress.com/2010/11/06/the-agile-inception-deck/>). Ten questions every team should answer with stakeholders before starting an engagement. Re-validate at every cycle boundary.
 
-> **How to fill this file**: copy [`../templates/14_inception-deck.md`](../templates/14_inception-deck.md) over this placeholder and replace `<...>` markers with engagement specifics. Aim for one focused paragraph per question — not bullet lists, not slide-style fragments. The forcing function is to be able to discuss each answer in a stakeholder meeting without losing the room.
+> **How to fill this file**: copy [`../01-artefacts/templates/14_inception-deck.md`](../01-artefacts/templates/14_inception-deck.md) over this placeholder and replace `<...>` markers with engagement specifics. Aim for one focused paragraph per question — not bullet lists, not slide-style fragments. The forcing function is to be able to discuss each answer in a stakeholder meeting without losing the room.
 
 ---
 
@@ -37,7 +37,7 @@ charter-period: <YYYY-MM-DD>–<YYYY-MM-DD>
 
 ## 6. Show the solution
 
-<!-- 1-2 architecture sketches or wireframes. C4 L1 from ../diagrams/c4/ is often the right fit. -->
+<!-- 1-2 architecture sketches or wireframes. C4 L1 from ../01-artefacts/diagrams/c4/ is often the right fit. -->
 
 ## 7. What keeps us up at night
 
