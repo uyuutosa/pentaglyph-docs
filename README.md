@@ -26,6 +26,110 @@ External standards are authoritative. This kit only adds:
 
 ---
 
+## How pentaglyph is layered — the two-axis taxonomy
+
+> **Read this section before touching anything in `template/docs/`. AI agents in particular: this is the structure you will be evaluated against.**
+
+pentaglyph organises every file along **two orthogonal axes**, defined authoritatively in [`template/docs/STRATEGY.md §3`](./template/docs/STRATEGY.md#3-two-axis-taxonomy-change-rate--concern). Reading only one axis (e.g. just looking at [`assets/layers.png`](./assets/layers.png) which shows concern alone) is the most common AI-agent failure mode and produces miscategorised files.
+
+<p align="center">
+  <img src="./assets/layers-matrix.png" alt="pentaglyph two-axis taxonomy — change-rate (A/B/C) × concern (⓪/①/②/③/④/⑤). Every artefact lives in exactly one cell." width="100%" />
+</p>
+
+> If the image above is missing, regenerate it via `paperbanana generate -i assets/layers-matrix.txt -c "pentaglyph two-axis taxonomy" -o assets/layers-matrix.png` (requires `GOOGLE_API_KEY` or `PAPERBANANA_API_KEY_NAME`). The methodology spec at [`assets/layers-matrix.txt`](./assets/layers-matrix.txt) is the canonical source for the figure.
+
+### Axis 1 — change-rate (A / B / C)
+
+How often the artefact changes. Determines review weight and lifecycle state machine.
+
+| Layer | Purpose | Change rate | Lifecycle |
+|---|---|---|---|
+| **A — Durable design** | Records "how the system is built". Code-coupled. Reviewed before merge. | Slow | `Draft → Review → Done → Superseded` |
+| **B — Volatile working material** | Records "what we did, when". Append-only. Not reviewed (latest-wins). | Fast (dated) | `Active → Superseded by next dated file` |
+| **C — Reference and archive** | Frozen prior content / RAW third-party material. Read-only. | None | (immutable) |
+
+### Axis 2 — concern (⓪ / ① / ② / ③ / ④ / ⑤)
+
+What concern the artefact addresses. Determines responsibility, DO/DON'T contract, and primary location. **Dependency direction is bottom-up**: each lower concern is the substrate for the upper.
+
+| Layer | Concern | Responsibility (DO) | Out of scope (DON'T) |
+|---|---|---|---|
+| **⓪ Standards** | Bind external authoritative canons | List + link out (arc42, C4, MADR, Diátaxis, TiSDD + PEL primitives) | Re-author the canons' philosophy |
+| **① Artefacts** | Templates + placement taxonomy + lifecycle state machine | Provide concrete document shapes and where they go | Prescribe processes that produce them |
+| **② Process** | Bind external process canons (Scrum, BDD, TDD, Trunk-based, …) into thin operational defaults | One `02-process/` per canon, 6-section template, link-out only | Invent new process standards; paraphrase canon definitions |
+| **③ Automation** | Reduce manual work via CLI + AI agents + scripts | Operate on artefacts from ①, execute processes from ② | Re-define artefacts or processes inside automation code |
+| **④ Governance** | Define who decides / accepts / overrides | RACI, ADR Accept protocol, override justification | Take specific decisions (those are ADRs in ⓪/①) |
+| **⑤ Measurement** *(optional)* | Quantify the health of ⓪–④ | Doc coverage, ADR throughput, freshness, doc-rot detection | Prescribe how to improve metrics (that is ② Process's role) |
+
+### Combined matrix — where things actually live
+
+Every artefact in the kit lives in exactly one cell of this matrix. **Empty cells are intentionally empty** — placing content there indicates a concern misclassification.
+
+```
+                    ┌────────────────────────────────────┬────────────────────────────────────┬──────────────────────────────────┐
+                    │ A — Durable design                 │ B — Volatile working material      │ C — Reference and archive        │
+                    │ slow · reviewed · code-coupled     │ dated · append-only · latest-wins  │ frozen · read-only               │
+┌───────────────────┼────────────────────────────────────┼────────────────────────────────────┼──────────────────────────────────┤
+│ ⓪ Standards      │ STRATEGY.md §2 (no directory)      │ —                                  │ —                                │
+├───────────────────┼────────────────────────────────────┼────────────────────────────────────┼──────────────────────────────────┤
+│ ① Artefacts      │ 01-artefacts/templates/            │ client-engagement/                 │ archive/_legacy/                 │
+│                   │ 01-artefacts/arc42/                │ {reports,daci,kickoffs,            │                                  │
+│                   │ 01-artefacts/detailed-design/      │  prfaqs,questions}/ (PEL volatile) │                                  │
+│                   │ 01-artefacts/api-contract/         │                                    │                                  │
+│                   │ 01-artefacts/user-manual/          │                                    │                                  │
+│                   │ 01-artefacts/service-design/       │                                    │                                  │
+│                   │ 01-artefacts/diagrams/c4/          │                                    │                                  │
+├───────────────────┼────────────────────────────────────┼────────────────────────────────────┼──────────────────────────────────┤
+│ ② Process        │ 02-process/version-control.md      │ 01-artefacts/impl-plans/           │ —                                │
+│                   │ 02-process/dev-cycle.md            │ 01-artefacts/task-list/            │ (frozen process = deprecated;    │
+│                   │ 02-process/dod-dor.md              │ 01-artefacts/postmortems/          │  express via superseding ADR)    │
+│                   │ 02-process/tdd-workflow.md         │ 01-artefacts/reports/              │                                  │
+│                   │ 02-process/bdd-workflow.md         │                                    │                                  │
+│                   │ 02-process/_binding-a-new-process.md │                                  │                                  │
+├───────────────────┼────────────────────────────────────┼────────────────────────────────────┼──────────────────────────────────┤
+│ ③ Automation     │ cli/                               │ —                                  │ —                                │
+│                   │ .claude/                           │                                    │                                  │
+│                   │ scripts/docs/                      │                                    │                                  │
+├───────────────────┼────────────────────────────────────┼────────────────────────────────────┼──────────────────────────────────┤
+│ ④ Governance     │ 04-governance/raci.md              │ 01-artefacts/cost-estimates/       │ —                                │
+│                   │ 04-governance/adr-accept-protocol.md │                                  │                                  │
+│                   │ 04-governance/override-justification.md │                              │                                  │
+│                   │ 04-governance/contributing.md      │                                    │                                  │
+├───────────────────┼────────────────────────────────────┼────────────────────────────────────┼──────────────────────────────────┤
+│ ⑤ Measurement    │ 05-measurement/README.md           │ 05-measurement/snapshots/          │ —                                │
+│   (optional)      │ 05-measurement/baseline.md         │ YYYY-MM-DD_*.md                    │                                  │
+└───────────────────┴────────────────────────────────────┴────────────────────────────────────┴──────────────────────────────────┘
+                                       Place by concern first (⓪–⑤). Then pick change-rate (A/B/C).
+                                          Empty cells signal a misclassification.
+```
+
+### Placement procedure (use this exactly, in order)
+
+1. **Pick concern first** (⓪–⑤). Ask yourself: *"which concern would re-author this content if it disappeared?"*
+2. **Pick change-rate second** (A/B/C). Ask yourself: *"would I keep editing this file indefinitely, or write a new dated file next month?"*
+3. **Locate the matching cell** in the matrix above and place the file at one of the listed paths.
+4. **If the cell is intentionally empty**, you are in the wrong concern. Back to step 1.
+
+### Worked example — binding an emerging practice (e.g. AI harness engineering)
+
+Suppose you want to adopt practices from the 2026 "Harness Engineering" essay (PostToolUse hooks, AGENTS.md sizing rules, ADR-linter coupling, MVH rollout). The source is not yet a canon — it's a vendor / community aggregate — so pentaglyph upstream cannot bind it as a default (per [ADR-0002 bind-canons-only](./template/docs/01-artefacts/arc42/09-decisions/0002-bind-canons-only-no-self-authored-standards.md) and the day-1 ∧ switching-cost ∧ external-canon ∧ domain-neutrality criterion in [ADR-0003](./template/docs/01-artefacts/arc42/09-decisions/0003-apply-day1-switching-cost-canon-criterion.md), it fails the external-canon axis). But your **downstream project** can still adopt it via the override path. Place the new artefacts like this:
+
+| Aspect of the harness practice | Cell | Concrete file in your downstream project |
+|---|---|---|
+| Link to the source essay | ⓪ × A | Add a one-line `link-out` under `docs/STRATEGY.md §9.X` (no paraphrasing) |
+| Hook config template, AGENTS.md template (<50 lines) | ① × A | `docs/01-artefacts/templates/<NN>_hooks-config.json.tmpl`, `<NN>_agents-md.tmpl` |
+| Rationale: "why we adopted hooks; what we deviated; override path" | ② × A | `docs/02-process/harness-strategy.md` (use the 6-section template in `02-process/_binding-a-new-process.md`) |
+| Rollout plan (dated) | ② × B | `docs/01-artefacts/impl-plans/YYYY-MM-DD_harness-rollout.md` |
+| `.claude/settings.json` hooks block, hook scripts | ③ × A | `.claude/settings.json`, `.claude/hooks/*.sh` |
+| RACI line: "who accepts a new hook" | ④ × A | New row in `docs/04-governance/raci.md` |
+| Hook hit-rate, lint auto-fix success rate | ⑤ × B | `docs/05-measurement/snapshots/YYYY-MM-DD_harness.md` (only if Layer ⑤ is activated) |
+
+**Notice the pattern**: a single emerging practice spans **6 of the 18 cells** when adopted properly. Putting it all in one place (e.g. only `02-process/harness.md`, or only `.claude/settings.json`) is a misclassification — it conflates Standards (link-out), Process (rationale), Automation (executable hooks), Governance (RACI), and Measurement (metrics) into one cell. The matrix is what prevents that conflation.
+
+**Why upstream pentaglyph does not ship this binding by default**: external-canon axis fails (no ISO/IEEE/single-authoritative-URL). Adopt downstream, observe for 6 months, then propose upstream via [`02-process/_future-bindings.md`](./template/docs/02-process/_future-bindings.md) if it stabilises.
+
+---
+
 ## Quick start
 
 ```bash
