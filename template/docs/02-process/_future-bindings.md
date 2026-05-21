@@ -68,6 +68,27 @@ type: backlog
 - **Maps to**: would extend `01-artefacts/service-design/` with design-team workflow. Layer ② + Layer ④ Governance overlap.
 - **Status**: Held; weak canon. Watch for canonical consolidation.
 
+### Continuous Integration discipline (Fowler 2006)
+
+- **Primary**: Fowler, M. (2006). ["Continuous Integration"](https://martinfowler.com/articles/continuousIntegration.html). Companion: Duvall, P. M., Matyas, S., & Glover, A. (2007). *Continuous Integration: Improving Software Quality and Reducing Risk* (Addison-Wesley).
+- **Why eligible**: ✅ day-1 (every project benefits from frequent integration), ✅ switching-cost (CI habits compound), ✅ external canon (Fowler is the canonical author + IEEE-published companion book), ✅ domain neutrality.
+- **Maps to**: would create `02-process/continuous-integration.md` binding the trunk-frequency / build-on-every-commit / fix-broken-build-immediately principles. Distinct from `version-control.md` (which binds Git Flow branch topology) — CI is a *cadence* canon, not a *topology* canon.
+- **Status**: Held; informally referenced by [`.claude/rules/implementation-workflow.md`](../../.claude/rules/implementation-workflow.md) §Periodic integration. Bind on PO demand when a downstream project wants a formal CI binding distinct from its branching binding. Added to backlog per [ADR-0012](../01-artefacts/arc42/09-decisions/0012-add-implementation-workflow-rule.md) follow-up.
+
+### Postmortem Culture (Google SRE)
+
+- **Primary**: Beyer, B., Jones, C., Petoff, J., Murphy, N. R. eds. (2016). [Site Reliability Engineering](https://sre.google/sre-book/postmortem-culture/), chapter "Postmortem Culture: Learning from Failure". Free online.
+- **Why eligible**: ✅ day-1 (every project has incidents / corrections to learn from), ✅ switching-cost (blameless culture takes time to seed but resists drift), ✅ external canon (Google-published, free online), ✅ domain neutrality.
+- **Maps to**: would create `02-process/postmortem-culture.md` binding the blameless-postmortem template + "five whys" + lessons-learned-register practice. Adjacent to the broader SRE binding (above) but narrower scope (postmortem discipline only, no SLO / error-budget infrastructure).
+- **Status**: Held; informally referenced by [`.claude/rules/implementation-workflow.md`](../../.claude/rules/implementation-workflow.md) §Hard rule 5 (reflect on corrections) and by downstream `postmortems/` directories already in use. Bind on PO demand when a downstream wants a formal postmortem template distinct from generic project lessons. Added to backlog per [ADR-0012](../01-artefacts/arc42/09-decisions/0012-add-implementation-workflow-rule.md) follow-up.
+
+### Lessons-Learned Register (PMBOK 7)
+
+- **Primary**: Project Management Institute (2021). [*PMBOK Guide* (7th ed.)](https://www.pmi.org/standards/pmbok), "Lessons-Learned Register" practice.
+- **Why eligible**: ✅ day-1 (every iteration produces lessons), ✅ switching-cost (a populated register compounds value), ✅ external canon (PMI-published global standard), ✅ domain neutrality.
+- **Maps to**: would create `02-process/lessons-learned.md` binding the PMBOK register lifecycle (capture → review → close). Overlaps with Postmortem Culture above (incident-specific) — this binding covers the *continuous* register, postmortems feed into it.
+- **Status**: Held; informally referenced by [`.claude/rules/implementation-workflow.md`](../../.claude/rules/implementation-workflow.md) §Hard rule 5 (reflect on corrections). Adopting projects commonly track this in an ad-hoc `tasks/lessons.md` or `docs/01-artefacts/postmortems/`; formal binding would standardise the placement. Added to backlog per [ADR-0012](../01-artefacts/arc42/09-decisions/0012-add-implementation-workflow-rule.md) follow-up.
+
 ## Backlog — under evaluation (axes uncertain)
 
 ### Domain-Driven Design (Evans 2003)
