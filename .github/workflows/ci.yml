@@ -35,29 +35,32 @@ jobs:
           rm -rf /tmp/smoke-min
           bun run src/index.ts init /tmp/smoke-min --profile=minimal --ai=generic --name="CI Smoke (minimal)"
           test -f /tmp/smoke-min/docs/WORKFLOW.md
-          test -f /tmp/smoke-min/docs/arc42/09-decisions/README.md
-          test -f /tmp/smoke-min/docs/templates/5_adr.md
-          test ! -d /tmp/smoke-min/docs/user-manual
+          test -f /tmp/smoke-min/docs/01-artefacts/arc42/09-decisions/README.md
+          test -f /tmp/smoke-min/docs/01-artefacts/templates/5_adr.md
+          test ! -d /tmp/smoke-min/docs/01-artefacts/user-manual
           test ! -d /tmp/smoke-min/.claude
+          test -f /tmp/smoke-min/.pentaglyph
 
       - name: Smoke test — standard profile + claude hook
         run: |
           rm -rf /tmp/smoke-std
           bun run src/index.ts init /tmp/smoke-std --profile=standard --ai=claude --name="CI Smoke (standard)"
-          test -f /tmp/smoke-std/docs/diagrams/c4/workspace.dsl
-          test -f /tmp/smoke-std/docs/detailed-design/README.md
+          test -f /tmp/smoke-std/docs/01-artefacts/diagrams/c4/workspace.dsl
+          test -f /tmp/smoke-std/docs/01-artefacts/detailed-design/README.md
           test -f /tmp/smoke-std/.claude/rules/documentation.md
           ! grep -q '<placeholder>' /tmp/smoke-std/docs/WORKFLOW.md
+          test -f /tmp/smoke-std/.pentaglyph
+          grep -q '"version": "0.2.0"' /tmp/smoke-std/.pentaglyph
 
       - name: Smoke test — full profile
         run: |
           rm -rf /tmp/smoke-full
           bun run src/index.ts init /tmp/smoke-full --profile=full --ai=cursor --name="CI Smoke (full)"
-          test -d /tmp/smoke-full/docs/user-manual/tutorials
-          test -d /tmp/smoke-full/docs/user-manual/how-to
-          test -d /tmp/smoke-full/docs/user-manual/reference
-          test -d /tmp/smoke-full/docs/user-manual/explanation
-          test -d /tmp/smoke-full/docs/cost-estimates
+          test -d /tmp/smoke-full/docs/01-artefacts/user-manual/tutorials
+          test -d /tmp/smoke-full/docs/01-artefacts/user-manual/how-to
+          test -d /tmp/smoke-full/docs/01-artefacts/user-manual/reference
+          test -d /tmp/smoke-full/docs/01-artefacts/user-manual/explanation
+          test -d /tmp/smoke-full/docs/01-artefacts/cost-estimates
           test -f /tmp/smoke-full/.cursor/rules/docs.md
 
       - name: Smoke test — add command
@@ -65,7 +68,8 @@ jobs:
           rm -rf /tmp/smoke-add
           bun run src/index.ts init /tmp/smoke-add --profile=minimal --ai=generic
           bun run src/index.ts add user-manual /tmp/smoke-add
-          test -f /tmp/smoke-add/docs/user-manual/README.md
+          test -f /tmp/smoke-add/docs/01-artefacts/user-manual/README.md || \
+            test -f /tmp/smoke-add/docs/user-manual/README.md
           # Re-running add should skip existing files
           OUT=$(bun run src/index.ts add user-manual /tmp/smoke-add)
           echo "$OUT" | grep -q '0 files written'
@@ -74,10 +78,10 @@ jobs:
         run: |
           rm -rf /tmp/smoke-inc
           bun run src/index.ts init /tmp/smoke-inc --include=arc42,templates --ai=generic
-          test -d /tmp/smoke-inc/docs/arc42
-          test -d /tmp/smoke-inc/docs/templates
-          test ! -d /tmp/smoke-inc/docs/detailed-design
-          test ! -d /tmp/smoke-inc/docs/user-manual
+          test -d /tmp/smoke-inc/docs/01-artefacts/arc42
+          test -d /tmp/smoke-inc/docs/01-artefacts/templates
+          test ! -d /tmp/smoke-inc/docs/01-artefacts/detailed-design
+          test ! -d /tmp/smoke-inc/docs/01-artefacts/user-manual
 
       - name: Smoke test — --dry-run produces no files
         run: |
@@ -85,9 +89,15 @@ jobs:
           bun run src/index.ts init /tmp/smoke-dry --profile=full --ai=claude --dry-run
           test ! -d /tmp/smoke-dry
 
+      - name: Smoke test — AI_AGENT_HINT line in post-init output
+        run: |
+          rm -rf /tmp/smoke-hint
+          OUT=$(bun run src/index.ts init /tmp/smoke-hint --profile=minimal --ai=generic)
+          echo "$OUT" | grep -q '^AI_AGENT_HINT: kit=pentaglyph'
+
       - name: npm pack — verify tarball includes template/
         run: |
           npm pack --dry-run 2>&1 | tee /tmp/pack.log
           grep -q 'template/docs/WORKFLOW.md' /tmp/pack.log
-          grep -q 'template/docs/arc42/09-decisions/README.md' /tmp/pack.log
-          grep -q 'template/docs/templates/5_adr.md' /tmp/pack.log
+          grep -q 'template/docs/01-artefacts/arc42/09-decisions/README.md' /tmp/pack.log
+          grep -q 'template/docs/01-artefacts/templates/5_adr.md' /tmp/pack.log

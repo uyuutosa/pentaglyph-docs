@@ -79,16 +79,34 @@ export async function runInit(opts: ParsedArgs): Promise<void> {
     );
   }
 
-  // Sections
+  // Sections — try layer-prefixed paths first (post-ADR-0010 restructure
+  // where artefact sections live under 01-artefacts/), then fall back to
+  // flat paths (pre-restructure templates or future top-level layers like
+  // 02-process / 04-governance / 05-measurement). The candidate order
+  // ensures upstream templates can evolve their physical layout without
+  // breaking older profile names.
   for (const section of sections) {
-    const src = join(templateDocs, section);
-    const dest = join(targetDocs, section);
-    if (!existsSync(src)) {
-      log(`  warn   section "${section}" not found in template — skipping`);
+    const candidates = [
+      join("01-artefacts", section),
+      section,
+    ];
+    let resolved: { src: string; dest: string; rel: string } | null = null;
+    for (const rel of candidates) {
+      const src = join(templateDocs, rel);
+      if (existsSync(src)) {
+        resolved = { src, dest: join(targetDocs, rel), rel };
+        break;
+      }
+    }
+    if (!resolved) {
+      log(
+        `  warn   section "${section}" not found in template ` +
+          `(tried 01-artefacts/${section} and ${section}) — skipping`,
+      );
       continue;
     }
-    log(`  add    ${section}/`);
-    await copyDir(src, dest, {
+    log(`  add    ${resolved.rel}/`);
+    await copyDir(resolved.src, resolved.dest, {
       force: !!opts.force,
       dryRun: !!opts.dryRun,
       log,
