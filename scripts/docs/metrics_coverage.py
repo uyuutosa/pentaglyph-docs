@@ -7,7 +7,7 @@ small placeholder threshold of non-front-matter / non-heading characters).
 
 The script is part of Layer ③ Automation per ADR-0007 of the pentaglyph kit. Per
 the layer contract it reads Layer ① Artefacts and writes only to stdout
-(callers redirect to Layer ⑤ Measurement files under metrics/).
+(callers redirect to Layer ⑤ Measurement files under 05-measurement/).
 
 Usage:
     metrics_coverage.py <docs_dir> [--format=markdown|json] [--threshold=200]
@@ -28,18 +28,18 @@ from pathlib import Path
 
 # arc42 sections we measure for coverage. Each is a `(directory_glob, label)` pair.
 ARC42_SECTIONS: tuple[tuple[str, str], ...] = (
-    ("arc42/01-introduction-and-goals", "§1 Introduction and goals"),
-    ("arc42/02-architecture-constraints", "§2 Architecture constraints"),
-    ("arc42/03-context-and-scope", "§3 Context and scope"),
-    ("arc42/04-solution-strategy", "§4 Solution strategy"),
-    ("arc42/05-building-blocks", "§5 Building block view"),
-    ("arc42/06-runtime", "§6 Runtime view"),
-    ("arc42/07-deployment", "§7 Deployment view"),
-    ("arc42/08-crosscutting", "§8 Crosscutting"),
-    ("arc42/09-decisions", "§9 Decisions (ADRs)"),
-    ("arc42/10-quality", "§10 Quality"),
-    ("arc42/11-risks", "§11 Risks"),
-    ("arc42/12-glossary", "§12 Glossary"),
+    ("01-artefacts/arc42/01-introduction-and-goals", "§1 Introduction and goals"),
+    ("01-artefacts/arc42/02-architecture-constraints", "§2 Architecture constraints"),
+    ("01-artefacts/arc42/03-context-and-scope", "§3 Context and scope"),
+    ("01-artefacts/arc42/04-solution-strategy", "§4 Solution strategy"),
+    ("01-artefacts/arc42/05-building-blocks", "§5 Building block view"),
+    ("01-artefacts/arc42/06-runtime", "§6 Runtime view"),
+    ("01-artefacts/arc42/07-deployment", "§7 Deployment view"),
+    ("01-artefacts/arc42/08-crosscutting", "§8 Crosscutting"),
+    ("01-artefacts/arc42/09-decisions", "§9 Decisions (ADRs)"),
+    ("01-artefacts/arc42/10-quality", "§10 Quality"),
+    ("01-artefacts/arc42/11-risks", "§11 Risks"),
+    ("01-artefacts/arc42/12-glossary", "§12 Glossary"),
 )
 
 OTHER_TREES: tuple[tuple[str, str], ...] = (
@@ -48,8 +48,8 @@ OTHER_TREES: tuple[tuple[str, str], ...] = (
     ("governance", "Governance (Layer ④)"),
     ("user-manual", "User Manual (Diátaxis)"),
     ("templates", "Templates (Layer ① shape definitions)"),
-    ("arc42/03-context-and-scope/use-cases", "Use Cases"),
-    ("arc42/03-context-and-scope/prds", "PRDs"),
+    ("01-artefacts/arc42/03-context-and-scope/use-cases", "Use Cases"),
+    ("01-artefacts/arc42/03-context-and-scope/prds", "PRDs"),
     ("service-design", "Service Design (TiSDD)"),
 )
 

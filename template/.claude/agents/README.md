@@ -29,10 +29,10 @@ the system you want to document.
 | Agent | Role | Writes to |
 |-------|------|-----------|
 | **`doc-orchestrator`** | Drives the conversation. Decides which phase the user is in, which gap to fill next, which specialist to dispatch. Single source of conversational state. | (delegates) |
-| **`discovery-agent`** | Elicits *what + why + who*. Conducts the discovery interview. | `arc42/01-introduction-and-goals/`, `arc42/03-context-and-scope/`, PRDs, use cases |
-| **`architect-agent`** | Converts *what* into *structural how*. Top-level decisions, building blocks, crosscutting concerns. | `arc42/04-solution-strategy/`, `arc42/05-building-blocks/`, `arc42/08-crosscutting/`, `diagrams/c4/workspace.dsl` |
-| **`adr-writer`** | Turns "we need to decide X" into a MADR v3.0 ADR. Pure execution after the architect surfaces a decision. | `arc42/09-decisions/NNNN-<title>.md` |
-| **`spec-writer`** | Picks one building block and produces its full Module Detailed Design (data model, API, sequences, alternatives). | `detailed-design/<module>.md`, optionally a runtime scenario in `arc42/06-runtime/` |
+| **`discovery-agent`** | Elicits *what + why + who*. Conducts the discovery interview. | `01-artefacts/arc42/01-introduction-and-goals/`, `01-artefacts/arc42/03-context-and-scope/`, PRDs, use cases |
+| **`architect-agent`** | Converts *what* into *structural how*. Top-level decisions, building blocks, crosscutting concerns. | `01-artefacts/arc42/04-solution-strategy/`, `01-artefacts/arc42/05-building-blocks/`, `01-artefacts/arc42/08-crosscutting/`, `01-artefacts/diagrams/c4/workspace.dsl` |
+| **`adr-writer`** | Turns "we need to decide X" into a MADR v3.0 ADR. Pure execution after the architect surfaces a decision. | `01-artefacts/arc42/09-decisions/NNNN-<title>.md` |
+| **`spec-writer`** | Picks one building block and produces its full Module Detailed Design (data model, API, sequences, alternatives). | `01-artefacts/detailed-design/<module>.md`, optionally a runtime scenario in `01-artefacts/arc42/06-runtime/` |
 | **`completeness-auditor`** | Read-only inventory. Checks coverage against the rubric below and reports gaps. | (no writes — reports only) |
 
 The user normally only talks to `doc-orchestrator`. The other agents are
@@ -48,10 +48,10 @@ criteria are met.
 
 | Phase | Approx coverage | Required artefacts | Exit criteria (the auditor checks all of these) |
 |-------|----------------:|--------------------|--------------------------------------------------|
-| **1. Discovery** | 25% | `arc42/01-introduction-and-goals/overview.md` (≥ 5 goals + ≥ 3 stakeholders + ≥ 5 quality goals); `arc42/03-context-and-scope/system-context.md` (C4 L1 with ≥ 1 actor + ≥ 1 external system); ≥ 1 PRD; ≥ 1 use case | All four files exist, no `<placeholder>` strings remain, each file ≥ 500 chars, front-matter `status: Review` or `Done` |
-| **2. Architecture** | 60% | `arc42/04-solution-strategy/strategy.md` (≥ 5 named decisions, each linking to its ADR); `arc42/05-building-blocks/overview.md` (≥ 3 containers); `diagrams/c4/workspace.dsl` (L1 + L2 elements declared); ≥ 3 ADRs in `arc42/09-decisions/` | strategy.md cross-links resolve to existing ADRs; container names in §5 match `workspace.dsl`; each ADR has Y-statement + ≥ 2 considered options |
-| **3. Detail** | 85% | ≥ 1 `detailed-design/<module>.md` for the most-critical building block (full data model + API + alternatives); ≥ 1 runtime scenario in `arc42/06-runtime/`; `arc42/08-crosscutting/` for ≥ 2 concerns | detailed-design file is ≥ 2000 chars; runtime scenario references existing building blocks; crosscutting files have a `Rule:` and a `Why:` |
-| **4. Operations** | 100% | `arc42/07-deployment/deployment.md`; `arc42/10-quality/slos.md` (≥ 3 SLOs with target + verification); `arc42/11-risks/risk-register.md` (≥ 5 risks with owner + mitigation); `arc42/12-glossary/glossary.md` (≥ 5 terms) | All four files exist, all 12 arc42 section READMEs link to at least one substantive sibling file |
+| **1. Discovery** | 25% | `01-artefacts/arc42/01-introduction-and-goals/overview.md` (≥ 5 goals + ≥ 3 stakeholders + ≥ 5 quality goals); `01-artefacts/arc42/03-context-and-scope/system-context.md` (C4 L1 with ≥ 1 actor + ≥ 1 external system); ≥ 1 PRD; ≥ 1 use case | All four files exist, no `<placeholder>` strings remain, each file ≥ 500 chars, front-matter `status: Review` or `Done` |
+| **2. Architecture** | 60% | `01-artefacts/arc42/04-solution-strategy/strategy.md` (≥ 5 named decisions, each linking to its ADR); `01-artefacts/arc42/05-building-blocks/overview.md` (≥ 3 containers); `01-artefacts/diagrams/c4/workspace.dsl` (L1 + L2 elements declared); ≥ 3 ADRs in `01-artefacts/arc42/09-decisions/` | strategy.md cross-links resolve to existing ADRs; container names in §5 match `workspace.dsl`; each ADR has Y-statement + ≥ 2 considered options |
+| **3. Detail** | 85% | ≥ 1 `01-artefacts/detailed-design/<module>.md` for the most-critical building block (full data model + API + alternatives); ≥ 1 runtime scenario in `01-artefacts/arc42/06-runtime/`; `01-artefacts/arc42/08-crosscutting/` for ≥ 2 concerns | detailed-design file is ≥ 2000 chars; runtime scenario references existing building blocks; crosscutting files have a `Rule:` and a `Why:` |
+| **4. Operations** | 100% | `01-artefacts/arc42/07-deployment/deployment.md`; `01-artefacts/arc42/10-quality/slos.md` (≥ 3 SLOs with target + verification); `01-artefacts/arc42/11-risks/risk-register.md` (≥ 5 risks with owner + mitigation); `01-artefacts/arc42/12-glossary/glossary.md` (≥ 5 terms) | All four files exist, all 12 arc42 section READMEs link to at least one substantive sibling file |
 
 **Substantive content heuristic** (used by the auditor):
 
@@ -77,7 +77,7 @@ START: user invokes /doc-init or talks to doc-orchestrator
 │
 ├─ If Phase 1 incomplete:
 │     Dispatch discovery-agent with the specific missing artefact
-│     (e.g. "fill arc42/01 overview.md")
+│     (e.g. "fill 01-artefacts/arc42/01 overview.md")
 │
 ├─ If Phase 2 incomplete:
 │     Dispatch architect-agent
@@ -119,7 +119,7 @@ this is fast enough.
 Each specialist agent expects to be invoked by the orchestrator with a precise
 brief, e.g.:
 
-> "Fill `arc42/01-introduction-and-goals/overview.md`. The user has told me:
+> "Fill `01-artefacts/arc42/01-introduction-and-goals/overview.md`. The user has told me:
 > [summary of conversation so far]. Use Template 1. Status: Draft → Review when
 > done. Cross-link to existing ADRs: [list]. Quality goals to include: [list]."
 
@@ -154,4 +154,4 @@ take effect on the next conversation.
 
 - [`docs/WORKFLOW.md`](../../docs/WORKFLOW.md) — the static workflow rules (where each doc lives)
 - [`docs/AI_INSTRUCTIONS.md`](../../docs/AI_INSTRUCTIONS.md) — generic AI rules
-- [`docs/templates/README.md`](../../docs/templates/README.md) — template selection flow
+- [`docs/01-artefacts/templates/README.md`](../../docs/01-artefacts/templates/README.md) — template selection flow

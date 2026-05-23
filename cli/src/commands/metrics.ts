@@ -6,12 +6,12 @@
  *
  * Per ADR-0007 layer-writes contract: this command **reads** Layer ① / ② / ④
  * artefacts and **writes** only to stdout. Callers redirect to Layer ⑤
- * Measurement files under `docs/metrics/`.
+ * Measurement files under `docs/05-measurement/`.
  *
  * @see scripts/docs/README.md
- * @see template/docs/metrics/README.md
- * @see template/docs/arc42/09-decisions/0007-automation-layer-contract.md
- * @see template/docs/arc42/09-decisions/0009-measurement-layer-activation.md
+ * @see template/docs/05-measurement/README.md
+ * @see template/docs/01-artefacts/arc42/09-decisions/0007-automation-layer-contract.md
+ * @see template/docs/01-artefacts/arc42/09-decisions/0009-measurement-layer-activation.md
  *
  * @remarks
  * Requires Python 3.10+ available on PATH. The Python scripts are stdlib-only

@@ -1,0 +1,217 @@
+# pentaglyph-docs two-axis taxonomy matrix — methodology spec for paperbanana
+
+## トーン & マナー（必読）
+
+- 16:9 横長（3584x2048）。`STRATEGY.md §3.3` の Combined Matrix を視覚化する。`README.md` の "Two-axis taxonomy" 解説セクションに埋め込む。
+- 背景: 非常に薄いオフホワイト #F7F8FA のフラットカラー（テクスチャ・ノイズ・写真質感は厳禁）。
+- スタイル: モダンでテクニカル、calm。Accenture スライド風の上品な余白感、ただし軽やか。`hero.png` と `layers.png` のデザイン言語に厳格に従う（同じシリーズの 3 枚目という統一感を出す）。
+- 立体表現の禁止: 影・グロー・グラデーション・3D・スキュアモーフィズム・写真テクスチャはすべて禁止。線と面のみで構成する。
+- 顔・手・人物・絵文字・アイコン風イラストは一切入れない。
+
+## なぜこの図が必要か（design intent、生成自体には使わないが守る目的）
+
+`layers.png` は concern 軸 6 層（⓪/①/②/③/④/⑤）のみを縦に積んだ図で、change-rate 軸（A/B/C）が描かれていない。読者（特に AI agent）は `layers.png` だけ見ると「pentaglyph は 1 軸構造だ」と誤読する。本図は **3 列（change-rate: A/B/C） × 6 行（concern: ⓪/①/②/③/④/⑤）の matrix** を提示し、空セル（intentionally empty）も含めて 2 軸構造であることを一目で理解させる。
+
+## アクセントカラー（concern 軸 6 層に 1 対 1 で割り当て、`layers.txt` と完全に同一）
+
+各 concern 行の **左端ガター 12px 幅のカラーバー** と **層番号バッジ** にのみ使用する。matrix セル内の文字・矢印・背景には絶対にブリードさせない。
+
+| Layer | 名称 | 色（HEX） |
+|---|---|---|
+| ⓪ | Standards | #1F6FEB (calm blue) |
+| ① | Artefacts | #0B8A3A (calm green) |
+| ② | Process | #B45309 (calm amber) |
+| ③ | Automation | #6B46C1 (calm purple) |
+| ④ | Governance | #BE185D (calm rose) |
+| ⑤ | Measurement | #4B5563 (calm slate gray、50% 透明) |
+
+## change-rate 軸 3 列のヘッダースタイル
+
+各列ヘッダーはアクセントカラーを **使わない**（concern 軸との混同を避けるため）。代わりに濃度違いの灰色ピル背景で識別する。
+
+| Column | ヘッダー文字 | ピル背景 | ピル文字色 |
+|---|---|---|---|
+| A | `Layer A — Durable design` | #111827 (dark slate) | #FFFFFF |
+| B | `Layer B — Volatile working material` | #6B7280 (mid gray) | #FFFFFF |
+| C | `Layer C — Reference and archive` | #D1D5DB (light gray) | #111827 |
+
+サブテキスト（ヘッダーの直下、小さく）:
+- A: `Slow change · reviewed before merge · code-coupled`
+- B: `Dated · append-only · latest-wins`
+- C: `Frozen · read-only`
+
+## 全体レイアウト（厳守）
+
+横 3584 × 縦 2048 の canvas を **3 つの帯**に分割する:
+
+- **TOP BAND**（上 12% / y=0..245）: タイトル領域
+- **MATRIX BAND**（中 80% / y=245..1885）: matrix 本体（列ヘッダー + 6 行 × 3 列のセル）
+- **BOTTOM BAND**（下 8% / y=1885..2048）: 下キャプション領域
+
+## TOP BAND — タイトル
+
+中央寄せで 2 行配置。
+
+- 1 行目（メインタイトル）:
+  - テキスト: `Two-axis taxonomy`
+  - サイズ: 約 120px
+  - フォントウェイト: bold
+  - 字間: 少し詰める
+  - カラー: ダークスレート #111827
+- 2 行目（サブタイトル）:
+  - テキスト: `Change-rate × Concern — every artefact lives in exactly one cell.`
+  - サイズ: 約 42px
+  - フォントウェイト: regular
+  - カラー: #4B5563（やや薄いグレー）
+- 1 行目と 2 行目の間隔: 約 20px
+- タイトル全体は TOP BAND の中で垂直中央に置く
+
+## MATRIX BAND — 6 行 × 3 列の matrix 本体
+
+MATRIX BAND を **左 6%（x=0..215）の "concern axis ガター"** + **残り 94%（x=215..3584）の matrix 領域** に分割する。
+
+### concern ガター（左端、x=0..215）
+
+ガターの中に **6 行ぶんの concern ラベル**を縦に並べる。各 concern ラベルは MATRIX BAND の上下を 6 等分した各バンドに垂直中央で置く。
+
+各 concern ラベルの構造（上から下へ）:
+
+1. **円形番号バッジ**: 直径 96px、塗りつぶしカラーは concern のアクセントカラー、内側に層番号テキスト（⓪/①/②/③/④/⑤、サイズ約 52px、bold、白文字、水平・垂直中央）。⑤ は背景 #4B5563 のまま 50% 透明
+2. **層名テキスト**（バッジの右、ガター幅 215px の中に収める形にするか、バッジの直下に縦書きで重ねるか）: 採用は **バッジ直下に 1 行**、サイズ 22px、weight medium、カラー #111827、英語名のみ。日本語名はガター幅の都合で省略
+   - ⓪: `Standards`
+   - ①: `Artefacts`
+   - ②: `Process`
+   - ③: `Automation`
+   - ④: `Governance`
+   - ⑤: `Measurement` （文字色 #6B7280 のやや薄色、optional 表現）
+
+### matrix 領域（x=215..3584 = 幅 3369px、y=245..1885 = 高さ 1640px）
+
+matrix を **3 列ヘッダー（高さ 約 180px）** + **6 行 × 3 列のセル領域** に分ける。
+
+#### 列ヘッダー帯（matrix 領域の上 180px）
+
+3 列を等幅に分割（各列 約 1123px 幅）。各列の中央に **ピル型ヘッダー**を配置する。
+
+- ピルの寸法: 幅 約 1000px × 高さ 約 100px、border-radius 約 50px
+- ピル内のテキスト: 上記の列ヘッダー文字（サイズ 約 36px、weight bold、水平・垂直中央）
+- ピル直下の中央: サブテキスト（サイズ 約 22px、weight regular、カラー #6B7280、ピルの下に 20px の隙間で置く）
+
+#### セル領域（matrix 領域の残り、6 行 × 3 列）
+
+セル領域の高さ約 1460px を 6 行に等分（各行 約 243px）。各行の幅 3369px を 3 列に等分（各列 約 1123px）。
+
+各セルの基本構造:
+
+- セル枠: 1px ヘアライン、カラー #E5E7EB（matrix 全体に格子状に引く）
+- セル背景: 純白 #FFFFFF（**ただし intentionally-empty セルは別扱い**、後述）
+- セル内部の上端から 20px 下げた位置に、セル左寄せ（セル左端から 32px インデント）で本文テキストを配置
+
+各セルに入れるテキストは、下記「セル本文一覧」を厳守。
+
+### セル本文一覧（concern × change-rate の 18 セル）
+
+書式: 各セルは **1〜3 行の等幅フォント文字列**（サイズ 約 22px、weight regular、カラー #1F2937、line-height 1.4）で配置先パスを記述する。空セルは "—" 1 文字を中央配置（カラー #D1D5DB、サイズ 約 48px、weight regular）+ 微小注記 `intentionally empty` を直下に小さく（サイズ 14px、カラー #9CA3AF、italic）。
+
+#### Row ⓪ Standards
+
+| Column | 本文 |
+|---|---|
+| A — Durable | `STRATEGY.md §2`<br>`(no directory)` |
+| B — Volatile | "—" + `intentionally empty`<br>（理由: canons は dated にならない） |
+| C — Frozen | "—" + `intentionally empty` |
+
+#### Row ① Artefacts
+
+| Column | 本文 |
+|---|---|
+| A — Durable | `01-artefacts/templates/`<br>`01-artefacts/arc42/`<br>`01-artefacts/detailed-design/`<br>`01-artefacts/api-contract/`<br>`01-artefacts/user-manual/`<br>`01-artefacts/service-design/`<br>`01-artefacts/diagrams/c4/` |
+| B — Volatile | `client-engagement/`<br>`{reports,daci,kickoffs,prfaqs,questions}/`<br>(PEL volatile primitives) |
+| C — Frozen | `archive/_legacy/` |
+
+#### Row ② Process
+
+| Column | 本文 |
+|---|---|
+| A — Durable | `02-process/version-control.md`<br>`02-process/dev-cycle.md`<br>`02-process/dod-dor.md`<br>`02-process/tdd-workflow.md`<br>`02-process/bdd-workflow.md`<br>`02-process/_binding-a-new-process.md` |
+| B — Volatile | `01-artefacts/impl-plans/`<br>`01-artefacts/task-list/`<br>`01-artefacts/postmortems/`<br>`01-artefacts/reports/` |
+| C — Frozen | "—" + `intentionally empty`<br>（frozen process = deprecated; supersede ADR で表現） |
+
+#### Row ③ Automation
+
+| Column | 本文 |
+|---|---|
+| A — Durable | `cli/`<br>`.claude/`<br>`scripts/docs/` |
+| B — Volatile | "—" + `intentionally empty` |
+| C — Frozen | "—" + `intentionally empty` |
+
+#### Row ④ Governance
+
+| Column | 本文 |
+|---|---|
+| A — Durable | `04-governance/raci.md`<br>`04-governance/adr-accept-protocol.md`<br>`04-governance/override-justification.md`<br>`04-governance/contributing.md` |
+| B — Volatile | `01-artefacts/cost-estimates/` |
+| C — Frozen | "—" + `intentionally empty` |
+
+#### Row ⑤ Measurement（optional）
+
+| Column | 本文 |
+|---|---|
+| A — Durable | `05-measurement/README.md`<br>`05-measurement/baseline.md` |
+| B — Volatile | `05-measurement/snapshots/`<br>`YYYY-MM-DD_*.md` |
+| C — Frozen | "—" + `intentionally empty` |
+
+行 ⑤ のセル全体は **80% 不透明度** で他行より薄く描画する（optional 表現、`layers.png` と同じ扱い）。
+
+### 凡例（matrix 右下、最終行 ⑤ × C — Frozen セルの外、matrix 領域外には**置かない**）
+
+凡例は不要。"—" の意味は intentionally-empty 注記で十分に伝わる。**追加の legend box は禁止**（コンポジションを乱す）。
+
+## BOTTOM BAND — 下キャプション
+
+canvas 下端に近い位置に、1 行のキャプションを中央寄せで配置する。
+
+- テキスト: `Place by concern first (⓪–⑤). Then pick change-rate (A/B/C). Empty cells signal a misclassification.`
+- サイズ: 約 28px
+- weight: regular
+- カラー: #6B7280
+- BOTTOM BAND の中で垂直中央に置く
+
+## 否定制約（守らないと不合格）
+
+- 絵文字を一切使わない（U+1F300〜U+1FAFF などの emoji codepoint はすべて禁止）。**ただし concern 番号 ⓪①②③④⑤ は Unicode CIRCLED DIGIT (U+24EA, U+2460-U+2464) なので使用可**
+- 影・グロー・グラデーション・透視図・3D 表現はすべて禁止
+- 写真・写真合成・テクスチャ素材は使わない
+- 顔・手・人物のシルエットは入れない
+- concern アクセント 6 色（#1F6FEB / #0B8A3A / #B45309 / #6B46C1 / #BE185D / #4B5563）は **左端ガターの番号バッジと、その直下の英語名テキストの強調にのみ**使う。matrix セル内・列ヘッダー・タイトル・キャプション・背景には絶対にブリードさせない
+- 列ヘッダーピルの色は 3 段階の灰色（#111827 / #6B7280 / #D1D5DB）のみ。アクセントカラーを混ぜない
+- matrix は **6 行 × 3 列の格子**。行を増やしたり減らしたり、列を 4 列にしたり、セルを merge したりしない
+- 空セルは "—"（U+2014, EM DASH 1 文字）+ `intentionally empty` の italic 注記のみ。"N/A" / "—（理由）" / "✕" / "空欄" 等の表記は使わない
+- ⑤ Measurement 行の "optional" 表現はカード半透明 + やや薄色文字のみ。バッジを破線にしたり、行全体を別枠で囲ったりしない（matrix の格子構造を維持する）
+- ロゴ、QR コード、URL、補足の説明文ボックス、`hero.png` / `layers.png` の他のテキストは追加しない
+- 番号バッジは **円形のみ**。角丸長方形・六角形・五角形・盾型・リボン型は禁止
+- セル内の本文テキストは **等幅フォント**（モノスペース、例: SF Mono / JetBrains Mono / IBM Plex Mono のいずれか）。プロポーショナル体は使わない（パス文字列を読みやすく揃えるため）
+- matrix の格子線は #E5E7EB の 1px ヘアラインのみ。太線・破線・色付き線は使わない
+
+## 検証チェックリスト（生成後の VLM 自動レビューでこの順に検査）
+
+1. タイトル「Two-axis taxonomy」が canvas 上部にあり、サブタイトル「Change-rate × Concern — every artefact lives in exactly one cell.」が直下にある
+2. canvas の左端に **縦に 6 つの円形番号バッジ** ⓪/①/②/③/④/⑤ が上から下に並んでいる
+3. 各バッジの背景色が指定どおり: ⓪青 / ①緑 / ②琥珀 / ③紫 / ④薔薇 / ⑤灰（半透明）
+4. matrix 上部に **3 つのピル型列ヘッダー**: 黒 `Layer A — Durable design` / 中灰 `Layer B — Volatile working material` / 薄灰 `Layer C — Reference and archive` が左から右に並ぶ
+5. 各列ヘッダーピルの直下に小さなサブテキスト 1 行が読める
+6. matrix 領域に **6 行 × 3 列 = 18 セルの格子** がある（行数 = 6、列数 = 3、ぴったり）
+7. 各セルが #E5E7EB のヘアラインで区切られている
+8. Row ⓪ × Col A セルに `STRATEGY.md §2` の文字列が読める
+9. Row ① × Col A セルに `01-artefacts/templates/` 他、複数行のパス文字列が読める
+10. Row ② × Col A セルに `02-process/version-control.md` 他、複数行のパス文字列が読める
+11. Row ③ × Col A セルに `cli/`, `.claude/`, `scripts/docs/` の 3 行が読める
+12. Row ④ × Col A セルに `04-governance/` 配下の 4 ファイルが読める
+13. Row ⑤ × Col A セルに `05-measurement/README.md` と `05-measurement/baseline.md` が読める
+14. Row ⓪ × Col B/C、Row ② × Col C、Row ③ × Col B/C、Row ④ × Col C、Row ⑤ × Col C の各セルが "—" 1 文字 + `intentionally empty` の italic 注記で表現されている
+15. Row ⑤ 全体が他行より薄い（80% 不透明度）
+16. 下端中央に `Place by concern first (⓪–⑤). Then pick change-rate (A/B/C). Empty cells signal a misclassification.` の 1 行がある
+17. 6 色のアクセントカラーが左端ガター以外にブリードしていない（matrix セル本文・列ヘッダーピル・タイトル・キャプション・背景には使われていない）
+18. 絵文字・写真・3D 効果・人物が含まれていない
+19. セル本文のパス文字列が等幅フォントで縦に揃っている
+20. matrix の左右上下に余分な凡例ボックス・装飾線・グリッドガイドが描かれていない

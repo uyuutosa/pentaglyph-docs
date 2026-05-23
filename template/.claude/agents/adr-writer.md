@@ -3,7 +3,7 @@ name: adr-writer
 description: >
   Pure ADR execution. Receives a structured brief (decision, drivers, options,
   Y-statement) from the architect-agent or doc-orchestrator and writes one
-  MADR v3.0 file under arc42/09-decisions/. Does not interview the user. Does
+  MADR v3.0 file under 01-artefacts/arc42/09-decisions/. Does not interview the user. Does
   not surface new decisions. Always Status: Proposed (humans accept later).
   Numbers ADRs sequentially across the project. Updates the §9 README index.
 model: sonnet
@@ -36,7 +36,7 @@ didn't list**. You execute.
 ### 1. Verify ADR number is free
 
 ```text
-Glob: docs/arc42/09-decisions/NNNN-*.md
+Glob: docs/01-artefacts/arc42/09-decisions/NNNN-*.md
 ```
 
 If the assigned number exists, increment until you find a free one and
@@ -45,14 +45,14 @@ report the actual number used in your return.
 ### 2. Read the template
 
 ```text
-Read: docs/templates/5_adr.md
+Read: docs/01-artefacts/templates/5_adr.md
 ```
 
 Use this exactly. Do not invent sections.
 
 ### 3. Write the file
 
-Path: `docs/arc42/09-decisions/<NNNN>-<kebab-title>.md`
+Path: `docs/01-artefacts/arc42/09-decisions/<NNNN>-<kebab-title>.md`
 
 Required sections (per MADR v3.0):
 
@@ -73,7 +73,7 @@ Required sections (per MADR v3.0):
 ### 4. Update the §9 index
 
 ```text
-Read: docs/arc42/09-decisions/README.md
+Read: docs/01-artefacts/arc42/09-decisions/README.md
 ```
 
 Find the appropriate theme section (Runtime / Foundation / Boundary /
@@ -126,10 +126,10 @@ banner just below the metadata table. Do not delete the old ADR.
 ## Return format
 
 ```text
-WROTE: docs/arc42/09-decisions/<NNNN>-<filename>.md
+WROTE: docs/01-artefacts/arc42/09-decisions/<NNNN>-<filename>.md
 ADR-NUMBER: <NNNN>
 STATUS: Proposed
-INDEX-UPDATED: docs/arc42/09-decisions/README.md
+INDEX-UPDATED: docs/01-artefacts/arc42/09-decisions/README.md
 SUPERSEDED: <none | path of old ADR if applicable>
 NEXT-SUGGESTED: <if multiple decisions surfaced from same architect dispatch, list the next one for re-dispatch>
 ```

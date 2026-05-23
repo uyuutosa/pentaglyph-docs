@@ -7,7 +7,7 @@ layer: 3
 
 # `.claude/` — AI-agent rules, agents, and skills (Layer ③ Automation)
 
-> **Self-architecture role**: this directory is part of **Layer ③ Automation** in pentaglyph's [self-architecture](../docs/arc42/05-building-blocks/pentaglyph-self-architecture.md), alongside `cli/` and `scripts/docs/`. It encodes pentaglyph's rules, sub-agents, and skills for Anthropic's Claude Code. See [ADR-0001](../docs/arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) and [ADR-0004](../docs/arc42/09-decisions/0004-layer-separation-contracts.md).
+> **Self-architecture role**: this directory is part of **Layer ③ Automation** in pentaglyph's [self-architecture](../docs/01-artefacts/arc42/05-building-blocks/pentaglyph-self-architecture.md), alongside `cli/` and `scripts/docs/`. It encodes pentaglyph's rules, sub-agents, and skills for Anthropic's Claude Code. See [ADR-0001](../docs/01-artefacts/arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) and [ADR-0004](../docs/01-artefacts/arc42/09-decisions/0004-layer-separation-contracts.md).
 
 ## What lives here
 
@@ -19,13 +19,13 @@ layer: 3
 
 ## What does NOT belong here
 
-- **New canons or standards.** A new process binding belongs in `docs/design-guide/`, not in an agent or rule. The agent/skill may then *execute* the binding.
-- **Templates.** Templates are Layer ① Artefacts and live in `docs/templates/`. An agent generating a doc must reference the template; it must not embed a private copy.
+- **New canons or standards.** A new process binding belongs in `docs/02-process/`, not in an agent or rule. The agent/skill may then *execute* the binding.
+- **Templates.** Templates are Layer ① Artefacts and live in `docs/01-artefacts/templates/`. An agent generating a doc must reference the template; it must not embed a private copy.
 - **Decision authority.** Agents and skills cannot Accept ADRs or override governance. That is Layer ④ Governance's role.
 
 ## Layer dependency direction
 
-Per [ADR-0004](../docs/arc42/09-decisions/0004-layer-separation-contracts.md), Layer ③ Automation depends on layers ⓪ + ① + ② only:
+Per [ADR-0004](../docs/01-artefacts/arc42/09-decisions/0004-layer-separation-contracts.md), Layer ③ Automation depends on layers ⓪ + ① + ② only:
 
 - ✅ Agents and skills may **read** templates, design-guides, ADRs.
 - ✅ Agents and skills may **write** new instances of templates (e.g. `adr-writer` writes an ADR using `5_adr.md`).
@@ -35,11 +35,11 @@ A forthcoming layer-aware lint (`scripts/docs/lint_layer_citations.py`) will det
 
 ## When to add a new agent / rule / skill
 
-The [§9.1 four-axis criterion](../docs/STRATEGY.md) ([ADR-0003](../docs/arc42/09-decisions/0003-apply-day1-switching-cost-canon-criterion.md)) applies here too:
+The [§9.1 four-axis criterion](../docs/STRATEGY.md) ([ADR-0003](../docs/01-artefacts/arc42/09-decisions/0003-apply-day1-switching-cost-canon-criterion.md)) applies here too:
 
 1. **Day-1 necessity** — does every pentaglyph project need this automation on day one? (Most automations fail this; they are project-specific and belong in the downstream `.claude/`.)
 2. **Switching cost** — is replacing the automation costly enough to justify shipping a default?
-3. **External canon / artefact** — does the automation operate on a canon-bound process or a template from `docs/templates/`? If not, it is probably inventing.
+3. **External canon / artefact** — does the automation operate on a canon-bound process or a template from `docs/01-artefacts/templates/`? If not, it is probably inventing.
 4. **Domain neutrality** — does the automation work across regulated / startup / AI-first / enterprise IT?
 
 If all four hold, propose an ADR and add the automation here. If not, leave it for downstream `.claude/` extensions.
@@ -51,11 +51,11 @@ Downstream projects extend pentaglyph's `.claude/` by **adding** files to their 
 Each downstream override should:
 
 1. Open with a comment citing the kit-provided rule it replaces.
-2. Link to the downstream `docs/design-guide/<reason>.md` documenting the rationale ([ADR-0001](../docs/arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) §5 "Override paths").
+2. Link to the downstream `docs/02-process/<reason>.md` documenting the rationale ([ADR-0001](../docs/01-artefacts/arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) §5 "Override paths").
 
 ## Cross-references
 
-- [Self-architecture overview](../docs/arc42/05-building-blocks/pentaglyph-self-architecture.md)
+- [Self-architecture overview](../docs/01-artefacts/arc42/05-building-blocks/pentaglyph-self-architecture.md)
 - [STRATEGY.md §3](../docs/STRATEGY.md) — the two-axis taxonomy
-- [ADR-0004](../docs/arc42/09-decisions/0004-layer-separation-contracts.md) — layer separation contracts (DO/DON'T table)
+- [ADR-0004](../docs/01-artefacts/arc42/09-decisions/0004-layer-separation-contracts.md) — layer separation contracts (DO/DON'T table)
 - [`cli/README.md`](../cli/README.md) — the Bun CLI sibling of this `.claude/` automation

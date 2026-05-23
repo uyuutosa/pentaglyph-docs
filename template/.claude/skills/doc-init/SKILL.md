@@ -56,18 +56,18 @@ SUBSTANTIVE-FILES: 8 / 22
 
 ARTEFACTS:
   PHASE-1:
-    ✓ docs/arc42/01-introduction-and-goals/overview.md: 7 goals, 4 stakeholders, 5 quality goals
-    ✓ docs/arc42/03-context-and-scope/system-context.md: 2 actors, 3 external systems
-    ✓ docs/arc42/03-context-and-scope/prds/auth-prd.md: 4 FRs, 3 NFRs
+    ✓ docs/01-artefacts/arc42/01-introduction-and-goals/overview.md: 7 goals, 4 stakeholders, 5 quality goals
+    ✓ docs/01-artefacts/arc42/03-context-and-scope/system-context.md: 2 actors, 3 external systems
+    ✓ docs/01-artefacts/arc42/03-context-and-scope/prds/auth-prd.md: 4 FRs, 3 NFRs
     ✗ no use cases yet
   PHASE-2:
-    ⚠ docs/arc42/04-solution-strategy/strategy.md: only 2 decisions, need ≥ 5
-    ✗ docs/arc42/05-building-blocks/overview.md: missing
-    ✗ docs/diagrams/c4/workspace.dsl: still in starter state
-    ⚠ docs/arc42/09-decisions/: only 1 ADR, need ≥ 3
+    ⚠ docs/01-artefacts/arc42/04-solution-strategy/strategy.md: only 2 decisions, need ≥ 5
+    ✗ docs/01-artefacts/arc42/05-building-blocks/overview.md: missing
+    ✗ docs/01-artefacts/diagrams/c4/workspace.dsl: still in starter state
+    ⚠ docs/01-artefacts/arc42/09-decisions/: only 1 ADR, need ≥ 3
 
 NEXT-GAP: write a use case for the primary auth flow
-NEXT-GAP-PATH: docs/arc42/03-context-and-scope/use-cases/login.md
+NEXT-GAP-PATH: docs/01-artefacts/arc42/03-context-and-scope/use-cases/login.md
 NEXT-GAP-TEMPLATE: 4 (Use Case)
 NEXT-GAP-AGENT: discovery-agent
 NEXT-GAP-MISSING: actor, main success scenario steps, ≥ 1 Given/When/Then AC

@@ -6,7 +6,7 @@ description: >
   + quality goals), arc42 §3 business + system context (C4 L1), one PRD per
   primary feature, and one use case per primary scenario. Does not start fresh
   interviews — consumes the orchestrator's collected user-context. Always uses
-  templates 1, 2, 4 from docs/templates/. Returns a brief result summary.
+  templates 1, 2, 4 from docs/01-artefacts/templates/. Returns a brief result summary.
 model: sonnet
 tools: Read, Write, Edit, Grep, Glob
 ---
@@ -25,11 +25,11 @@ dispatch.
 ## Inputs you receive (from the orchestrator's `Task` prompt)
 
 - **Target file** (one of):
-  - `docs/arc42/01-introduction-and-goals/overview.md`
-  - `docs/arc42/03-context-and-scope/business-context.md`
-  - `docs/arc42/03-context-and-scope/system-context.md`
-  - `docs/arc42/03-context-and-scope/prds/<feature>.md`
-  - `docs/arc42/03-context-and-scope/use-cases/<name>.md`
+  - `docs/01-artefacts/arc42/01-introduction-and-goals/overview.md`
+  - `docs/01-artefacts/arc42/03-context-and-scope/business-context.md`
+  - `docs/01-artefacts/arc42/03-context-and-scope/system-context.md`
+  - `docs/01-artefacts/arc42/03-context-and-scope/prds/<feature>.md`
+  - `docs/01-artefacts/arc42/03-context-and-scope/use-cases/<name>.md`
 - **Template number** (1, 2, or 4)
 - **User context bullets** (≤ 200 words)
 - **Cross-links** (existing ADRs / PRDs / use cases to reference)
@@ -38,7 +38,7 @@ dispatch.
 
 ## What you produce, by target
 
-### `arc42/01-introduction-and-goals/overview.md`
+### `01-artefacts/arc42/01-introduction-and-goals/overview.md`
 
 Use Template 1, trimmed to §1 portion. Required to have:
 
@@ -51,9 +51,9 @@ Use Template 1, trimmed to §1 portion. Required to have:
 If the user provided fewer than 5 goals, derive the rest from quality
 goals and stakeholder concerns. **Never invent quantitative targets** —
 if the user said "fast", write "fast (target TBD)" and add to
-`arc42/11-risks/open-questions.md`.
+`01-artefacts/arc42/11-risks/open-questions.md`.
 
-### `arc42/03-context-and-scope/business-context.md`
+### `01-artefacts/arc42/03-context-and-scope/business-context.md`
 
 Use Template 1 trimmed to §3 portion. Required:
 
@@ -61,7 +61,7 @@ Use Template 1 trimmed to §3 portion. Required:
 - ≥ 1 business external system (org boundary, not technical)
 - Brief value-flow narrative (≤ 5 sentences)
 
-### `arc42/03-context-and-scope/system-context.md`
+### `01-artefacts/arc42/03-context-and-scope/system-context.md`
 
 Use Template 1 §3 + a Mermaid `C4Context` block. Required:
 
@@ -69,11 +69,11 @@ Use Template 1 §3 + a Mermaid `C4Context` block. Required:
   brief
 - Prose description below the diagram (LLMs cannot reliably parse Mermaid)
 - External-dependencies table (purpose / protocol / failure mode)
-- **Also update `docs/diagrams/c4/workspace.dsl`** if it's still in the
+- **Also update `docs/01-artefacts/diagrams/c4/workspace.dsl`** if it's still in the
   starter state — replace the placeholder identifiers with real ones from
   this context
 
-### `arc42/03-context-and-scope/prds/<feature>.md`
+### `01-artefacts/arc42/03-context-and-scope/prds/<feature>.md`
 
 Use Template 2. Required:
 
@@ -84,7 +84,7 @@ Use Template 2. Required:
 - Non-Goals section (Mandatory — Google's most-rejected reason)
 - Status `Review`
 
-### `arc42/03-context-and-scope/use-cases/<name>.md`
+### `01-artefacts/arc42/03-context-and-scope/use-cases/<name>.md`
 
 Use Template 4. Required:
 
@@ -99,7 +99,7 @@ Use Template 4. Required:
 
 1. **No `<placeholder>` in your output.** If the brief doesn't have a
    value, either ask (return INSUFFICIENT BRIEF) or substitute "TBD —
-   tracked in arc42/11-risks/open-questions.md" and append the open
+   tracked in 01-artefacts/arc42/11-risks/open-questions.md" and append the open
    question to that file.
 2. **Cross-link from the new file** to the relevant external standard
    URLs (arc42, C4, MADR, Diátaxis) per WORKFLOW.md hard rule §6.
@@ -108,7 +108,7 @@ Use Template 4. Required:
    deleting.
 4. **Update the parent README.md index** if you create the first file in
    a directory. (e.g. first file in `prds/` → add a "## Index" section to
-   `arc42/03-context-and-scope/README.md` listing the new file.)
+   `01-artefacts/arc42/03-context-and-scope/README.md` listing the new file.)
 
 ---
 

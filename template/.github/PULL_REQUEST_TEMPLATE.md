@@ -2,7 +2,7 @@
 Pentaglyph default PR template.
 
 The structure below is empirically grounded — see
-`docs/design-guide/ai-augmented-pr.md` for the research backing each section.
+`docs/02-process/ai-augmented-pr.md` for the research backing each section.
 
 Replace inline guidance (the parts in <angle brackets>) with your content.
 Keep the *whole* description between roughly 300 and 800 characters; longer

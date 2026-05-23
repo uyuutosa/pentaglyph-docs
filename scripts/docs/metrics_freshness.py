@@ -8,8 +8,9 @@ front-matter field, computes age in days from today, and reports:
 - Files whose last-reviewed exceeds the staleness threshold (default 90 days).
 - Files missing `last-reviewed` entirely.
 
-Volatile docs (Layer B: impl-plans/, task-list/, postmortems/, reports/,
-cost-estimates/) are excluded from freshness checks because they are
+Volatile docs (Layer B: 01-artefacts/impl-plans/, 01-artefacts/task-list/,
+01-artefacts/postmortems/, 01-artefacts/reports/, 01-artefacts/cost-estimates/)
+are excluded from freshness checks because they are
 append-only — the existence of a newer dated file is itself the freshness signal.
 
 The script is part of Layer ③ Automation per ADR-0007 of the pentaglyph kit. Per

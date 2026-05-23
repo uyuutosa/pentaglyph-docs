@@ -8,7 +8,7 @@ paths:
 This kit ships **Git Flow** as the default branching model. Downstream
 projects that need a different model (trunk-based, GitHub Flow, release-train,
 …) override this rule by writing their own
-[`docs/design-guide/version-control.md`](../../docs/design-guide/version-control.md)
+[`docs/02-process/version-control.md`](../../docs/02-process/version-control.md)
 **and** updating `.claude/rules/version-control.md` with the project-specific
 deviation. Until then, the rules below are mandatory.
 
@@ -93,7 +93,7 @@ Three reasons drive the choice:
 Pick a different model only when one of those drivers is actively wrong
 for the project (e.g. mature CD with feature flags makes trunk-based
 strictly better). Document the deviation in
-[`docs/design-guide/version-control.md`](../../docs/design-guide/version-control.md)
+[`docs/02-process/version-control.md`](../../docs/02-process/version-control.md)
 with a one-paragraph rationale.
 
 ## Hard rules
@@ -136,5 +136,5 @@ Each downstream project supplements this rule with at minimum:
 - Whether release tagging is automated or manual.
 
 Those extensions belong in
-[`docs/design-guide/version-control.md`](../../docs/design-guide/version-control.md).
+[`docs/02-process/version-control.md`](../../docs/02-process/version-control.md).
 This file stays universal.
