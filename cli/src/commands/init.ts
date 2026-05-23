@@ -99,9 +99,83 @@ export async function runInit(opts: ParsedArgs): Promise<void> {
   // AI hook
   await installAiHook(templateRoot, targetRoot, ai, opts, log);
 
+  // Cross-repo AI marker — addresses pentaglyph-docs#19. Auto-load rules
+  // resolve from a Claude Code session root, so when an AI agent sessioned
+  // in repo A edits a pentaglyph-adopting repo B from outside, B's
+  // `.claude/rules/documentation.md` never fires. The marker file is
+  // discoverable by `ls` / `find` from the file tree alone, so an external
+  // AI agent crawling the target before writing can latch onto it.
+  await writeMarker(targetRoot, opts, log);
+
   log("");
   log("Done.");
   log(`Read ${targetDocs}/AI_INSTRUCTIONS.md and ${targetDocs}/WORKFLOW.md next.`);
+  // Machine-readable hint for AI agents observing this stdout. Format
+  // intentionally distinct (single-line, key=value) so a downstream agent
+  // can grep / parse without false positives from prose. See
+  // pentaglyph-docs#19 Option D.
+  log("AI_AGENT_HINT: kit=pentaglyph read=docs/AI_INSTRUCTIONS.md,docs/WORKFLOW.md before=any-edit-under=docs/");
+}
+
+/**
+ * Writes a small `.pentaglyph` marker file at the target root.
+ *
+ * The file is JSON-shaped so downstream tooling (CI hooks, AI-agent
+ * meta-rules) can parse it without YAML or TOML dependencies. Content is
+ * intentionally minimal — just enough for an external agent to:
+ *   1. Detect that the directory is a pentaglyph-adopting repo
+ *   2. Locate the canonical AI_INSTRUCTIONS / WORKFLOW files
+ *   3. Read the kit version so version-specific protocol can be retrieved
+ *
+ * Path: `<target>/.pentaglyph` (at the repo root, alongside `docs/`).
+ * The leading dot keeps it out of the way for human listings while
+ * remaining discoverable by `find . -name '.pentaglyph'`.
+ */
+async function writeMarker(
+  targetRoot: string,
+  opts: ParsedArgs,
+  log: (msg: string) => void,
+): Promise<void> {
+  const markerPath = join(targetRoot, ".pentaglyph");
+  if (existsSync(markerPath) && !opts.force) {
+    log(`  skip   ${markerPath} (exists)`);
+    return;
+  }
+  if (opts.dryRun) {
+    log(`  would  ${markerPath}`);
+    return;
+  }
+  const version = await readKitVersion();
+  const marker = {
+    kit: "pentaglyph",
+    version,
+    ai_instructions: "docs/AI_INSTRUCTIONS.md",
+    workflow: "docs/WORKFLOW.md",
+    templates: "docs/templates/",
+    agent_hint:
+      "AI agents editing this repo's docs/ from any context (including " +
+      "cross-repo sessions) should Read docs/AI_INSTRUCTIONS.md and " +
+      "docs/WORKFLOW.md before writing. The Claude Code .claude/rules/ " +
+      "auto-load only resolves from the session root, so external agents " +
+      "must discover this protocol via the file tree.",
+    discoverable_by: [
+      "find . -name '.pentaglyph'",
+      "test -f .pentaglyph",
+    ],
+    upstream: "https://github.com/uyuutosa/pentaglyph-docs",
+  };
+  await writeFile(markerPath, JSON.stringify(marker, null, 2) + "\n", "utf8");
+  log(`  write  ${markerPath}`);
+}
+
+async function readKitVersion(): Promise<string> {
+  try {
+    const pkgPath = join(import.meta.dirname, "..", "..", "package.json");
+    const pkg = JSON.parse(await readFile(pkgPath, "utf8")) as { version?: string };
+    return pkg.version ?? "0.0.0";
+  } catch {
+    return "0.0.0";
+  }
 }
 
 interface InstallFileOpts {
