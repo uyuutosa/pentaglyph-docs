@@ -39,7 +39,7 @@ template-id: 12
 
 ## 3. Authority
 
-<Per [`raci.md`](../04-governance/raci.md), the Acceptor for this artefact type is <role>. The Acceptor listed in Metadata is named.>
+<Per [`raci.md`](../../04-governance/raci.md), the Acceptor for this artefact type is <role>. The Acceptor listed in Metadata is named.>
 
 ## 4. Trade-offs
 
@@ -66,8 +66,8 @@ template-id: 12
 
 - The file(s) changed (with the change's commit hash if relevant)
 - The trigger (retrospective output, regulatory document, downstream issue)
-- [ADR-0008 Governance layer contract](../01-artefacts/arc42/09-decisions/0008-governance-layer-contract.md)
-- [`raci.md`](../04-governance/raci.md) and any other Layer ④ file consulted
+- [ADR-0008 Governance layer contract](../arc42/09-decisions/0008-governance-layer-contract.md)
+- [`raci.md`](../../04-governance/raci.md) and any other Layer ④ file consulted
 
 ---
 

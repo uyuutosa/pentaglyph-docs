@@ -21,7 +21,7 @@ last-reviewed: 2026-05-21
 ## Context and Problem Statement
 
 `.claude/rules/` currently ships **four files**
-([`client-engagement.md`](../../../.claude/rules/client-engagement.md),
+([`client-engagement.md`](../../../../.claude/rules/client-engagement.md),
 [`dialogue-style.md`](../../../.claude/rules/dialogue-style.md),
 [`documentation.md`](../../../.claude/rules/documentation.md),
 [`version-control.md`](../../../.claude/rules/version-control.md)). Each
@@ -79,9 +79,9 @@ canon — it draws from at least six different sources (Pragmatic
 Programmer, Polya, Fowler CI, git-worktree(1), Google SRE Postmortem
 Culture, PMBOK Lessons-Learned Register). Promoting any of those to a
 formal Layer ② binding requires the screening process in
-[`02-process/_binding-a-new-process.md`](../../../docs/02-process/_binding-a-new-process.md)
+[`02-process/_binding-a-new-process.md`](../../../02-process/_binding-a-new-process.md)
 and PO demand, and is tracked separately in
-[`02-process/_future-bindings.md`](../../../docs/02-process/_future-bindings.md).
+[`02-process/_future-bindings.md`](../../../02-process/_future-bindings.md).
 
 ---
 
@@ -123,7 +123,7 @@ and PO demand, and is tracked separately in
 ## Decision Outcome
 
 **Chosen option: Option 4 — add
-[`.claude/rules/implementation-workflow.md`](../../../.claude/rules/implementation-workflow.md)
+[`.claude/rules/implementation-workflow.md`](../../../../.claude/rules/implementation-workflow.md)
 as a 5th Layer ③ Automation rule, kit-authored, with explicit
 cross-references to existing Layer ② canon bindings.**
 
@@ -141,7 +141,7 @@ The rule:
   reflect-on-corrections / Stage 0 meta-pattern).
 - Cross-references existing Layer ② canon bindings where they intersect
   (e.g. hard rule §6 "verify before done" links to
-  [`02-process/dod-dor.md`](../../../docs/02-process/dod-dor.md)).
+  [`02-process/dod-dor.md`](../../../02-process/dod-dor.md)).
 - Cites external inspirations (Pragmatic Programmer / Polya / Fowler /
   git-worktree(1) / Google SRE / PMBOK) under an explicit *External
   references (informational, not formal bindings)* heading.
@@ -151,9 +151,9 @@ The rule:
 
 Promotion of any informational reference to a formal Layer ② binding is
 **out of scope for this ADR** and follows the screening in
-[`02-process/_binding-a-new-process.md`](../../../docs/02-process/_binding-a-new-process.md);
+[`02-process/_binding-a-new-process.md`](../../../02-process/_binding-a-new-process.md);
 the canons that meet the four-axis criterion will be added to
-[`02-process/_future-bindings.md`](../../../docs/02-process/_future-bindings.md)
+[`02-process/_future-bindings.md`](../../../02-process/_future-bindings.md)
 as backlog candidates in a separate change.
 
 ### Y-statement summary
@@ -216,7 +216,7 @@ as backlog candidates in a separate change.
     if multiple canons are paraphrased in one Layer ② file without
     `_binding-a-new-process.md` screening.
   - Prematurely commits the kit to formal bindings of canons not yet
-    in [`_future-bindings.md`](../../../docs/02-process/_future-bindings.md).
+    in [`_future-bindings.md`](../../../02-process/_future-bindings.md).
 
 ### Option 4: Layer ③ Automation rule only (chosen)
 
@@ -303,7 +303,7 @@ as backlog candidates in a separate change.
       tickets.)
 - [ ] In a separate change, add Fowler CI 2006 / Google SRE Postmortem
       Culture / PMBOK Lessons-Learned Register to
-      [`02-process/_future-bindings.md`](../../../docs/02-process/_future-bindings.md)
+      [`02-process/_future-bindings.md`](../../../02-process/_future-bindings.md)
       as backlog candidates (currently absent from the backlog).
 - [ ] Update `STRATEGY.md` to mention the five-rule surface area
       (was: four) and the precedent that Layer ③ rules may have no
@@ -314,7 +314,7 @@ as backlog candidates in a separate change.
 ## Compliance / Validation
 
 - **Verification:** No section of
-  [`implementation-workflow.md`](../../../.claude/rules/implementation-workflow.md)
+  [`implementation-workflow.md`](../../../../.claude/rules/implementation-workflow.md)
   paraphrases an unbound canon's core definitions. The *External
   references* section cites sources informally; rules drawing on bound
   canons link to the corresponding `02-process/` file.

@@ -10,7 +10,7 @@ template-id: 9
 
 > **Use case**: capture the output of a Scrum Retrospective (or equivalent cadence retro) as a versioned, citable record.
 > **Lifecycle**: Layer B (Volatile, dated, append-only). Place at `01-artefacts/task-list/YYYY-MM-DD_sprint-NN-retro.md`.
-> **Canon**: [Scrum Guide 2020 §Sprint Retrospective](https://scrumguides.org/scrum-guide.html#sprint-retrospective) — bound via [`02-process/dev-cycle.md`](../02-process/dev-cycle.md).
+> **Canon**: [Scrum Guide 2020 §Sprint Retrospective](https://scrumguides.org/scrum-guide.html#sprint-retrospective) — bound via [`02-process/dev-cycle.md`](../../02-process/dev-cycle.md).
 > **Length target**: 1 page. Retros that grow beyond 1 page usually indicate scope drift in the retro itself.
 >
 > Delete this `> ...` guidance block after copying.
@@ -81,7 +81,7 @@ template-id: 9
 
 ## 4. Definition of Done updates (optional)
 
-If this retro tightens the team's DoD, record the change here and update [`02-process/dod-dor.md`](../02-process/dod-dor.md) in the same PR.
+If this retro tightens the team's DoD, record the change here and update [`02-process/dod-dor.md`](../../02-process/dod-dor.md) in the same PR.
 
 | DoD item | Old | New | Effective from |
 | --- | --- | --- | --- |
@@ -94,7 +94,7 @@ If this retro tightens the team's DoD, record the change here and update [`02-pr
 - [Scrum Guide 2020 §Sprint Retrospective](https://scrumguides.org/scrum-guide.html#sprint-retrospective)
 - Derby, E. & Larsen, D. (2006). [Agile Retrospectives: Making Good Teams Great](https://pragprog.com/titles/dlret/agile-retrospectives/) — alternative formats.
 - [Retromat](https://retromat.org/) — large catalog of retrospective formats.
-- [`02-process/dev-cycle.md`](../02-process/dev-cycle.md) — Scrum binding that produces this artefact.
+- [`02-process/dev-cycle.md`](../../02-process/dev-cycle.md) — Scrum binding that produces this artefact.
 
 ---
 

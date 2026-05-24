@@ -20,7 +20,7 @@ last-reviewed: 2026-05-14
 
 ## Context and Problem Statement
 
-[ADR-0001](0001-adopt-five-layer-self-architecture.md) introduces Layer ④ Governance as one of pentaglyph's six concern layers. [ADR-0004](0004-layer-separation-contracts.md) gives the general DO/DON'T contract: Layer ④ defines who decides, accepts, overrides — not what is decided. Until Phase 4 of the [self-architecture roadmap](../../01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md), governance was only `owner:` front-matter — implicit and weak.
+[ADR-0001](0001-adopt-five-layer-self-architecture.md) introduces Layer ④ Governance as one of pentaglyph's six concern layers. [ADR-0004](0004-layer-separation-contracts.md) gives the general DO/DON'T contract: Layer ④ defines who decides, accepts, overrides — not what is decided. Until Phase 4 of the [self-architecture roadmap](../../../../../../../docs/01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md), governance was only `owner:` front-matter — implicit and weak.
 
 This ADR formalises Layer ④:
 
@@ -134,9 +134,9 @@ Per [ADR-0004](0004-layer-separation-contracts.md), Layer ④ writes only into `
 ### Positive
 
 - Regulated adopters get a concrete file set to point auditors at.
-- ADR `Proposed → Accepted` has a defined procedure ([`04-governance/adr-accept-protocol.md`](../../04-governance/adr-accept-protocol.md)).
-- Downstream overrides have a documented format ([`04-governance/override-justification.md`](../../04-governance/override-justification.md)).
-- Upstream contributions have a documented flow ([`04-governance/contributing.md`](../../04-governance/contributing.md)).
+- ADR `Proposed → Accepted` has a defined procedure ([`04-governance/adr-accept-protocol.md`](../../../04-governance/adr-accept-protocol.md)).
+- Downstream overrides have a documented format ([`04-governance/override-justification.md`](../../../04-governance/override-justification.md)).
+- Upstream contributions have a documented flow ([`04-governance/contributing.md`](../../../04-governance/contributing.md)).
 - Layer ④ becomes greppable: `find docs/governance -name "*.md"` lists every governance artefact.
 
 ### Negative

@@ -15,7 +15,7 @@ last-reviewed: 2026-05-14
 | arc42 section | §5 Building Block View |
 | C4 levels covered | L1 (System Context) + L2 (Container) |
 | Related ADRs | (forthcoming self-ADRs 1-6) |
-| Linked impl-plan | [`docs/01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md`](../../01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md) |
+| Linked impl-plan | [`docs/01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md`](../../../../../../../docs/01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md) |
 
 ---
 

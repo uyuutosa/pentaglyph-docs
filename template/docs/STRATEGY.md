@@ -119,7 +119,7 @@ Making both axes explicit is what allows pentaglyph to host BDD, Scrum, TDD or a
 | **④ Governance** | `04-governance/raci.md`, `04-governance/adr-accept-protocol.md`, `04-governance/override-justification.md`, `04-governance/contributing.md` (forthcoming) | `01-artefacts/cost-estimates/` (governance outputs over time) | — |
 | **⑤ Measurement** *(optional)* | `05-measurement/README.md`, `05-measurement/baseline.md` (forthcoming) | `05-measurement/snapshots/*.md` (dated) | — |
 
-> **Note**: cells referencing files marked *forthcoming* describe the **target structure**. The build-out plan lives in [`docs/01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md`](01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md). Empty cells marked "—" are **intentionally empty by design** — placing content there indicates a concern misclassification.
+> **Note**: cells referencing files marked *forthcoming* describe the **target structure**. The build-out plan lives in [`docs/01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md`](../../../../docs/01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md). Empty cells marked "—" are **intentionally empty by design** — placing content there indicates a concern misclassification.
 
 **How to use the matrix when placing a new file**:
 

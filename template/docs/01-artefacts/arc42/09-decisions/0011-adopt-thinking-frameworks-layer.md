@@ -132,7 +132,7 @@ Each file: 150–400 words. Front matter declaring framework name + stage + boun
 
 - [ADR-0002](0002-bind-canons-only-no-self-authored-standards.md): ✅ each framework binds an external canon with authoritative URL; pentaglyph does not author the philosophy
 - [ADR-0004](0004-layer-separation-contracts.md): ✅ frameworks live in concern ② Process, do not leak into ⓪ Standards or ① Artefacts
-- [`docs/02-process/_binding-a-new-process.md`](../../02-process/_binding-a-new-process.md): ✅ each framework file follows the 6-section template adapted for thinking-frameworks (source / when / when-not / example / failures / related)
+- [`docs/02-process/_binding-a-new-process.md`](../../../02-process/_binding-a-new-process.md): ✅ each framework file follows the 6-section template adapted for thinking-frameworks (source / when / when-not / example / failures / related)
 
 ---
 

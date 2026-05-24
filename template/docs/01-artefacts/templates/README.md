@@ -7,7 +7,7 @@ layer: 1
 
 # Template Index
 
-> **Self-architecture role**: this directory is the primary home of **Layer ① Artefacts** in pentaglyph's [self-architecture](../01-artefacts/arc42/05-building-blocks/pentaglyph-self-architecture.md). It provides concrete document shapes; it does **not** prescribe the processes that produce them (that is Layer ② Process / `02-process/`). See [ADR-0001](../01-artefacts/arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) and [ADR-0004](../01-artefacts/arc42/09-decisions/0004-layer-separation-contracts.md).
+> **Self-architecture role**: this directory is the primary home of **Layer ① Artefacts** in pentaglyph's [self-architecture](../arc42/05-building-blocks/pentaglyph-self-architecture.md). It provides concrete document shapes; it does **not** prescribe the processes that produce them (that is Layer ② Process / `02-process/`). See [ADR-0001](../arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) and [ADR-0004](../arc42/09-decisions/0004-layer-separation-contracts.md).
 
 Fourteen templates cover the full authoring surface: 1 fallback + 5 core architecture + 3 UX research + 4 process bindings + 1 onboarding guidebook. Pick one before writing.
 

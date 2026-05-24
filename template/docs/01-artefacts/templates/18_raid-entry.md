@@ -6,7 +6,7 @@ last-reviewed: <YYYY-MM-DD>
 
 # RAID Entry Template (Type 18 / Risk·Assumption·Issue·Decision)
 
-> **Copy to use**: usually you **inline-edit** [`client-engagement/raid.md`](../client-engagement/raid.md) as a single living table; use this template only when an entry needs its own file for verbose context.
+> **Copy to use**: usually you **inline-edit** [`client-engagement/raid.md`](../../client-engagement/raid.md) as a single living table; use this template only when an entry needs its own file for verbose context.
 > Recommended location: rows in `client-engagement/raid.md`; verbose backing for an entry: `client-engagement/questions/Q-NNN-<slug>.md` (questions log) — see [`../client-engagement/questions/README.md`](../client-engagement/questions/README.md) for the split rationale.
 > Reference: [RAID Log — Asana](https://asana.com/resources/raid-log) · [RAID Log — Digital Project Manager](https://thedigitalprojectmanager.com/project-management/raid-log/)
 > Length target: **one row per entry** in the table; **≤ 1 page** if backed by a verbose file
@@ -28,7 +28,7 @@ last-reviewed: <YYYY-MM-DD>
 
 ## Inline row format (what goes in `raid.md`)
 
-The canonical use of this template is as a row in [`../client-engagement/raid.md`](../client-engagement/raid.md). Each row is one item:
+The canonical use of this template is as a row in [`../client-engagement/raid.md`](../../client-engagement/raid.md). Each row is one item:
 
 ```markdown
 | ID     | Class | Opened     | Owner   | Summary                         | Severity | Action / next            | Linked                  |
@@ -99,7 +99,7 @@ Closed rows stay in the file for the duration of the engagement — they are the
 ## Anti-patterns
 
 - **One row per concern, but no one owns it**: shared ownership = no ownership. Pick one accountable name.
-- **Open items list that only grows**: triage cadence in [`../client-engagement/OPERATING-AGREEMENT.md` §1](../client-engagement/OPERATING-AGREEMENT.md) requires closing items, not just adding.
+- **Open items list that only grows**: triage cadence in [`../client-engagement/OPERATING-AGREEMENT.md` §1](../../client-engagement/OPERATING-AGREEMENT.md) requires closing items, not just adding.
 - **Risk rows that read like aspirations**: "We need to make sure performance is good" is not a Risk — state the *future event* that would manifest the risk.
 - **Verbose rows that should be files**: if a row spills past one screen line, promote its narrative to [`../client-engagement/questions/`](../client-engagement/questions/).
 
@@ -109,6 +109,6 @@ Closed rows stay in the file for the duration of the engagement — they are the
 
 - [RAID log — Asana](https://asana.com/resources/raid-log)
 - [RAID log — Digital Project Manager](https://thedigitalprojectmanager.com/project-management/raid-log/)
-- [`../client-engagement/raid.md`](../client-engagement/raid.md) — the living table this template fills
+- [`../client-engagement/raid.md`](../../client-engagement/raid.md) — the living table this template fills
 - [`../client-engagement/questions/`](../client-engagement/questions/) — verbose backing files
 - [`../client-engagement/README.md`](../client-engagement/README.md) — PEL overview

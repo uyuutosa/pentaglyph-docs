@@ -114,7 +114,7 @@ Reference: [`../01-artefacts/diagrams/c4/`](../01-artefacts/diagrams/c4/) for th
 | --- | --- | --- | --- | --- |
 | 1 | `<risk>` | `<consequence>` | High / Med / Low | `<what we're doing about it>` |
 
-→ Mirror to [`raid.md`](../client-engagement/raid.md) `R-NNN` rows.
+→ Mirror to [`raid.md`](../../client-engagement/raid.md) `R-NNN` rows.
 
 ---
 
@@ -125,7 +125,7 @@ Reference: [`../01-artefacts/diagrams/c4/`](../01-artefacts/diagrams/c4/) for th
 
 **Estimated duration**: `<X-Y weeks / cycles / months>`
 
-**Cycles**: `<N cycles of M weeks each>` — see [`OPERATING-AGREEMENT.md` §1](../client-engagement/OPERATING-AGREEMENT.md) for cadence specifics.
+**Cycles**: `<N cycles of M weeks each>` — see [`OPERATING-AGREEMENT.md` §1](../../client-engagement/OPERATING-AGREEMENT.md) for cadence specifics.
 
 **Effort band**: `<S / M / L / XL>` engagement — `<rough total person-weeks>`.
 
@@ -142,7 +142,7 @@ Reference: [`../01-artefacts/diagrams/c4/`](../01-artefacts/diagrams/c4/) for th
 | --- | --- | --- |
 | Time | **Fixed** / Flexible | <e.g., milestone tied to client board meeting on <date>> |
 | Scope | Fixed / **Flexible** | <e.g., NOT list is fixed but Now/Next/Later flex within remaining capacity> |
-| Quality | **Fixed** | Non-negotiable — see [`OPERATING-AGREEMENT.md` §6](../client-engagement/OPERATING-AGREEMENT.md) for definition |
+| Quality | **Fixed** | Non-negotiable — see [`OPERATING-AGREEMENT.md` §6](../../client-engagement/OPERATING-AGREEMENT.md) for definition |
 | Cost / capacity | Fixed / **Flexible** | <e.g., team size locked, overtime is the lever> |
 
 **The lever we will pull when things slip**: <which of the above moves first>
@@ -163,9 +163,9 @@ Reference: [`../01-artefacts/diagrams/c4/`](../01-artefacts/diagrams/c4/) for th
 - Cycle (every <N> weeks): Heartbeat + Kickoff
 - Roadmap review: monthly
 
-**Channels**: see [`OPERATING-AGREEMENT.md` §2](../client-engagement/OPERATING-AGREEMENT.md).
+**Channels**: see [`OPERATING-AGREEMENT.md` §2](../../client-engagement/OPERATING-AGREEMENT.md).
 
-**Decision rights**: see [`OPERATING-AGREEMENT.md` §3](../client-engagement/OPERATING-AGREEMENT.md).
+**Decision rights**: see [`OPERATING-AGREEMENT.md` §3](../../client-engagement/OPERATING-AGREEMENT.md).
 
 ---
 
@@ -190,4 +190,4 @@ Reference: [`../01-artefacts/diagrams/c4/`](../01-artefacts/diagrams/c4/) for th
 - [Agile Inception Deck — Jonathan Rasmusson](https://agilewarrior.wordpress.com/2010/11/06/the-agile-inception-deck/)
 - *The Agile Samurai* (Rasmusson, Pragmatic Bookshelf 2010)
 - [`../client-engagement/README.md`](../client-engagement/README.md) — PEL overview
-- [`../client-engagement/OPERATING-AGREEMENT.md`](../client-engagement/OPERATING-AGREEMENT.md) — how the engagement runs
+- [`../client-engagement/OPERATING-AGREEMENT.md`](../../client-engagement/OPERATING-AGREEMENT.md) — how the engagement runs

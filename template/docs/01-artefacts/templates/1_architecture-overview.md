@@ -157,11 +157,11 @@ C4Container
 
 | Concern                  | Detail document                                                                                  |
 | ------------------------ | ------------------------------------------------------------------------------------------------ |
-| Error handling strategy  | [01-artefacts/arc42/08-crosscutting/error-strategy.md](../01-artefacts/arc42/08-crosscutting/error-strategy.md)            |
-| AuthN/AuthZ / PII        | [01-artefacts/arc42/08-crosscutting/auth-and-pii.md](../01-artefacts/arc42/08-crosscutting/auth-and-pii.md)                |
-| State management         | [01-artefacts/arc42/08-crosscutting/state-management.md](../01-artefacts/arc42/08-crosscutting/state-management.md)        |
-| Observability / logging  | [01-artefacts/arc42/08-crosscutting/observability.md](../01-artefacts/arc42/08-crosscutting/observability.md)              |
-| Performance / scalability| [01-artefacts/arc42/08-crosscutting/performance.md](../01-artefacts/arc42/08-crosscutting/performance.md)                  |
+| Error handling strategy  | [01-artefacts/arc42/08-crosscutting/error-strategy.md](../../../../../../docs/01-artefacts/arc42/08-crosscutting/error-strategy.md)            |
+| AuthN/AuthZ / PII        | [01-artefacts/arc42/08-crosscutting/auth-and-pii.md](../../../../../../docs/01-artefacts/arc42/08-crosscutting/auth-and-pii.md)                |
+| State management         | [01-artefacts/arc42/08-crosscutting/state-management.md](../../../../../../docs/01-artefacts/arc42/08-crosscutting/state-management.md)        |
+| Observability / logging  | [01-artefacts/arc42/08-crosscutting/observability.md](../../../../../../docs/01-artefacts/arc42/08-crosscutting/observability.md)              |
+| Performance / scalability| [01-artefacts/arc42/08-crosscutting/performance.md](../../../../../../docs/01-artefacts/arc42/08-crosscutting/performance.md)                  |
 
 ---
 

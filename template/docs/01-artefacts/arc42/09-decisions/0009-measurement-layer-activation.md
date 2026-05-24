@@ -41,7 +41,7 @@ This ADR closes the gap by:
 - **DD-1 (highest)**: Honesty about scope. Optional means optional — adopters must be able to skip Layer ⑤ entirely without losing kit value.
 - **DD-2**: Predictability for future metric additions. The 5-category enumeration is the criterion for in-scope vs out-of-scope.
 - **DD-3**: Layer-writes discipline. Per [ADR-0007](0007-automation-layer-contract.md), metric scripts read all layers and write only to stdout / `05-measurement/`. This ADR confirms.
-- **DD-4**: Dogfooding. The kit applies its own discipline to itself via [`baseline.md`](../../05-measurement/baseline.md).
+- **DD-4**: Dogfooding. The kit applies its own discipline to itself via [`baseline.md`](../../../05-measurement/baseline.md).
 
 ---
 
@@ -96,7 +96,7 @@ The decision is reversible: a project may activate / deactivate Layer ⑤ at any
 
 ### 3.4 Dogfooding baseline
 
-The kit itself runs the 3 implemented scripts against its own `template/docs/` and commits the snapshot to [`template/docs/05-measurement/baseline.md`](../../05-measurement/baseline.md). The baseline is updated on every kit minor-version bump.
+The kit itself runs the 3 implemented scripts against its own `template/docs/` and commits the snapshot to [`template/docs/05-measurement/baseline.md`](../../../05-measurement/baseline.md). The baseline is updated on every kit minor-version bump.
 
 Current baseline (2026-05-14):
 
@@ -179,7 +179,7 @@ Current baseline (2026-05-14):
 - Verification:
   - The 3 implemented Python scripts in `scripts/docs/` exist and run end-to-end against `template/docs/` (verified by the baseline).
   - `bunx pentaglyph metrics` wraps the 3 scripts (verified by integration smoke test, forthcoming).
-  - [`template/docs/05-measurement/baseline.md`](../../05-measurement/baseline.md) exists and is updated on every minor-version bump.
+  - [`template/docs/05-measurement/baseline.md`](../../../05-measurement/baseline.md) exists and is updated on every minor-version bump.
 - Frequency: per-PR + per-release.
 
 ---
@@ -197,5 +197,5 @@ Current baseline (2026-05-14):
 - [`STRATEGY.md §12 Layer ⑤ Measurement`](../../STRATEGY.md)
 - [`scripts/docs/README.md`](../../../../scripts/docs/README.md)
 - [`template/docs/05-measurement/README.md`](../../05-measurement/README.md)
-- [`template/docs/05-measurement/baseline.md`](../../05-measurement/baseline.md)
+- [`template/docs/05-measurement/baseline.md`](../../../05-measurement/baseline.md)
 - Forsgren, Humble, Kim (2018). [Accelerate](https://itrevolution.com/product/accelerate/) — DORA framework, candidate for future Layer ⑤ metric category 5.

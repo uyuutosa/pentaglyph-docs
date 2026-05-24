@@ -36,7 +36,7 @@ last-reviewed: <YYYY-MM-DD>
 | Informed (I) | `<name>`, `<name>` |
 | Opened | `<YYYY-MM-DD>` |
 | Target decision date | `<YYYY-MM-DD>` |
-| Linked | [`../raid.md`](../raid.md) `D-NNN` (if any), [`../questions/Q-NNN.md`](../questions/) (if any) |
+| Linked | [`../raid.md`](../../client-engagement/raid.md) `D-NNN` (if any), [`../questions/Q-NNN.md`](../questions/) (if any) |
 
 ---
 
@@ -153,4 +153,4 @@ The Git history of this DACI file is preserved (the file is moved, not deleted) 
 - [Reforge DACI artifact library](https://www.reforge.com/artifacts/c/team-operations/daci-decision-making-framework)
 - [`5_adr.md`](./5_adr.md) — the MADR template this DACI archives into
 - [`../client-engagement/README.md`](../client-engagement/README.md) — PEL overview
-- [`../client-engagement/OPERATING-AGREEMENT.md` §3](../client-engagement/OPERATING-AGREEMENT.md) — decision rights matrix for this engagement
+- [`../client-engagement/OPERATING-AGREEMENT.md` §3](../../client-engagement/OPERATING-AGREEMENT.md) — decision rights matrix for this engagement

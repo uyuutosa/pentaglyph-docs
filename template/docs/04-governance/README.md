@@ -40,7 +40,7 @@ Per [ADR-0004](../01-artefacts/arc42/09-decisions/0004-layer-separation-contract
 - **`override-justification.md`**: a new override category emerges that the existing format doesn't capture.
 - **`contributing.md`**: the upstream contribution flow changes (new git host, new policy).
 
-Every update to a file in this directory should be a Layer ④ governance decision recorded via [`../01-artefacts/templates/12_governance-decision.md`](../01-artefacts/templates/12_governance-decision.md) (Phase 4 of the [self-architecture roadmap](../01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md)).
+Every update to a file in this directory should be a Layer ④ governance decision recorded via [`../01-artefacts/templates/12_governance-decision.md`](../01-artefacts/templates/12_governance-decision.md) (Phase 4 of the [self-architecture roadmap](../../../../../docs/01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md)).
 
 ## How downstream projects override
 

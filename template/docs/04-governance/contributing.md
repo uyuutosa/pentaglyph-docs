@@ -90,7 +90,7 @@ git push <your-fork-remote> extract-<topic>:refs/heads/feature/<short-descriptio
 # Open PR from there
 ```
 
-The downstream subtree path is documented in the upstream kit because pentaglyph itself is dogfooding the pattern — see this kit's own [`01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md`](../01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md) §10 PR strategy.
+The downstream subtree path is documented in the upstream kit because pentaglyph itself is dogfooding the pattern — see this kit's own [`01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md`](../../../../../docs/01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md) §10 PR strategy.
 
 ### Step 3: Self-check
 

@@ -81,7 +81,7 @@ A condensed inventory of smaller items shipped this cycle, for completeness:
 <!-- The cycle's friction. Honesty over polish — the Heartbeat is the institutional memory of what went wrong as much as what went right.
      Map each struggle to a `raid.md` row or a `decisions/` MADR showing how we're responding. -->
 
-<paragraph: struggle 1 — what didn't go as planned, what we now do differently — link to [`../raid.md`](../raid.md) or [`../decisions/`](../decisions/)>
+<paragraph: struggle 1 — what didn't go as planned, what we now do differently — link to [`../raid.md`](../../client-engagement/raid.md) or [`../decisions/`](../decisions/)>
 
 <paragraph: struggle 2 — same shape>
 
@@ -134,8 +134,8 @@ A condensed inventory of smaller items shipped this cycle, for completeness:
 - [Basecamp Heartbeat (Jason Fried)](https://world.hey.com/jason/what-s-in-a-heartbeat-4fd72d0e)
 - [Amazon 6-pager structure](https://www.sixpagermemo.com/blog/amazon-six-pager-template)
 - [`../README.md`](../README.md) — PEL overview
-- [`../NOW-NEXT-LATER.md`](../NOW-NEXT-LATER.md) — roadmap (Now/Next/Later) as of this Heartbeat
+- [`../NOW-NEXT-LATER.md`](../../client-engagement/NOW-NEXT-LATER.md) — roadmap (Now/Next/Later) as of this Heartbeat
 - [`../kickoffs/`](../kickoffs/) — cycle kickoff that opened this cycle
 - [`../decisions/`](../decisions/) / [`../daci/`](../daci/) — decisions narrated above
-- [`../raid.md`](../raid.md) — risks / issues / dependencies surfaced this cycle
+- [`../raid.md`](../../client-engagement/raid.md) — risks / issues / dependencies surfaced this cycle
 - previous Heartbeat — [`../01-artefacts/reports/<YYMMDD-prev-cycle>/heartbeat.md`](../01-artefacts/reports/)

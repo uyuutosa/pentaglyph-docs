@@ -200,7 +200,7 @@ Use a comparison table for non-trivial selections (DBs, libraries, etc.). -->
 ### 6.1 Security / AuthN/AuthZ / PII
 
 - Auth method: <Bearer Token / mTLS / etc.>
-- PII handling: see [01-artefacts/arc42/08-crosscutting/auth-and-pii.md](../01-artefacts/arc42/08-crosscutting/auth-and-pii.md) §X
+- PII handling: see [01-artefacts/arc42/08-crosscutting/auth-and-pii.md](../../../../../../docs/01-artefacts/arc42/08-crosscutting/auth-and-pii.md) §X
 
 ### 6.2 Observability (log / metric / alert)
 
@@ -216,7 +216,7 @@ Use a comparison table for non-trivial selections (DBs, libraries, etc.). -->
 ### 6.4 Error handling
 
 - Error code list: see §10
-- Retry policy: <plan or [01-artefacts/arc42/08-crosscutting/error-strategy.md](../01-artefacts/arc42/08-crosscutting/error-strategy.md)>
+- Retry policy: <plan or [01-artefacts/arc42/08-crosscutting/error-strategy.md](../../../../../../docs/01-artefacts/arc42/08-crosscutting/error-strategy.md)>
 
 ### 6.5 Cost
 

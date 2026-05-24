@@ -10,7 +10,7 @@ template-id: 10
 
 > **Use case**: refine a single PBI (User Story / Bug / Task) up to "Ready" state before Sprint Planning. Captures DoR completion.
 > **Lifecycle**: Layer A (Durable, lives with the PBI in the work-item system) or Layer B (`01-artefacts/task-list/`) depending on whether the work-item system supports rich-text fields.
-> **Canon**: [Scrum.org Definition of Ready](https://www.scrum.org/resources/blog/walking-through-definition-ready) — bound via [`02-process/dod-dor.md`](../02-process/dod-dor.md).
+> **Canon**: [Scrum.org Definition of Ready](https://www.scrum.org/resources/blog/walking-through-definition-ready) — bound via [`02-process/dod-dor.md`](../../02-process/dod-dor.md).
 > **Length target**: 1 page per PBI. If refinement output exceeds 1 page, split the PBI.
 >
 > Delete this `> ...` guidance block after copying.
@@ -44,7 +44,7 @@ Linked persona: [`01-artefacts/service-design/personas/<PE-NN>.md`](../01-artefa
 
 ## 2. Acceptance Criteria
 
-> Use Given/When/Then per [`02-process/bdd-workflow.md`](../02-process/bdd-workflow.md).
+> Use Given/When/Then per [`02-process/bdd-workflow.md`](../../02-process/bdd-workflow.md).
 
 - **AC-1**:
   - Given <context>
@@ -56,7 +56,7 @@ Linked persona: [`01-artefacts/service-design/personas/<PE-NN>.md`](../01-artefa
 
 ## 3. Definition of Ready checklist
 
-> Default DoR — downstream may extend per [`02-process/dod-dor.md`](../02-process/dod-dor.md).
+> Default DoR — downstream may extend per [`02-process/dod-dor.md`](../../02-process/dod-dor.md).
 
 - [ ] **Independent** — the PBI can be worked without blocking on another PBI not in this Sprint.
 - [ ] **Negotiable** — the team and PO have aligned on what's in scope and what's deferred.
@@ -108,6 +108,6 @@ If confidence is Low, consider splitting before commit.
 
 - [Scrum.org — Walking Through the Definition of Ready](https://www.scrum.org/resources/blog/walking-through-definition-ready)
 - Cohn, M. [User Stories Applied](https://www.mountaingoatsoftware.com/books/user-stories-applied). INVEST criteria.
-- [`02-process/dod-dor.md`](../02-process/dod-dor.md) — the binding that defines DoR.
-- [`02-process/bdd-workflow.md`](../02-process/bdd-workflow.md) — G/W/T grammar for AC.
+- [`02-process/dod-dor.md`](../../02-process/dod-dor.md) — the binding that defines DoR.
+- [`02-process/bdd-workflow.md`](../../02-process/bdd-workflow.md) — G/W/T grammar for AC.
 - [`01-artefacts/templates/6_persona.md`](./6_persona.md) — persona linked in §1.

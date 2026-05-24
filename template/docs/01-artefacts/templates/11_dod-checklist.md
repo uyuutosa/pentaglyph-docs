@@ -10,7 +10,7 @@ template-id: 11
 
 > **Use case**: per-artefact-type DoD checklists. Each downstream project owns their DoD and updates it via retrospective outputs.
 > **Lifecycle**: Layer A (Durable). Place at `<downstream>/docs/02-process/dod-checklist.md`.
-> **Canon**: [Scrum Guide 2020 §Definition of Done](https://scrumguides.org/scrum-guide.html#definition-of-done) — bound via [`02-process/dod-dor.md`](../02-process/dod-dor.md).
+> **Canon**: [Scrum Guide 2020 §Definition of Done](https://scrumguides.org/scrum-guide.html#definition-of-done) — bound via [`02-process/dod-dor.md`](../../02-process/dod-dor.md).
 > **Editing**: this is a living document. Tighten over time per retro outputs.
 >
 > Delete this `> ...` guidance block after copying.
@@ -24,7 +24,7 @@ template-id: 11
 | Status | Stable |
 | Last tightened | YYYY-MM-DD (Sprint NN retro) |
 | Owner | Engineering team + PO |
-| Binding | [`02-process/dod-dor.md`](../02-process/dod-dor.md) |
+| Binding | [`02-process/dod-dor.md`](../../02-process/dod-dor.md) |
 
 ---
 
@@ -49,7 +49,7 @@ template-id: 11
 ## 2. PRD / Use Case DoD
 
 - [ ] Status field is `Done` or `Accepted`
-- [ ] All FRs have Acceptance Criteria in G/W/T (per [`02-process/bdd-workflow.md`](../02-process/bdd-workflow.md))
+- [ ] All FRs have Acceptance Criteria in G/W/T (per [`02-process/bdd-workflow.md`](../../02-process/bdd-workflow.md))
 - [ ] Non-functional requirements explicit (NFR section non-empty or marked "N/A with rationale")
 - [ ] Linked persona(s) (per [`01-artefacts/templates/6_persona.md`](./6_persona.md))
 - [ ] Out-of-scope section explicit
@@ -113,5 +113,5 @@ template-id: 11
 
 - [Scrum Guide 2020 §Definition of Done](https://scrumguides.org/scrum-guide.html#definition-of-done)
 - Scrum.org. [What Is a Definition of Done?](https://www.scrum.org/resources/what-definition-done)
-- [`02-process/dod-dor.md`](../02-process/dod-dor.md) — the binding that defines DoD.
-- [`02-process/bdd-workflow.md`](../02-process/bdd-workflow.md), [`02-process/tdd-workflow.md`](../02-process/tdd-workflow.md) — related quality bindings.
+- [`02-process/dod-dor.md`](../../02-process/dod-dor.md) — the binding that defines DoD.
+- [`02-process/bdd-workflow.md`](../../02-process/bdd-workflow.md), [`02-process/tdd-workflow.md`](../../02-process/tdd-workflow.md) — related quality bindings.

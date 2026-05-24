@@ -58,7 +58,7 @@ Legend: ✅ = shipped / closed, ⏩ = advanced significantly, 🔄 = in flight w
 <!-- Where we hit friction, made a wrong assumption, or have an unresolved blocker.
      Honesty over polish. Every problem should map to either a `raid.md` row or a `questions/` entry. -->
 
-- `<problem>` — `<what's blocking>` — linked to [`raid.md` `I-NNN`](../raid.md) | [`questions/Q-NNN.md`](../questions/)
+- `<problem>` — `<what's blocking>` — linked to [`raid.md` `I-NNN`](../../client-engagement/raid.md) | [`questions/Q-NNN.md`](../questions/)
 - `<problem>` — `<what's blocking>` — linked to ...
 
 If no problems this week, write "None this week" — but be skeptical: if you're never reporting problems, the channel is broken.
@@ -87,7 +87,7 @@ If no problems this week, write "None this week" — but be skeptical: if you're
 
 - [Atlassian Weekly Team Updates play](https://www.atlassian.com/team-playbook/plays/weekly-team-updates)
 - [`../README.md`](../README.md) — PEL overview
-- [`../NOW-NEXT-LATER.md`](../NOW-NEXT-LATER.md) — current roadmap
-- [`../raid.md`](../raid.md) — open items table
+- [`../NOW-NEXT-LATER.md`](../../client-engagement/NOW-NEXT-LATER.md) — current roadmap
+- [`../raid.md`](../../client-engagement/raid.md) — open items table
 - [`../kickoffs/`](../kickoffs/) — cycle kickoff narratives (for cycle theme)
 - [`../01-artefacts/reports/<YYMMDD-prev>/weekly.md`](./) — previous week (for Next → Priorities continuity)

@@ -14,7 +14,7 @@ last-reviewed: 2026-05-16
 | 親 ADR           | [ADR-0010](../arc42/09-decisions/0010-explicit-layer-prefixed-directories.md) — 採用判断                          |
 | 関連 ADR         | [ADR-0001](../arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) (5+1 層) / [ADR-0004](../arc42/09-decisions/0004-layer-separation-contracts.md) (依存方向) / [ADR-0007](../arc42/09-decisions/0007-automation-layer-contract.md) (Layer ③ は repo root) |
 | 関連 case-study  | [2026-05-16_digital-twin-downstream-process-binding.md](../../../case-studies/2026-05-16_digital-twin-downstream-process-binding.md) — この移行が surface された経緯 |
-| 関連 impl-plan   | [2026-05-14_pentaglyph-self-architecture-roadmap.md](./2026-05-14_pentaglyph-self-architecture-roadmap.md)（5+1 層を確立した親ロードマップ。本書はその上で**ディレクトリ可視化**を実装する具体パッチ） |
+| 関連 impl-plan   | [2026-05-14_pentaglyph-self-architecture-roadmap.md](../../../../../../docs/01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md)（5+1 層を確立した親ロードマップ。本書はその上で**ディレクトリ可視化**を実装する具体パッチ） |
 | 影響範囲         | pentaglyph upstream（kit 本体）+ 全 downstream consumer（subtree / npm install）                                  |
 | 起票者           | Yu (PO) + Claude Code 補助                                                                                        |
 
@@ -60,14 +60,14 @@ prunable worktree 3 件（`worktree-agent-*`）は再開前に `git worktree pru
 - [x] [ADR-0010 upstream](../arc42/09-decisions/0010-explicit-layer-prefixed-directories.md) (Proposed)
 - [x] ADR-0034 downstream (Proposed) — lives in the downstream consumer's own `docs/01-artefacts/arc42/09-decisions/0034-adopt-layer-prefixed-directories.md`
 - [x] 本 impl-plan (Draft)
-- [x] paperbanana 仕様 [`assets/layers.txt`](../../assets/layers.txt) + 画像 [`assets/layers.png`](../../assets/layers.png)
+- [x] paperbanana 仕様 [`assets/layers.txt`](../../assets/layers.txt) + 画像 [`assets/layers.png`](../../../../assets/layers.png)
 - [x] `pentaglyph-self-architecture.md §3` に layers.png 埋め込み + ADR-0010 への参照
 
 セッション 2026-05-17 で以下が完了している:
 
 - [x] **Phase 1.6a 完了 — migrate スクリプト実装**: [`scripts/docs/migrate_layer_paths.py`](../../../../../scripts/docs/migrate_layer_paths.py) を実装。`--scope=upstream | downstream | both` + `--apply` 付き。冪等性あり、fenced code block 除外、17 件のユニットテスト ([`scripts/docs/tests/test_migrate_layer_paths.py`](../../../../../scripts/docs/tests/test_migrate_layer_paths.py)) 全件パス
 - [x] dry-run 検証完了: upstream で 30 ファイル / 161 件置換、downstream で 490 ファイル / 3155 件置換を確認
-- [x] [ライフサイクル 3 ルール binding](../../design-guide/ai-augmented-lifecycle.md) (upstream Layer ②) + [downstream ADO Agile 具象 binding](../../../../../docs/02-process/ai-lifecycle-binding.md) + 6 skills / 2 agents / `.claude/rules/azure-devops.md` / `CLAUDE.md` DoD 更新 — PR #820 でレビュー中
+- [x] [ライフサイクル 3 ルール binding](../../02-process/ai-augmented-lifecycle.md) (upstream Layer ②) + [downstream ADO Agile 具象 binding](../../../../../../docs/02-process/ai-lifecycle-binding.md) + 6 skills / 2 agents / `.claude/rules/azure-devops.md` / `CLAUDE.md` DoD 更新 — PR #820 でレビュー中
 
 ### 再開プロトコル
 
@@ -103,7 +103,7 @@ prunable worktree 3 件（`worktree-agent-*`）は再開前に `git worktree pru
 - **pentaglyph upstream** (`libs/pentaglyph-docs/template/docs/`) のディレクトリ再配置
 - 全 internal cross-reference (`.md` / `.dsl` / `.py` / `.ts` / `.json` / `.yaml`) の path 書き換え
 - `cli/` scaffolder の出力テンプレート更新（新規プロジェクトが新構造で初期化されるよう）
-- `pentaglyph-self-architecture.md` の §3 Container view + paperbanana 画像（[layers.png](../../../assets/layers.png)）の説明を新パスに更新
+- `pentaglyph-self-architecture.md` の §3 Container view + paperbanana 画像（[layers.png](../../../../assets/layers.png)）の説明を新パスに更新
 - `STRATEGY.md` / `WORKFLOW.md` / `AI_INSTRUCTIONS.md` / `INDEX.md` / `README.md` の path 例を新構造へ
 - **downstream consumer** (`docs/` + `.claude/` + `CLAUDE.md`) の同期適用（Digital Twin PoC を reference consumer として使う）
 - Wiki sync スクリプトの path mapping 更新（downstream のみ）
@@ -166,7 +166,7 @@ prunable worktree 3 件（`worktree-agent-*`）は再開前に `git worktree pru
 |------|------|
 | 2.1  | 全 markdown link check (`scripts/docs/check_links.py` 既存 or 新規 `npx markdown-link-check`) → 100% resolve |
 | 2.2  | Mermaid 図のレンダリング確認（必要なら `/diagram-render` 相当） |
-| 2.3  | paperbanana 画像（[layers.png](../../assets/layers.png)）が `pentaglyph-self-architecture.md` から正しく相対参照される |
+| 2.3  | paperbanana 画像（[layers.png](../../../../assets/layers.png)）が `pentaglyph-self-architecture.md` から正しく相対参照される |
 | 2.4  | `bunx pentaglyph init` スナップショットテスト pass |
 | 2.5  | `bunx pentaglyph doc-status` が新構造で動作する（Phase 4 の auditor がレイヤ別 coverage を出せる） |
 
@@ -291,6 +291,6 @@ Phase 3 (npm publish) 後は npm 側ロールバックが不可能なため、Ph
 - [ADR-0001 — 5-layer self-architecture](../arc42/09-decisions/0001-adopt-five-layer-self-architecture.md) — 層の定義
 - [ADR-0004 — layer separation contracts](../arc42/09-decisions/0004-layer-separation-contracts.md) — 依存方向
 - [ADR-0007 — automation layer contract](../arc42/09-decisions/0007-automation-layer-contract.md) — Layer ③ は repo root
-- [pentaglyph-self-architecture.md](../arc42/05-building-blocks/pentaglyph-self-architecture.md) — Container view（[layers.png](../../assets/layers.png) embed 済）
-- [2026-05-14_pentaglyph-self-architecture-roadmap.md](./2026-05-14_pentaglyph-self-architecture-roadmap.md) — 親ロードマップ
+- [pentaglyph-self-architecture.md](../arc42/05-building-blocks/pentaglyph-self-architecture.md) — Container view（[layers.png](../../../../assets/layers.png) embed 済）
+- [2026-05-14_pentaglyph-self-architecture-roadmap.md](../../../../../../docs/01-artefacts/impl-plans/2026-05-14_pentaglyph-self-architecture-roadmap.md) — 親ロードマップ
 - [2026-05-16_digital-twin-downstream-process-binding.md](../../../case-studies/2026-05-16_digital-twin-downstream-process-binding.md) — この移行が surface された経緯
