@@ -78,6 +78,14 @@ If the budget exceeds 60 minutes, the change should usually be split.
 
 List the files where an AI agent generated more than ~30% of the new lines. The 30% line is a pragmatic disclosure threshold, not an empirical constant; the *requirement* to disclose at all derives from EU AI Act transparency expectations and from regulated-industry policies that treat AI authorship as a material fact. The mechanical convention of `Co-Authored-By:` trailers in commit messages ([documented by Anthropic Claude Code](https://github.com/anthropics/claude-code/issues/19925) and used by GitHub Copilot) covers the commit side; this section covers the PR-description side.
 
+### 3.6 PR-unit constraint (one PR ↔ one deliverable work item)
+
+The PR boundary is the **branch + diff** surface of [`ai-augmented-lifecycle.md §2.2`](./ai-augmented-lifecycle.md#22-one-pr-maps-to-one-top-level-deliverable-work-item). One PR maps to exactly **one** top-level deliverable work item (user story, bug, or equivalent). Sub-tasks are work-decomposition under a parent deliverable — they are not PR'd independently. AI agents handed a sub-task identifier MUST resolve it to the parent deliverable before branching.
+
+The empirical basis is the same 200-400 LoC review band §3.4 already invokes: a deliverable-sized PR sits inside that band, a sub-task PR sits below it (fragmenting the reviewer's attention across multiple gates) and a multi-deliverable PR sits above it (collapsing the gate into something unreviewable). One-deliverable-per-PR is what makes the verification budget land where research says it should.
+
+This section is the PR-author-side cross-reference. The work-item-side rules (lifecycle gate + parentage) live in [`ai-augmented-lifecycle.md`](./ai-augmented-lifecycle.md).
+
 ---
 
 ## 4. Length budget

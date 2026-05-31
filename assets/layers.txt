@@ -1,0 +1,183 @@
+# pentaglyph-docs self-architecture image — methodology spec for paperbanana
+
+## トーン & マナー（必読）
+
+- 16:9 横長（3584x2048）。`pentaglyph-self-architecture.md` の Container View セクションに埋め込む。
+- 背景: 非常に薄いオフホワイト #F7F8FA のフラットカラー（テクスチャ・ノイズ・写真質感は厳禁）。
+- スタイル: モダンでテクニカル、calm。Accenture スライド風の上品な余白感、ただし軽やか。`hero.png` と同じデザイン言語に厳格に従う。
+- 立体表現の禁止: 影・グロー・グラデーション・3D・スキュアモーフィズム・写真テクスチャはすべて禁止。線と面のみで構成する。
+- 顔・手・人物・絵文字・アイコン風イラストは一切入れない。
+
+## アクセントカラー（6 レイヤに 1 対 1 で割り当て）
+
+各レイヤカードの **左端 12px 幅のカラーバー** と **層番号バッジ** にのみ使用する。タイトル・本文テキスト・矢印・背景には絶対にブリードさせない。
+
+| Layer | 名称 | 色（HEX） | 名称（英語）|
+|---|---|---|---|
+| ⓪ | Standards | #1F6FEB (calm blue) | Standards |
+| ① | Artefacts | #0B8A3A (calm green) | Artefacts |
+| ② | Process | #B45309 (calm amber) | Process |
+| ③ | Automation | #6B46C1 (calm purple) | Automation |
+| ④ | Governance | #BE185D (calm rose) | Governance |
+| ⑤ | Measurement | #4B5563 (calm slate gray) | Measurement (optional) |
+
+⑤ Measurement は **optional** であることを視覚的に弱める（カラーバーを 50% 透明、テキストカラー #6B7280 のやや薄色）。
+
+## 全体レイアウト（厳守）
+
+横 3584 × 縦 2048 の canvas を **3 つの帯** に分割する:
+
+- **TOP BAND** (上 14% / y=0..280): タイトル領域
+- **STACK BAND** (中 76% / y=280..1840): 6 つの層カードを縦積み + 右側に依存方向矢印
+- **BOTTOM BAND** (下 10% / y=1840..2048): 下キャプション領域
+
+## TOP BAND — タイトル
+
+中央寄せで 2 行配置。
+
+- 1 行目（メインタイトル）:
+  - テキスト: `pentaglyph self-architecture`
+  - サイズ: 約 130px
+  - フォントウェイト: bold
+  - 字間: 少し詰める
+  - カラー: ダークスレート #111827
+- 2 行目（サブタイトル）:
+  - テキスト: `Six layers. One direction. Mechanically checkable.`
+  - サイズ: 約 44px
+  - フォントウェイト: regular
+  - カラー: #4B5563（やや薄いグレー）
+- 1 行目と 2 行目の間隔: 約 24px
+- タイトル全体は TOP BAND の中で垂直中央に置く
+
+## STACK BAND — 6 レイヤを縦積み
+
+STACK BAND の左 78% (x=180..2980) を **6 枚の水平カードを縦に積む** ためのカラムとして使う。STACK BAND の右 22% (x=2980..3400) を **依存方向矢印** のカラムとして使う。
+
+カードは **下から上へ** ⓪ → ① → ② → ③ → ④ → ⑤ の順に積む。
+
+### 各レイヤカードの構造（共通）
+
+- カード全体: 幅 約 2800px、高さ 約 235px、border-radius 約 16px
+- カード背景: 純白 #FFFFFF
+- カード枠線: 1px ヘアライン、カラー #E5E7EB
+- カード間の縦の隙間: 約 20px
+
+カード内部レイアウト（左から右へ 5 ゾーン）:
+
+1. **左端カラーバー** (x=0..12 from card-left): 高さ 235px、幅 12px、塗りつぶし。レイヤのアクセントカラーで塗る（⑤ のみ 50% 透明）
+2. **層番号バッジ** (x=40..200): 直径 120px の円形、塗りつぶしカラーは対応レイヤのアクセントカラー、内側に層番号テキスト（⓪/①/②/③/④/⑤、サイズ 約 64px、bold、カラー #FFFFFF、水平・垂直中央）。⑤ は背景を #4B5563 のまま使う
+3. **名称テキスト** (x=240..680): 縦 2 行
+   - 1 行目: 英語名（サイズ 約 56px、bold、カラー #111827）
+   - 2 行目: 日本語名（サイズ 約 30px、regular、カラー #6B7280）
+4. **責務テキスト** (x=720..1920): 1 行のみ、サイズ 約 30px、regular、カラー #4B5563。各レイヤごとに以下を表示
+5. **配置先テキスト** (x=1960..2780): 1 行のみ、等幅フォント、サイズ 約 28px、カラー #111827。「Where:」の見出しを weight 600 で先頭につけてから path を表示。Path 文字色は #1F2937 の濃いグレー
+
+### 各カードの具体テキスト（下から上へ）
+
+#### Layer ⓪ Standards（最下段、stack の一番下）
+
+- 番号バッジ: `⓪`（白文字、背景 #1F6FEB）
+- 名称: `Standards` / `標準`
+- 責務: `Link out to external canons (arc42, C4, MADR, Diátaxis, TiSDD).`
+- 配置先: `Where:  STRATEGY.md §2  (no directory)`
+
+#### Layer ① Artefacts
+
+- 番号バッジ: `①`（白文字、背景 #0B8A3A）
+- 名称: `Artefacts` / `成果物`
+- 責務: `Concrete shapes, taxonomy, lifecycle of every document.`
+- 配置先: `Where:  docs/01-artefacts/`
+
+#### Layer ② Process
+
+- 番号バッジ: `②`（白文字、背景 #B45309）
+- 名称: `Process` / `プロセス`
+- 責務: `Thin design-guides binding external process canons (Scrum, BDD, TDD).`
+- 配置先: `Where:  docs/02-process/`
+
+#### Layer ③ Automation
+
+- 番号バッジ: `③`（白文字、背景 #6B46C1）
+- 名称: `Automation` / `自動化`
+- 責務: `CLI scaffolder + AI agents + lint and sync scripts.`
+- 配置先: `Where:  .claude/  cli/  scripts/docs/`
+
+#### Layer ④ Governance
+
+- 番号バッジ: `④`（白文字、背景 #BE185D）
+- 名称: `Governance` / `ガバナンス`
+- 責務: `Who decides, accepts, overrides — RACI + ADR Accept protocol.`
+- 配置先: `Where:  docs/04-governance/`
+
+#### Layer ⑤ Measurement（最上段、stack の一番上、optional）
+
+- 番号バッジ: `⑤`（白文字、背景 #4B5563、50% 透明感）
+- 名称: `Measurement` / `計測 (optional)`
+  - 「(optional)」部分はサブタイトル化（サイズ 約 24px、regular、カラー #9CA3AF）して英語名の右に小さく付ける
+  - 日本語名は `計測（任意）`
+- 責務: `Quantifies the health of layers ⓪-④. Not required for v1 adoption.`
+- 配置先: `Where:  docs/05-measurement/  (optional)`
+- カード全体の不透明度: 80%（他カードより薄く見える）
+- カード枠線: 通常の #E5E7EB を 1px **dashed**（破線）にする ← optional 表現
+
+### STACK BAND 右側 — 依存方向矢印カラム
+
+stack の右 (x=2980..3400) に **1 本の太い縦矢印** を配置する。矢印は **下から上へ** 向く（依存方向 = ⓪ → ① → ② → ③ → ④ → ⑤）。
+
+- 縦矢印: 縦線 太さ 8px、カラー #111827
+- 縦線の上端と下端: y は STACK BAND の上端から 100px 下、下端から 100px 上
+- 上端に三角形の矢印先（arrowhead）: 高さ 32px、底辺 24px、塗りつぶしカラー #111827
+- 縦線の中央付近、矢印の右側に縦書きで配置するラベル:
+  - テキスト: `Dependency direction: bottom-up`
+  - サイズ 約 28px、weight medium、カラー #4B5563
+  - 縦書き（90° 回転、bottom-to-top で読む）
+  - 矢印の右側 約 80px の位置
+
+### STACK BAND 全体の追加要素
+
+- カード ⓪ と ① の間、カード ① と ② の間、…、カード ④ と ⑤ の間に、それぞれカード間隙の中央に **小さな上向き矢印**（高さ 16px、塗り #9CA3AF）を 1 つずつ置く。位置は各カードの番号バッジの真上（x ≒ 100 from card-left）。これは隣接層間の依存方向を補強する局所マーカー
+- 矢印は本当に小さく、目立たせない（メインの依存方向は右カラムの太い矢印が担う）
+
+## BOTTOM BAND — 下キャプション
+
+canvas 下端に近い位置に、1 行のキャプションを中央寄せで配置する。
+
+- テキスト: `⓪ Standards  →  ① Artefacts  →  ② Process  →  ③ Automation  →  ④ Governance  →  ⑤ Measurement`
+- 各層名の間は `  →  `（半角スペース 2、右矢印 U+2192、半角スペース 2）で区切る
+- サイズ: 約 32px
+- weight: regular
+- カラー: #6B7280
+- BOTTOM BAND の中で垂直中央に置く
+- 矢印 → の色は #9CA3AF（薄め、テキストより少しだけ目立たない）
+
+## 否定制約（守らないと不合格）
+
+- 絵文字を一切使わない（U+1F300〜U+1FAFF などの emoji codepoint はすべて禁止）。**ただし層番号の ⓪①②③④⑤ は emoji ではなく Unicode CIRCLED DIGIT (U+24EA, U+2460-U+2464) なので使用可**
+- 影・グロー・グラデーション・透視図・3D 表現はすべて禁止
+- 写真・写真合成・テクスチャ素材は使わない
+- 顔・手・人物のシルエットは入れない
+- アクセント 6 色（#1F6FEB / #0B8A3A / #B45309 / #6B46C1 / #BE185D / #4B5563）は **対応するカードの「左端カラーバー」と「番号バッジ」内のみ** で使う。タイトル・サブタイトル・本文・配置先テキスト・矢印・背景・キャプションには絶対に使わない
+- カードは **6 枚厳密**。5 枚や 7 枚にしない。並び順は下から ⓪ → ① → ② → ③ → ④ → ⑤
+- 依存方向矢印は **bottom-up（下から上へ）** 厳守。逆方向に描かない
+- ロゴ、QR コード、URL、補足テキスト、`hero.png` の `arc42 · C4 · MADR · Diátaxis · TiSDD` などの他文字列は追加しない
+- 各カードの番号バッジは **円形のみ**。角丸長方形・六角形・五角形・盾型・リボン型は禁止
+- 縦書きラベル `Dependency direction: bottom-up` は **縦書き** で描く（横書きで描かない）
+- カード間に余分な装飾線・グリッド・段組ガイドを引かない
+
+## 検証チェックリスト（生成後の VLM 自動レビューでこの順に検査）
+
+1. タイトル「pentaglyph self-architecture」が canvas 上部にあり、サブタイトル「Six layers. One direction. Mechanically checkable.」が直下にある
+2. 中央に **6 枚** のカードが縦に積まれている（カード数 = 6、ぴったり）
+3. 最下段のカードが ⓪ Standards で、カラーバーが青 #1F6FEB
+4. 下から 2 段目のカードが ① Artefacts で、カラーバーが緑 #0B8A3A
+5. 下から 3 段目のカードが ② Process で、カラーバーが琥珀 #B45309
+6. 下から 4 段目のカードが ③ Automation で、カラーバーが紫 #6B46C1
+7. 下から 5 段目のカードが ④ Governance で、カラーバーが薔薇 #BE185D
+8. 最上段のカードが ⑤ Measurement で、カラーバーがグレー #4B5563、かつカードが半透明（80% 不透明度）+ 破線枠
+9. 各カードに **円形の番号バッジ** が左寄せで配置され、層番号 ⓪/①/②/③/④/⑤ が白文字で読める
+10. 各カードに **責務テキスト 1 行** と **配置先テキスト 1 行（Where: prefix 付き）** が読める
+11. stack の右側に **下から上へ向かう太い縦矢印** が 1 本あり、矢印先が上端にある
+12. その縦矢印の右側に **縦書き** で `Dependency direction: bottom-up` のラベルが読める
+13. 下端中央に `⓪ Standards  →  ① Artefacts  →  ② Process  →  ③ Automation  →  ④ Governance  →  ⑤ Measurement` の 1 行がある
+14. アクセント 6 色がそれぞれ対応カードの「左端カラーバー」と「番号バッジ」の外にブリードしていない（タイトル・矢印・キャプションには使われていない）
+15. 絵文字・写真・3D 効果・人物が含まれていない
