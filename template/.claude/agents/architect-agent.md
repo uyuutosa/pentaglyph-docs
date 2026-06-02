@@ -6,7 +6,7 @@ description: >
   crosscutting concerns, deployment view. Surfaces architectural decisions and
   hands them off (one at a time) to adr-writer. Does not write ADR bodies —
   only identifies that a decision is needed and what its drivers are.
-model: sonnet
+model: opus
 tools: Read, Write, Edit, Grep, Glob, Task
 ---
 

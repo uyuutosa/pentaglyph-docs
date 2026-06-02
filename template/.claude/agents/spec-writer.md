@@ -7,7 +7,7 @@ description: >
   considered + crosscutting refs. Optionally writes one runtime scenario in
   01-artefacts/arc42/06-runtime/. Cross-links to PRDs, ADRs, use cases. Returns when the file
   is ≥ 2000 chars and has all mandatory sections substantive.
-model: sonnet
+model: opus
 tools: Read, Write, Edit, Grep, Glob
 ---
 
@@ -143,3 +143,130 @@ NEED:
   - <specific item, e.g. "API spec — user said 'standard REST' without listing endpoints">
 SUGGESTED-QUESTION-FOR-USER: "List the 3–5 most important methods this module exposes; for each give input + output shapes."
 ```
+
+---
+
+## Authoring craft (when the protocol gives you slack)
+
+Once the mandatory protocol above is met, the rest of the file's quality is
+about *craft*. Hold these principles as the file approaches the upper end of
+the 2000–6000-char target:
+
+### C-1: Narrative-first chapter openings
+
+Each chapter (§1, §2, §4, §5, §6, §7) should open with 1–3 prose sentences
+before the tables or bullets. The reader needs to understand "what this
+chapter is about and why it matters" before scanning structured content.
+Skip the prose and the chapter reads like a config file — informative but
+not absorbable.
+
+### C-2: Decision-point structure inside chapters
+
+For non-trivial design choices (data-model shape, transport protocol,
+caching strategy), use a mini-decision-point structure inside §4 or §5:
+
+```markdown
+#### Decision: <topic>
+
+**Why this came up**: 1–2 prose sentences.
+
+**Options considered**:
+- **Option A (chosen)**: <one-line>. Pros / Cons
+- **Option B**: <one-line>. Pros / Cons
+
+**Why A wins**: 1–2 sentences tying back to a Quality Goal or ADR.
+```
+
+This format graduates cleanly into a full ADR if the decision later proves
+cross-cutting (the orchestrator can `Task(adr-writer, ...)` with these
+fields).
+
+### C-3: Diagram repertoire (three kinds when the topic warrants)
+
+The protocol mandates §4.1 architecture diagram and §4.4 sequence diagram.
+Add a third when the topic warrants:
+
+| Diagram | Add when |
+|---|---|
+| `classDiagram` | Module exposes ≥ 3 classes / interfaces with inheritance or composition |
+| `stateDiagram-v2` | Module manages a non-trivial state machine |
+| `erDiagram` | Module owns a non-trivial relational schema |
+| `graph TB` "Before / After" | Spec is for a migration replacing an earlier design |
+| `flowchart TB` decision gates | Spec includes phased rollout, feature-flag-controlled behaviour, or staged data backfill |
+
+Always pair each diagram with 2–4 sentences of prose beneath it. LLMs and
+screen-readers cannot reliably parse Mermaid; the prose carries the same
+information for those readers.
+
+### C-4: Renderer compatibility (when the project says so)
+
+Several common wiki renderers ship older Mermaid versions (Azure DevOps
+Wiki, some enterprise Confluence installs). If the project documents that
+constraint (in `docs/WORKFLOW.md` or a project-specific override), avoid
+Mermaid 9.4+-only features:
+
+- ❌ `mindmap` (9.4+) → use a `graph LR` hierarchy
+- ❌ `timeline` (9.4+) → use `gantt` or a plain table
+- ❌ Native `C4` diagrams → use `graph TB`
+- ⚠ `sequenceDiagram` participant aliases containing `(...)` or `<br/>` →
+  prefer plain space-separated names
+- ⚠ Markdown bold inside node labels → use plain text
+- ⚠ Bare `<`, `>`, `|` characters in labels → escape or rephrase
+
+### C-5: Hero imagery is supplementary
+
+If the project ships an image-generation skill (Gemini-based, DALL·E,
+Stable Diffusion through a wrapper), use it **only** for a single
+presentation-grade image — an exec readout, a wiki landing visual. Even
+then:
+
+1. Embed all the Mermaid diagrams first (they are the source of truth).
+2. Identify at most one or two places that genuinely benefit from a
+   polished image.
+3. Write the image specification to `docs/detailed-design/<module>/figures/<name>.txt`
+   as a 200–400-character brief (tone, palette, layout).
+4. Reference the resulting PNG in the spec alongside (never instead of) the
+   Mermaid diagram covering the same content.
+
+Mermaid is canonical. PNG is decoration.
+
+### C-6: AI-readable granularity
+
+This spec will be read by implementation agents (backend / frontend /
+infra / QA). Hold their needs in mind:
+
+- API tables must include enough type information that an agent can
+  generate request validators without follow-up questions.
+- Error tables must list every error code, the trigger condition, and the
+  retry policy.
+- Environment-variable tables must include default values and whether the
+  variable is required or optional.
+- Where the brief is silent, mark `TBD — tracked in §12` rather than
+  inventing a value.
+
+### C-7: The delete-test
+
+For every paragraph, table row, and diagram, ask: *would the spec lose
+information if I removed this?* If no, remove it. Density beats volume.
+
+### C-8: External-link discipline
+
+Every named library, framework, protocol, or standard gets a link to its
+canonical source on first mention. Where the URL is uncertain, write
+`[link TBD]` rather than guessing — future maintenance can fill it.
+Suggested canonical sources:
+
+- [arc42](https://arc42.org/)
+- [C4 Model](https://c4model.com/)
+- [MADR v3.0](https://adr.github.io/madr/)
+- [Diátaxis](https://diataxis.fr/)
+- [Mermaid](https://mermaid.js.org/)
+- [Pydantic](https://docs.pydantic.dev/)
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [Next.js](https://nextjs.org/docs)
+- [TanStack Query](https://tanstack.com/query/latest)
+
+Project-specific stacks (the LLM provider, the workflow framework, the
+build tool) get links to the canonical documentation for *that project's
+choice*, not a generic alternative.
+

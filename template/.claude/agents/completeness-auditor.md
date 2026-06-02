@@ -5,7 +5,7 @@ description: >
   four-phase rubric, detects substantive vs stub content, and returns the
   current phase + coverage % + the single highest-priority next gap. Called
   by the doc-orchestrator after every dispatch. Never writes files.
-model: haiku
+model: opus
 tools: Read, Grep, Glob, Bash
 ---
 

@@ -56,6 +56,7 @@ Three ✅ + one ⚠️. **Bind as the default cadence** for the kit, with an exp
 - **Sprint cadence is project-specific.** This binding does not prescribe 1-week / 2-week / 4-week Sprints — pick what matches team / domain.
 - **Sprint Goal** is a Layer ① artefact (typically tracked in your work-item system, not in `docs/`).
 - **Increment** = the cumulative `Done` state of all Layer A artefacts at Sprint end; aligns with pentaglyph's `Done` lifecycle state.
+- **AI-augmented work-item lifecycle** (review-gate, PR-unit, work-item parentage) is a *separate* binding — [`ai-augmented-lifecycle.md`](./ai-augmented-lifecycle.md). It is canon-neutral with respect to Scrum (applies equally to Kanban / SAFe overrides). The specific state machine that hosts it (ADO Agile `New→Active→Resolved→Closed`, Jira workflows, Linear states, …) is a Layer ③ Automation concern and lives in the **downstream** project's `design-guide/ai-lifecycle-binding.md`. This kit ships only the canon-neutral principles, not the tool-specific state names.
 
 ## 5. Override path
 
