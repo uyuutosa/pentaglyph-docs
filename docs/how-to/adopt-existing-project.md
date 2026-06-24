@@ -12,6 +12,8 @@ audience: teams retrofitting pentaglyph onto a live codebase
 
 The short answer: **do not retro-document the past.** Adopt pentaglyph for *future* changes, then back-fill the few legacy concepts that are actively load-bearing. This guide walks the staged adoption that has the best success rate in practice.
 
+> **This is a Strangler Fig migration.** What follows is the documentation-estate instance of [Fowler's Strangler Fig pattern](https://martinfowler.com/bliki/StranglerFigApplication.html): pentaglyph stands up *alongside* your legacy doc estate, every change routes through it, and the old ad-hoc docs shrink slice by slice until there is nothing left to delete — never a big-bang "document the whole past" rewrite (that rewrite is the Phase 0 anti-pattern below). The kit binds the general pattern in [`02-process/migration-strategy.md`](../../template/docs/02-process/migration-strategy.md); this guide is it applied to docs. The same three moves — cut a seam, strangle one slice per PR, retire the husk — are what you apply when you strangle *code*, not just docs.
+
 ---
 
 ## TL;DR
@@ -185,3 +187,4 @@ Everything else, including small teams, benefits.
 - [how-to/choose-the-right-template.md](./choose-the-right-template.md) — what to write when
 - [reference/profiles.md](../reference/profiles.md) — minimal / standard / full
 - [explanation/why-pentaglyph.md](../explanation/why-pentaglyph.md) — why this exists at all
+- [`02-process/migration-strategy.md`](../../template/docs/02-process/migration-strategy.md) — the general Strangler Fig binding this guide instantiates ([ADR-0014](../../template/docs/01-artefacts/arc42/09-decisions/0014-bind-strangler-fig-migration-canon.md))

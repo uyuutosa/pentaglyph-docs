@@ -24,6 +24,7 @@ This directory holds operational and convention guidelines: code style, naming, 
 | `review-checklist.md`         | What reviewers must verify before approving a PR                        |
 | `ai-augmented-pr.md`          | Rules for PR descriptions on AI-assisted changes (kit-shipped default)  |
 | `code-tours.md`               | CodeTour-compatible guided reading paths (kit-shipped default)          |
+| `migration-strategy.md`       | Strangler Fig (Fowler 2004) — incremental, reversible migration sequencing (kit-shipped default; [ADR-0014](../01-artefacts/arc42/09-decisions/0014-bind-strangler-fig-migration-canon.md)) |
 | `sprint-cadence.md`           | Sprint length, ceremonies, definition of done                           |
 | `release-process.md`          | Versioning scheme, release notes format, rollback procedure             |
 
